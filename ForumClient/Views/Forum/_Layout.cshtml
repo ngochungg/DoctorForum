@@ -164,8 +164,8 @@
                 </div>
                 <div class="col-auto ml-auto">
                     <div class="tt-account-btn">
-                        <a asp-action="Login" class="btn btn-secondary">Login</a>
-                        <a asp-action="Signup" class="btn btn-secondary">Sign up</a>
+                        <a asp-action="User_Login" class="btn btn-secondary">Login</a>
+                        <a asp-action="USer_Signup" class="btn btn-secondary">Sign up</a>
                     </div>
                 </div>
             </div>
@@ -260,14 +260,15 @@
             </div>
         </form>
     </div>
-    <a asp-action="Create" class="tt-btn-create-topic">
+
+    <a asp-action="Create_Topic" class="tt-btn-create-topic" hidden>
         <span class="tt-icon">
             <svg>
                 <use xlink:href="#icon-create_new"></use>
             </svg>
         </span>
     </a>
-
+    
     <div class="modal fade" id="modalAdvancedSearch" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">

@@ -24,15 +24,23 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-        public IActionResult Login()
+        public IActionResult User_Login()
         {
             return View();
         }
-        public IActionResult Signup()
+        public IActionResult User_Signup()
         {
             return View();
         }
-        public IActionResult Create()
+        public IActionResult Doctor_Login()
+        {
+            return View();
+        }
+        public IActionResult Doctor_Signup()
+        {
+            return View();
+        }
+        public IActionResult Create_Post()
         {
             return View();
         }

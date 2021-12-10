@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Defaul_FE\**" />
+    <Content Remove="Defaul_FE\**" />
+    <EmbeddedResource Remove="Defaul_FE\**" />
+    <None Remove="Defaul_FE\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Content\css\style.css" />
+    <None Include="wwwroot\Content\css\style.min.css" />
+    <None Include="wwwroot\Content\external\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\Content\external\perfect-scrollbar\perfect-scrollbar.scss" />
+    <None Include="wwwroot\Content\favicon\favicon.ico" />
+    <None Include="wwwroot\Content\images\logo.png" />
+    <None Include="wwwroot\Content\images\single-topic-img01.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img02.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img03.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img04.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img05.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img06.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img07.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img08.jpg" />
+    <None Include="wwwroot\Content\js\bundle.js" />
+    <None Include="wwwroot\Content\js\bundle.min.js" />
+    <None Include="wwwroot\Content\scss\style.scss" />
+    <None Include="wwwroot\Content\scss\_badge.scss" />
+    <None Include="wwwroot\Content\scss\_btn-create-topic.scss" />
+    <None Include="wwwroot\Content\scss\_categories_list.scss" />
+    <None Include="wwwroot\Content\scss\_categories_single.scss" />
+    <None Include="wwwroot\Content\scss\_custom_magnific_popup.scss" />
+    <None Include="wwwroot\Content\scss\_default_tabs.scss" />
+    <None Include="wwwroot\Content\scss\_editor.scss" />
+    <None Include="wwwroot\Content\scss\_followers_list.scss" />
+    <None Include="wwwroot\Content\scss\_form.scss" />
+    <None Include="wwwroot\Content\scss\_gallery.scss" />
+    <None Include="wwwroot\Content\scss\_header.scss" />
+    <None Include="wwwroot\Content\scss\_header_objects.scss" />
+    <None Include="wwwroot\Content\scss\_layout-tab.scss" />
+    <None Include="wwwroot\Content\scss\_layout404.scss" />
+    <None Include="wwwroot\Content\scss\_login.scss" />
+    <None Include="wwwroot\Content\scss\_messages_layout.scss" />
+    <None Include="wwwroot\Content\scss\_mobile-menu.scss" />
+    <None Include="wwwroot\Content\scss\_modal.scss" />
+    <None Include="wwwroot\Content\scss\_pageContent.scss" />
+    <None Include="wwwroot\Content\scss\_popup_settings.scss" />
+    <None Include="wwwroot\Content\scss\_single-topic.scss" />
+    <None Include="wwwroot\Content\scss\_topic_list_item.scss" />
+    <None Include="wwwroot\Content\scss\_typography.scss" />
+    <None Include="wwwroot\Content\scss\_user_header.scss" />
+    <None Include="wwwroot\Content\scss\_variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>

@@ -50,7 +50,6 @@ namespace ForumAPI.Controllers
             }
             return Ok(new Response { Status = "Success", Message = "User created successfully" });
         }
-
         //LoginAPI
         [HttpPost]
         [Route("Login")]

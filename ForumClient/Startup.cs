@@ -1,5 +1,10 @@
+using ForumClient.Models;
+using ForumClient.Models.AppDBContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,8 +27,19 @@ namespace ForumClient
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient();
+            services.AddMvc();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddSession();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+            //services.AddHttpClient();
             services.AddControllersWithViews();
+
+            string connectionString = Configuration.GetConnectionString("default");
+            services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +53,9 @@ namespace ForumClient
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseCookiePolicy();
+            app.UseStaticFiles();
+            app.UseSession();
             app.UseStaticFiles();
 
             app.UseRouting();

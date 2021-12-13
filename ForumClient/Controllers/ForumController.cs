@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ForumClient.Controllers
 {
@@ -35,7 +37,7 @@ namespace ForumClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userdetails = await _context.User.SingleOrDefaultAsync(m => m.UserName == model.UserName && m.Password == model.Password);
+                var userdetails = await _context.User.SingleOrDefaultAsync(m => m.UserName == model.UserName && m.Password == CreateMD5(model.Password));
                 if (userdetails == null)
                 {
                     ModelState.AddModelError("Password", "Invalid login attempt.");
@@ -45,6 +47,16 @@ namespace ForumClient.Controllers
                 userdetails.Status += 1;
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("userId", userdetails.Name);
+                HttpContext.Session.SetString("Role", userdetails.RoleId);
+                if (userdetails.Image == null)
+                {
+                    HttpContext.Session.SetString("Image", "0");
+                }
+                else
+                {
+                    HttpContext.Session.SetString("Image", userdetails.Image);
+                }
+
             }
             else
             {
@@ -64,17 +76,20 @@ namespace ForumClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User
+                
+                UserModel user = new UserModel
                 {
                     UserName = model.UserName,
                     Name = model.Name,
                     Email = model.Email,
-                    Password = model.Password,
+                    Password = CreateMD5(model.Password),
                     Mobile = model.Mobile,
                     Birthday = model.Birthday,
                     Address = model.Address,
-                    Status = 1,
-                    Role = "2"
+                    Image = model.Image,
+                    Status = 0,
+                    RoleId = "3",
+                    CreatedAt = DateTime.Now.ToString(),
                 };
                 _context.Add(user);
                 await _context.SaveChangesAsync();
@@ -140,6 +155,22 @@ namespace ForumClient.Controllers
         public IActionResult Create_Post()
         {
             return View();
+        }
+
+        public static string CreateMD5(string input)
+        {
+            // Use input string to calculate MD5 hash
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+            // Convert the byte array to hexadecimal string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hashBytes.Length; i++)
+            {
+                sb.Append(hashBytes[i].ToString("X2"));
+            }
+            return sb.ToString();
         }
     }
 }

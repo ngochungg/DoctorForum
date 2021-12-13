@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ForumClient.Models
 {
-    public partial class User
+    public partial class UserModel
     {
+        [Key]
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Name { get; set; }
@@ -16,7 +17,12 @@ namespace ForumClient.Models
         public string Mobile { get; set; }
         public string Birthday { get; set; }
         public string Address { get; set; }
-        public string Role { get; set; }
+        public string Image { get; set; }
+        public string Experience { get; set; }
+        public string Qualification { get; set; }
+        public string Professional { get; set; }
+        public string CreatedAt { get; set; }
+        public string RoleId { get; set; }
         public int Status { get; set; }
     }
 }

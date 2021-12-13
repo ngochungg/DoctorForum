@@ -33,5 +33,12 @@ namespace ForumClient.Models
 
         public string Birthday { get; set; }
         public string Address { get; set; }
+        public string Image { get; set; }
+        public string Experience { get; set; }
+        public string Qualification { get; set; }
+        public string Professional { get; set; }
+        public string CreatedAt { get; set; }
+        public string RoleId { get; set; }
+        public int Status { get; set; }
     }
 }

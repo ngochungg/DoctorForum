@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -163,10 +164,25 @@
                     <!-- /tt-search -->
                 </div>
                 <div class="col-auto ml-auto">
-                    <div class="tt-account-btn">
-                        <a asp-action="User_Login" class="btn btn-secondary">Login</a>
-                        <a asp-action="USer_Signup" class="btn btn-secondary">Sign up</a>
-                    </div>
+                    @{
+
+                        var userId = Context.Session.GetString("userId");
+                        if (userId == null)
+                        {
+                            <div class="tt-account-btn">
+                                <a asp-action="User_Login" class="btn btn-secondary">Login</a>
+                                <a asp-action="USer_Signup" class="btn btn-secondary">Sign up</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="tt-account-btn">
+                                <div>@userId</div>
+                                <a asp-action="Logout" class="btn btn-secondary">Logout</a>
+                            </div>
+                        }
+                    }
+
                 </div>
             </div>
         </div>
@@ -268,7 +284,7 @@
             </svg>
         </span>
     </a>
-    
+
     <div class="modal fade" id="modalAdvancedSearch" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">

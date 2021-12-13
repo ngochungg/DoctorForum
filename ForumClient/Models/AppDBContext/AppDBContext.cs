@@ -38,6 +38,14 @@ namespace ForumClient.Models.AppDBContext
                 entity.Property(e => e.Password)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Birthday)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Address)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
         }
     }

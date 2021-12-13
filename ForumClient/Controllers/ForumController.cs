@@ -41,6 +41,9 @@ namespace ForumClient.Controllers
                     ModelState.AddModelError("Password", "Invalid login attempt.");
                     return View("User_Login");
                 }
+
+                userdetails.Status += 1;
+                await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("userId", userdetails.Name);
             }
             else
@@ -67,7 +70,11 @@ namespace ForumClient.Controllers
                     Name = model.Name,
                     Email = model.Email,
                     Password = model.Password,
-                    Mobile = model.Mobile
+                    Mobile = model.Mobile,
+                    Birthday = model.Birthday,
+                    Address = model.Address,
+                    Status = 1,
+                    Role = "2"
                 };
                 _context.Add(user);
                 await _context.SaveChangesAsync();

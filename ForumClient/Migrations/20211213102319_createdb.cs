@@ -16,7 +16,11 @@ namespace ForumClient.Migrations
                     Name = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
                     Email = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
                     Password = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
-                    Mobile = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true)
+                    Mobile = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
+                    Birthday = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
+                    Address = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

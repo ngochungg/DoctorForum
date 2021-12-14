@@ -32,7 +32,16 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-
+        #region User
+        //public ActionResult User_View()
+        //{
+        //    return View();
+        //}
+        public async Task<IActionResult> User_View(int id)
+        {
+            UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            return View("User_View",MyUser);
+        }
         public IActionResult User_Login()
         {
             return View();
@@ -54,6 +63,8 @@ namespace ForumClient.Controllers
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("userId", userdetails.Name);
                 HttpContext.Session.SetString("Role", userdetails.RoleId);
+                var id = userdetails.Id.ToString();
+                HttpContext.Session.SetString("Id", id);
                 if (userdetails.Image == null)
                 {
                     HttpContext.Session.SetString("Image", "0");
@@ -136,7 +147,7 @@ namespace ForumClient.Controllers
 
         }
 
-        ////////////////
+        #endregion
 
         public IActionResult Categories()
         {

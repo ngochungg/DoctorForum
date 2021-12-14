@@ -168,10 +168,13 @@
 
                         var userId = Context.Session.GetString("userId");
                         var Role = Context.Session.GetString("Role");
+                        var Id = Context.Session.GetString("Id");
                         var Image = Context.Session.GetString("Image");
                         var Role2 =  Convert.ToInt16(Role);
+                        var Uid = Convert.ToInt16(Id);
                         int Image3;
                         bool Image2 = Int32.TryParse(Image, out Image3);
+
                         if (userId == null)
                         {
                             <div class="tt-account-btn">
@@ -186,13 +189,13 @@
                                 <div class="tt-user-info d-flex justify-content-center">
                                     @if (Image2 == true)
                                     {
-                                        <a href="#"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="avatarr"></a>
+                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="avatarr"></a>
                                     }
                                     else
                                     {
-                                        <a href="#"><img src="~/update_images/@Image" alt="Avatar" id="avatarr"></a>
+                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="~/update_images/@Image" alt="Avatar" id="avatarr"></a>
                                     }
-                                    <a href="#">
+                                    <a asp-action="User_View" asp-route-id="@Uid">
                                         <div style="margin-top: 13px;">
                                             @userId
                                         </div>
@@ -205,13 +208,13 @@
                                 <div class="tt-user-info d-flex justify-content-center">
                                     @if (Image2 == true)
                                     {
-                                        <a href="#"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="avatarr"></a>
+                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="avatarr"></a>
                                     }
                                     else
                                     {
-                                        <a href="#"><img src="~/update_images/@Image" alt="Avatar" id="avatarr"></a>
+                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="~/update_images/@Image" alt="Avatar" id="avatarr"></a>
                                     }
-                                    <a href="#">
+                                    <a asp-action="User_View" asp-route-id="@Uid">
                                         <div style="margin-top: 13px;">
                                             @userId <strong>Docter</strong>
                                         </div>

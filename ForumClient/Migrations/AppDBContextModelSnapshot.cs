@@ -122,6 +122,17 @@ namespace ForumClient.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin",
+                            Password = "E10ADC3949BA59ABBE56E057F20F883E",
+                            RoleId = "3",
+                            Status = 0,
+                            UserName = "Admin"
+                        });
                 });
 #pragma warning restore 612, 618
         }

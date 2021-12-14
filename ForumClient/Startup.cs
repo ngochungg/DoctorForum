@@ -39,7 +39,6 @@ namespace ForumClient
 
             string connectionString = Configuration.GetConnectionString("default");
             services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +67,7 @@ namespace ForumClient
                     name: "default",
                     pattern: "{controller=Forum}/{action=Index}/{id?}");
             });
+
         }
     }
 }

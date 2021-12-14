@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Text;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace ForumClient.Controllers
 {
@@ -18,15 +20,28 @@ namespace ForumClient.Controllers
     {
         private readonly AppDBContext _context;
 
-        public ForumController(AppDBContext context)
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public ForumController(AppDBContext context,IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            this.webHostEnvironment = webHostEnvironment;
         }
+
         public IActionResult Index()
         {
             return View();
         }
-
+        #region User
+        //public ActionResult User_View()
+        //{
+        //    return View();
+        //}
+        public async Task<IActionResult> User_View(int id)
+        {
+            UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            return View("User_View",MyUser);
+        }
         public IActionResult User_Login()
         {
             return View();
@@ -48,6 +63,8 @@ namespace ForumClient.Controllers
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("userId", userdetails.Name);
                 HttpContext.Session.SetString("Role", userdetails.RoleId);
+                var id = userdetails.Id.ToString();
+                HttpContext.Session.SetString("Id", id);
                 if (userdetails.Image == null)
                 {
                     HttpContext.Session.SetString("Image", "0");
@@ -75,7 +92,9 @@ namespace ForumClient.Controllers
         public async Task<ActionResult> Registar(RegistrationViewModel model)
         {
             if (ModelState.IsValid)
-            { 
+            {
+                string uniqueFileName = UploadedFile(model);
+
                 UserModel user = new UserModel
                 {
                     UserName = model.UserName,
@@ -85,7 +104,7 @@ namespace ForumClient.Controllers
                     Mobile = model.Mobile,
                     Birthday = model.Birthday,
                     Address = model.Address,
-                    Image = model.Image,
+                    Image = uniqueFileName,
                     Status = 0,
                     RoleId = "3",
                     CreatedAt = DateTime.Now.ToString(),
@@ -128,7 +147,7 @@ namespace ForumClient.Controllers
 
         }
 
-        ////////////////
+        #endregion
 
         public IActionResult Categories()
         {
@@ -170,6 +189,22 @@ namespace ForumClient.Controllers
                 sb.Append(hashBytes[i].ToString("X2"));
             }
             return sb.ToString();
+        }
+        public string UploadedFile(RegistrationViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.ProfileImage != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "update_images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfileImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ProfileImage.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
     }
 }

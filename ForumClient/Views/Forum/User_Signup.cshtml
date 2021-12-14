@@ -17,7 +17,7 @@
                         Join the forum to unlock true power of community.
                     </div>
                 </a>
-                <form asp-action="Registar" class="form-default" method="post">
+                <form asp-action="Registar" class="form-default" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label for="loginUserName">Username</label>
@@ -56,6 +56,11 @@
                     <div class="form-group">
                         <label for="Birthday">Birthday</label>
                         <input asp-for="Birthday" type="date" name="Birthday" class="form-control" id="Birthday">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ProfileImage">Image</label>
+                        <input asp-for="ProfileImage" type="file" name="ProfileImage" class="form-control-file" id="ProfileImage">
                     </div>
 
                     <input type="submit" class="btn btn-secondary btn-block" value="Create my account" />

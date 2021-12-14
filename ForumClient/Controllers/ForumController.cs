@@ -75,8 +75,7 @@ namespace ForumClient.Controllers
         public async Task<ActionResult> Registar(RegistrationViewModel model)
         {
             if (ModelState.IsValid)
-            {
-                
+            { 
                 UserModel user = new UserModel
                 {
                     UserName = model.UserName,

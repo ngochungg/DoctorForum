@@ -30,7 +30,6 @@ namespace ForumClient.Models
         [NotMapped] // Does not effect with your database
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
-
         public string Birthday { get; set; }
         public string Address { get; set; }
         public string Image { get; set; }

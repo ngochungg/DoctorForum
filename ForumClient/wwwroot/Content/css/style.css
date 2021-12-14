@@ -67,7 +67,13 @@ body {
   color: #666f74;
   text-align: left;
   background-color: #f8f9fb; }
-
+#avatarr {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: -5px;
+}
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 

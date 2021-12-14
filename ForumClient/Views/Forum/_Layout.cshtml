@@ -167,6 +167,11 @@
                     @{
 
                         var userId = Context.Session.GetString("userId");
+                        var Role = Context.Session.GetString("Role");
+                        var Image = Context.Session.GetString("Image");
+                        var Role2 =  Convert.ToInt16(Role);
+                        int Image3;
+                        bool Image2 = Int32.TryParse(Image, out Image3);
                         if (userId == null)
                         {
                             <div class="tt-account-btn">
@@ -176,10 +181,46 @@
                         }
                         else
                         {
-                            <div class="tt-account-btn">
-                                <div>@userId</div>
-                                <a asp-action="Logout" class="btn btn-secondary">Logout</a>
-                            </div>
+                            if (Role2 == 3)
+                            {
+                                <div class="tt-user-info d-flex justify-content-center">
+                                    @if (Image2 == true)
+                                    {
+                                        <a href="#"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="avatarr"></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#"><img src="@Image" alt="Avatar" id="avatarr"></a>
+                                    }
+                                    <a href="#">
+                                        <div style="margin-top: 13px;">
+                                            @userId
+                                        </div>
+                                    </a>
+                                    <a asp-action="Logout" style="font-weight: bold; margin-top: 12px; color: black;">Logout</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="tt-user-info d-flex justify-content-center">
+                                    @if (Image2 == true)
+                                    {
+                                        <a href="#"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="avatarr"></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#"><img src="@Image" alt="Avatar" id="avatarr"></a>
+                                    }
+                                    <a href="#">
+                                        <div style="margin-top: 13px;">
+                                            @userId <strong>Docter</strong>
+                                        </div>
+                                    </a>
+
+                                     <a asp-action="Logout" style="font-weight: bold; margin-top: 12px; color: black;">Logout</a>
+  
+                                </div>
+                            }
                         }
                     }
 
@@ -277,7 +318,7 @@
         </form>
     </div>
 
-    <a asp-action="Create_Topic" class="tt-btn-create-topic" hidden>
+    <a asp-action="Create_Topic" class="tt-btn-create-topic">
         <span class="tt-icon">
             <svg>
                 <use xlink:href="#icon-create_new"></use>

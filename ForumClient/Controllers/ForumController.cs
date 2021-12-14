@@ -39,8 +39,23 @@ namespace ForumClient.Controllers
         //}
         public async Task<IActionResult> User_View(int id)
         {
-            UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-            return View("User_View",MyUser);
+            var is_login = HttpContext.Request.Cookies["is_Login"];
+            if (is_login != null)
+            {
+                var login_id = Convert.ToInt16(is_login);
+                if (login_id == id)
+                {
+                    UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+                    return View("User_View", MyUser);
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+
         }
         public IActionResult User_Login()
         {
@@ -63,6 +78,8 @@ namespace ForumClient.Controllers
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("userId", userdetails.Name);
                 HttpContext.Session.SetString("Role", userdetails.RoleId);
+                var is_login = userdetails.Id.ToString();
+                HttpContext.Response.Cookies.Append("is_Login", is_login);
                 var id = userdetails.Id.ToString();
                 HttpContext.Session.SetString("Id", id);
                 if (userdetails.Image == null)
@@ -130,6 +147,10 @@ namespace ForumClient.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
             return View("Index");
         }
         public void ValidationMessage(string key, string alert, string value)

@@ -4,7 +4,6 @@
 @{
     ViewData["Title"] = "User_View";
     Layout = "~/Views/Forum/_Layout.cshtml";
-    var userId = Context.Session.GetString("userId");
 }
 
 <main id="tt-pageContent" class="tt-offset-small">
@@ -12,11 +11,11 @@
         <div class="container">
             <div class="tt-user-header">
                 <div class="tt-col-avatar">
-                    <img src="~/update_images/@Model.Image" alt="Avatar" id="avatarr">
+                    @*<img src="~/update_images/@Model.Image" alt="Avatar" id="avatarr">*@
                 </div>
                 <div class="tt-col-title">
                     <div class="tt-title">
-                        <a href="#">@userId</a>
+                        <a href="#"></a>
                     </div>
                 </div>
             </div>
@@ -40,7 +39,7 @@
             <div class="tab-content">
                 <div class="tab-pane tt-indent-none  show active" id="tt-tab-01" role="tabpanel">
                     <div class="tt-list-header">
-                        Hello!@Model.Name
+                        Hello! @Model.Name
                     </div>
                     <div class="tt-item">
                         <div class="row">

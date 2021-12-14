@@ -37,6 +37,78 @@ namespace ForumClient.Controllers
         //{
         //    return View();
         //}
+        public async Task<IActionResult> Update_User_View(int id)
+        {
+            var is_login = HttpContext.Request.Cookies["is_Login"];
+            if (is_login != null)
+            {
+                var login_id = Convert.ToInt16(is_login);
+                if (login_id == id)
+                {
+                    UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+                    UpdateUserView update = new UpdateUserView
+                    {
+                        Name = MyUser.Name,
+                        Address = MyUser.Address,
+                        Image = MyUser.Image,
+                        Experience = MyUser.Experience,
+                        Qualification = MyUser.Qualification,
+                        Professional  = MyUser.Professional,
+                        Email = MyUser.Email,
+                        Mobile = MyUser.Mobile
+                    };
+                    return View("User_Update", update);
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update_User(UpdateUserView model, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+                if(model.ProfileImage != null)
+                {
+                    string uniqueFileName = UpdateFile(model);
+                    old_user.Image = uniqueFileName;
+                }
+                if (model.Birthday != null)
+                {
+                    old_user.Birthday = model.Birthday;
+                }
+                if (old_user != null)
+                {
+                    if(old_user.Password == CreateMD5(model.Password)){
+                        old_user.Name = model.Name;
+                        old_user.Email = model.Email;
+                        old_user.Address = model.Address;
+                        old_user.Mobile = model.Mobile;
+                        old_user.Experience = model.Experience;
+                        old_user.Qualification = model.Qualification;
+                        old_user.Professional = model.Professional;
+                        await _context.SaveChangesAsync();
+                        ViewData["successful"] = "Update successful...!";
+                    }
+                    else
+                    {
+                        ViewData["failed"] = "Update failed...!";
+                    }
+                   
+                }
+            return RedirectToAction("User_View");
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                //return Page();
+                return RedirectToAction("User_View");
+            }
+        }
         public async Task<IActionResult> User_View(int id)
         {
             var is_login = HttpContext.Request.Cookies["is_Login"];
@@ -54,7 +126,6 @@ namespace ForumClient.Controllers
             {
                 return RedirectToAction("Index");
             }
-
 
         }
         public IActionResult User_Login()
@@ -212,6 +283,22 @@ namespace ForumClient.Controllers
             return sb.ToString();
         }
         public string UploadedFile(RegistrationViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.ProfileImage != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "update_images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfileImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ProfileImage.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
+        public string UpdateFile(UpdateUserView model)
         {
             string uniqueFileName = null;
 

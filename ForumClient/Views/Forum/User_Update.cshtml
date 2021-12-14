@@ -1,0 +1,112 @@
+﻿@model UpdateUserView
+@{
+    ViewData["Title"] = "User_Update";
+    Layout = "~/Views/Forum/_Layout.cshtml";
+}
+
+<h1>User_Update</h1>
+<main id="tt-pageContent" class="tt-offset-small">
+    <div class="tt-wrapper-section">
+        <div class="container">
+            <div class="tt-user-header">
+                <div class="tt-col-avatar">
+                    @*<img src="~/update_images/@Model.Image" alt="Avatar" id="avatarr">*@
+                </div>
+                <div class="tt-col-title">
+                    <div class="tt-title">
+                        <a href="#"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tt-tab-wrapper">
+            <div class="tt-wrapper-inner">
+                <ul class="nav nav-tabs pt-tabs-default" role="tablist">
+                    Edit Information
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane tt-indent-none  show active" id="tt-tab-01" role="tabpanel">
+                    <div class="tt-list-header">
+                        Hello! @Model.Name
+                    </div>
+                    <div class="tt-item">
+                        <form class="form-default" method="post" enctype="multipart/form-data" asp-action="Update_User">
+
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+
+                            <div class="form-group">
+                                <label for="loginUserEmail">Email</label>
+                                <input asp-for="Email" type="text" name="Email" class="form-control" id="loginUserEmail" value="@Model.Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="loginName">Name</label>
+                                <input asp-for="Name" type="text" name="Name" class="form-control" id="loginName" value="@Model.Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword">Password Old</label>
+                                <input asp-for="Password" type="Password" name="password" class="form-control" id="loginPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="Mobile">Phone</label>
+                                <input asp-for="Mobile" type="text" name="Mobile" class="form-control" id="Mobile" value="@Model.Mobile">
+                            </div>
+                            <div class="form-group">
+                                <label for="Address">Address</label>
+                                <input asp-for="Address" type="text" name="Address" class="form-control" id="Address" value="@Model.Address">
+                            </div>
+                            <div class="form-group">
+                                <label for="Birthday">Birthday</label>
+                                <input asp-for="Birthday" type="date" name="Birthday" class="form-control" id="Birthday">
+                            </div>
+                            @*<div class="form-group">
+                                    <label for="ProfileImage">Image</label>
+                                    <input asp-for="ProfileImage" type="file" name="ProfileImage" class="form-control-file" id="ProfileImage">
+                                </div>*@
+
+                            <input type="submit" class="btn btn-secondary btn-block" value="Create my account" />
+                            <p>Or signup with social network</p>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <a href="#" class="btn btn-color01 btn-secondary btn-block">
+                                            <i>
+                                                <svg class="icon">
+                                                    <use xlink:href="#facebook-f-brands"></use>
+                                                </svg>
+                                            </i>
+                                            Facebook
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <a href="#" class="btn btn-color02 btn-block">
+                                            <i>
+                                                <svg class="icon">
+                                                    <use xlink:href="#twitter-brands"></use>
+                                                </svg>
+                                            </i>
+                                            Twitter
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Are you a Doctor? <a asp-action="Doctor_Signup" class="tt-underline">Sign up here</a></p>
+                            <p>Already have an account? <a asp-action="User_Login" class="tt-underline">Login here</a></p>
+                            <div class="tt-notes">
+                                By signing up, signing in or continuing, I agree to
+                                DoctorForum’s <a href="#" class="tt-underline">Terms of Use</a> and <a href="#" class="tt-underline">Privacy Policy.</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

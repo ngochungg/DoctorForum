@@ -6819,10 +6819,10 @@ html.ie.gecko body.modal-open {
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start; }
-  @media (min-width: 471px) {
+  @media (min-width: 521px) {
     .tt-loginpages-wrapper .tt-loginpages {
-      width: 410px; } }
-  @media (max-width: 470px) {
+      width: 500px; } }
+  @media (max-width: 520px) {
     .tt-loginpages-wrapper .tt-loginpages {
       width: 100%; } }
 

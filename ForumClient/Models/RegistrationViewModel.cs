@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace ForumClient.Models
 {
@@ -33,6 +34,7 @@ namespace ForumClient.Models
         public string Birthday { get; set; }
         public string Address { get; set; }
         public string Image { get; set; }
+        public IFormFile ProfileImage { get; set; }
         public string Experience { get; set; }
         public string Qualification { get; set; }
         public string Professional { get; set; }

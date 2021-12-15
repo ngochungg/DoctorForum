@@ -310,6 +310,12 @@ namespace ForumClient.Controllers
         [HttpPost]
         public async Task<ActionResult> Registar(RegistrationViewModel model)
         {
+            var u = await _context.User.SingleOrDefaultAsync(m => m.UserName == model.UserName);
+            if(u != null)
+            {
+                TempData["Message"] = "User already exists";
+                return View("User_Signup");
+            }
             if (ModelState.IsValid)
             {
                 string uniqueFileName = UploadedFile(model);

@@ -10,19 +10,12 @@ namespace ForumClient.Models
 {
     public class UpdateUserView
     {
-        [Required]
-        [StringLength(15, MinimumLength = 3)]
+        public int id { get; set; }
         //[StringLength(15, ErrorMessage = "Name length can't be more than 15.")]
         public string Name { get; set; }
-        [Required]
-        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Mobile no not valid")]
         public string Mobile { get; set; }
-        [Required]
-        [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(10, MinimumLength = 6)]
         public string Password { get; set; }
         public string Birthday { get; set; }
         public string Address { get; set; }
@@ -34,5 +27,6 @@ namespace ForumClient.Models
         public string CreatedAt { get; set; }
         public string RoleId { get; set; }
         public int Status { get; set; }
+        public string Mess { get; set; }
     }
 }

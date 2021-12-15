@@ -37,7 +37,7 @@ namespace ForumClient.Controllers
         //{
         //    return View();
         //}
-        public async Task<IActionResult> Update_User_View(int id)
+        public async Task<IActionResult> Update_User_View(int id, string mess)
         {
             var is_login = HttpContext.Request.Cookies["is_Login"];
             if (is_login != null)
@@ -46,8 +46,10 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+
                     UpdateUserView update = new UpdateUserView
                     {
+                        id = MyUser.Id,
                         Name = MyUser.Name,
                         Address = MyUser.Address,
                         Image = MyUser.Image,
@@ -57,7 +59,10 @@ namespace ForumClient.Controllers
                         Email = MyUser.Email,
                         Mobile = MyUser.Mobile
                     };
-                    HttpContext.Session.SetString("Idd", is_login);
+                    if (mess != null)
+                    {
+                       update.Mess  = mess;
+                    }
                     return View("User_Update", update);
                 }
                 return RedirectToAction("Index");
@@ -70,8 +75,6 @@ namespace ForumClient.Controllers
         [HttpPost]
         public async Task<IActionResult> Update_User(UpdateUserView model, int id)
         {
-            if (ModelState.IsValid)
-            {
                 UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
                 if(model.ProfileImage != null)
                 {
@@ -82,33 +85,32 @@ namespace ForumClient.Controllers
                 {
                     old_user.Birthday = model.Birthday;
                 }
-                if (old_user != null)
-                {
-                    if(old_user.Password == CreateMD5(model.Password)){
-                        old_user.Name = model.Name;
-                        old_user.Email = model.Email;
-                        old_user.Address = model.Address;
-                        old_user.Mobile = model.Mobile;
-                        old_user.Experience = model.Experience;
-                        old_user.Qualification = model.Qualification;
-                        old_user.Professional = model.Professional;
-                        await _context.SaveChangesAsync();
-                        ViewData["successful"] = "Update successful...!";
-                    }
-                    else
-                    {
-                        ViewData["failed"] = "Update failed...!";
-                    }
-                   
-                }
-            return RedirectToAction("Update_User_View");
-            }
-            else
+            if (old_user != null)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                //return Page();
-                return RedirectToAction("User_View");
+                if (old_user.Password == CreateMD5(model.Password))
+                {
+                    old_user.Name = model.Name;
+                    old_user.Email = model.Email;
+                    old_user.Address = model.Address;
+                    old_user.Mobile = model.Mobile;
+                    old_user.Experience = model.Experience;
+                    old_user.Qualification = model.Qualification;
+                    old_user.Professional = model.Professional;
+                    await _context.SaveChangesAsync();
+                    model.Mess = "Update successful...!";
+                    int sid = id;
+                    return RedirectToAction("Update_User_View", new { id = sid, mess = model.Mess });
+                }
+                else
+                {
+                    model.Mess = "Update failed...!";
+                    int sid = id;
+                    return RedirectToAction("Update_User_View", new { id = sid, mess = model.Mess });
+                }
             }
+            model.Mess = "Update failed...!";
+            int uid = id;
+            return RedirectToAction("Update_User_View", new { id = uid, mess = model.Mess });
         }
         public async Task<IActionResult> User_View(int id)
         {

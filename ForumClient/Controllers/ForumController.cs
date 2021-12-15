@@ -37,6 +37,40 @@ namespace ForumClient.Controllers
         //{
         //    return View();
         //}
+
+        public async Task<IActionResult> Confirmed_docter_view(int id, string mess)
+        {
+            var is_login = HttpContext.Request.Cookies["is_Login"];
+            if (is_login != null)
+            {
+                var login_id = Convert.ToInt16(is_login);
+                if (login_id == id)
+                {
+                    UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+
+                    Confirmed_docter_view update = new Confirmed_docter_view
+                    {
+                        id = MyUser.Id,
+                        Name = MyUser.Name,
+                        Image = MyUser.Image,
+                        Experience = MyUser.Experience,
+                        Qualification = MyUser.Qualification,
+                        Professional = MyUser.Professional,
+                    };
+                    if (mess != null)
+                    {
+                        update.Mess = mess;
+                    }
+                    return View("Confirmed_docter_view", update);
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
         public async Task<IActionResult> Update_User_View(int id, string mess)
         {
             var is_login = HttpContext.Request.Cookies["is_Login"];
@@ -57,7 +91,8 @@ namespace ForumClient.Controllers
                         Qualification = MyUser.Qualification,
                         Professional  = MyUser.Professional,
                         Email = MyUser.Email,
-                        Mobile = MyUser.Mobile
+                        Mobile = MyUser.Mobile,
+                        RoleId = MyUser.RoleId
                     };
                     if (mess != null)
                     {

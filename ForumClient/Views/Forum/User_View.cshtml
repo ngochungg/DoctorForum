@@ -45,6 +45,14 @@
                     <div class="tt-item">
                         @Model.Id
                         <a asp-action="Update_User_View" asp-route-id="@Model.Id" class="btn btn-secondary">Edit User</a>
+                        @{
+                            var IRole = Convert.ToInt32(Model.RoleId);
+                            if (IRole == 3)
+                            {
+                                 <a asp-action="Confirmed_docter_view" asp-route-id="@Model.Id" class="btn btn-secondary">Confirmed as a doctor</a>
+                            }
+                        }
+
                     </div>
                     </div>
                         <div class="tab-pane tt-indent-none" id="tt-tab-02" role="tabpanel">

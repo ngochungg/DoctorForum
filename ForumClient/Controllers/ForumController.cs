@@ -1,4 +1,4 @@
-﻿using ForumClient.Models;
+using ForumClient.Models;
 using ForumClient.Models.AppDBContext;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

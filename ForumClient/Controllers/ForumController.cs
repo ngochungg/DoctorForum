@@ -57,6 +57,7 @@ namespace ForumClient.Controllers
                         Email = MyUser.Email,
                         Mobile = MyUser.Mobile
                     };
+                    HttpContext.Session.SetString("Idd", is_login);
                     return View("User_Update", update);
                 }
                 return RedirectToAction("Index");
@@ -100,7 +101,7 @@ namespace ForumClient.Controllers
                     }
                    
                 }
-            return RedirectToAction("User_View");
+            return RedirectToAction("Update_User_View");
             }
             else
             {

@@ -57,7 +57,7 @@ namespace ForumClient.Models.AppDBContext
                     .IsUnicode(false);
             });
             modelBuilder.Entity<UserModel>().HasData(
-                new UserModel { Id = 1,Name = "Admin", UserName = "Admin", Password = "E10ADC3949BA59ABBE56E057F20F883E",RoleId = "3" });
+                new UserModel { Id = 1,Name = "Admin", UserName = "Admin", Password = "E10ADC3949BA59ABBE56E057F20F883E",RoleId = "1" });
 
             //Role table
             modelBuilder.Entity<RoleModel>(entity =>

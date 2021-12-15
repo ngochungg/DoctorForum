@@ -601,10 +601,8 @@
                                 </div>
                             </th>
                             <th class="table-column-pl-0">Name</th>
-                            <th>Position</th>
-                            <th>Country</th>
-                            <th>Status</th>
-                            <th>Portfolio</th>
+                            <th>Address</th>
+                            <th>Phone number</th>
                             <th>Role</th>
                             <th></th>
                         </tr>
@@ -632,21 +630,9 @@
                                     </div>
                                 </a>
                             </td>
+                            <td>@item.Address<span class="text-hide">Code: GB</span></td>
                             <td>
-                                <span class="d-block h5 mb-0">Director</span>
-                                <span class="d-block font-size-sm">Human resources</span>
-                            </td>
-                            <td>United Kingdom <span class="text-hide">Code: GB</span></td>
-                            <td>
-                                <span class="legend-indicator bg-success"></span>Active
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="font-size-sm mr-2">72%</span>
-                                    <div class="progress table-progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
+                                <span class="legend-indicator bg-success"></span>@item.Mobile
                             </td>
                             @if (item.RoleId == "1")
                             {

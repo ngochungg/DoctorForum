@@ -83,7 +83,7 @@ namespace ForumClient.Controllers
 
         public async Task<IActionResult> UserView()
         {
-            var user = await _context.User.Select(c => new UserModel { Name = c.Name, Birthday = c.Birthday,Email = c.Email, Mobile = c.Mobile , Image = c.Image, RoleId = c.RoleId }).ToListAsync();
+            var user = await _context.User.Select(c => new UserModel { Name = c.Name, Birthday = c.Birthday,Email = c.Email, Mobile = c.Mobile , Image = c.Image, RoleId = c.RoleId, Address = c.Address }).ToListAsync();
             return View(user);
         }
     }

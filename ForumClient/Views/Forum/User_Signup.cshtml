@@ -22,32 +22,38 @@
                     <div class="form-group">
                         <label for="loginUserName">Username</label>
                         <input asp-for="UserName" type="text" name="UserName" class="form-control" id="loginUserName">
-                        <span asp-validation-for="UserName" class="text-danger"></span>
+                        <span asp-validation-for="UserName" class="text-danger" style="color:red"></span>
+                        @{
+                            if (@TempData["Message"] != null)
+                            {
+                                <span style="color:red">@TempData["Message"]</span>
+                            }
+                        }
                     </div>
                     <div class="form-group">
                         <label for="loginUserEmail">Email</label>
                         <input asp-for="Email" type="text" name="Email" class="form-control" id="loginUserEmail">
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <span asp-validation-for="Email" class="text-danger" style="color:red"></span>
                     </div>
                     <div class="form-group">
                         <label for="loginName">Name</label>
                         <input asp-for="Name" type="text" name="Name" class="form-control" id="loginName">
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <span asp-validation-for="Name" class="text-danger" style="color:red"></span>
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
                         <input asp-for="Password" type="Password" name="password" class="form-control" id="loginPassword">
-                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <span asp-validation-for="Password" class="text-danger" style="color:red"></span>
                     </div>
                     <div class="form-group">
                         <label for="ConfirmPassword">Confirm Password</label>
                         <input asp-for="ConfirmPassword" type="password" name="ConfirmPassword" class="form-control" id="ConfirmPassword">
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger" style="color:red"></span>
                     </div>
                     <div class="form-group">
                         <label for="Mobile">Phone</label>
                         <input asp-for="Mobile" type="text" name="Mobile" class="form-control" id="Mobile">
-                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                        <span asp-validation-for="Mobile" class="text-danger" style="color:red"></span>
                     </div>
                     <div class="form-group">
                         <label for="Address">Address</label>

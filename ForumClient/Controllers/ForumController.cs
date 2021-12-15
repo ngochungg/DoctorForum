@@ -1,4 +1,4 @@
-﻿using ForumClient.Models;
+using ForumClient.Models;
 using ForumClient.Models.AppDBContext;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,11 +33,70 @@ namespace ForumClient.Controllers
             return View();
         }
         #region User
-        //public ActionResult User_View()
-        //{
-        //    return View();
-        //}
+        #region change_password
+        public async Task<IActionResult> Change_Password_View(int id, string mess)
+        {
+            var is_login = HttpContext.Request.Cookies["is_Login"];
+            if (is_login != null)
+            {
+                var login_id = Convert.ToInt16(is_login);
+                if (login_id == id)
+                {
+                    UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
 
+                    Change_pass_view update = new Change_pass_view
+                    {
+                        id = MyUser.Id
+                    };
+                    if (mess != null)
+                    {
+                        update.Mess = mess;
+                    }
+                    return View("Change_pass", update);
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Change_Password(Change_pass_view model, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+                if (old_user != null)
+                {
+                    string passOld = CreateMD5(model.OldPassword);
+                    if (old_user.Password == passOld)
+                    {
+                        old_user.Password = CreateMD5(model.Password);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Logout");
+                    }
+                    else
+                    {
+                        model.Mess = "Wrong password...!";
+                        int sid = id;
+                        return RedirectToAction("Change_Password_View", new { id = sid, mess = model.Mess });
+                    }
+                }
+                model.Mess = "Change Fail";
+                int uid = id;
+                return RedirectToAction("Change_Password_View", new { id = uid, mess = model.Mess });
+            }
+            else
+            {
+                model.Mess = "The new password is not the same...!";
+                int uid = id;
+                return RedirectToAction("Change_Password_View", new { id = uid, mess = model.Mess });
+            }
+        }
+        #endregion
+
+        #region confirmed_docter
         public async Task<IActionResult> Confirmed_docter_view(int id, string mess)
         {
             var is_login = HttpContext.Request.Cookies["is_Login"];
@@ -71,6 +130,33 @@ namespace ForumClient.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Confirmed_docter(Confirmed_docter_view model, int id)
+        {
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            if (old_user != null)
+            {
+                if (old_user.Password == CreateMD5(model.Password))
+                {
+                    old_user.Experience = model.Experience;
+                    old_user.Qualification = model.Qualification;
+                    old_user.Professional = model.Professional;
+                    await _context.SaveChangesAsync();
+                    return View("waitAdminConfirmed");
+                }
+                else
+                {
+                    model.Mess = "Wrong password...!";
+                    int sid = id;
+                    return RedirectToAction("Confirmed_docter_view", new { id = sid, mess = model.Mess });
+                }
+            }
+            model.Mess = "Update failed...!";
+            int uid = id;
+            return RedirectToAction("Confirmed_docter_view", new { id = uid, mess = model.Mess });
+        }
+        #endregion
+        #region update_infor
         public async Task<IActionResult> Update_User_View(int id, string mess)
         {
             var is_login = HttpContext.Request.Cookies["is_Login"];
@@ -147,6 +233,8 @@ namespace ForumClient.Controllers
             int uid = id;
             return RedirectToAction("Update_User_View", new { id = uid, mess = model.Mess });
         }
+        #endregion
+        #region Proflie
         public async Task<IActionResult> User_View(int id)
         {
             var is_login = HttpContext.Request.Cookies["is_Login"];
@@ -166,6 +254,8 @@ namespace ForumClient.Controllers
             }
 
         }
+        #endregion
+        #region Login
         public IActionResult User_Login()
         {
             return View();
@@ -209,10 +299,13 @@ namespace ForumClient.Controllers
             }
             return View("Index");
         }
+
         public IActionResult User_Signup()
         {
             return View();
         }
+        #endregion
+        #region Registar_And_logout
         [Route("Register")]
         [HttpPost]
         public async Task<ActionResult> Registar(RegistrationViewModel model)
@@ -262,6 +355,8 @@ namespace ForumClient.Controllers
             }
             return View("Index");
         }
+        #endregion
+        #endregion
         public void ValidationMessage(string key, string alert, string value)
         {
             try
@@ -277,7 +372,7 @@ namespace ForumClient.Controllers
 
         }
 
-        #endregion
+
 
         public IActionResult Categories()
         {

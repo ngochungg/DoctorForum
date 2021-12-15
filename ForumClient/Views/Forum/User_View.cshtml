@@ -43,16 +43,24 @@
                         Hello! @Model.Name
                     </div>
                     <div class="tt-item">
-                        @Model.Id
-                        <a asp-action="Update_User_View" asp-route-id="@Model.Id" class="btn btn-secondary">Edit User</a>
+                        <a asp-action="Update_User_View" asp-route-id="@Model.Id" class="">Edit User</a>
+                        <a asp-action="Change_Password_View" asp-route-id="@Model.Id" class="">Change Password</a>
                         @{
                             var IRole = Convert.ToInt32(Model.RoleId);
                             if (IRole == 3)
                             {
-                                 <a asp-action="Confirmed_docter_view" asp-route-id="@Model.Id" class="btn btn-secondary">Confirmed as a doctor</a>
+                                if (Model.Experience == null)
+                                {
+                                    <a asp-action="Confirmed_docter_view" asp-route-id="@Model.Id" class="">Confirmed as a doctor</a>
+                                }
+                                else
+                                {
+                                    <h4>We will contact you to confirm you are docter. Please wait</h4>
+                                }
                             }
                         }
 
+                        }
                     </div>
                     </div>
                         <div class="tab-pane tt-indent-none" id="tt-tab-02" role="tabpanel">

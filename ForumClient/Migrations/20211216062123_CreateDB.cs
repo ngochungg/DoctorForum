@@ -2,7 +2,7 @@
 
 namespace ForumClient.Migrations
 {
-    public partial class CreateDb : Migration
+    public partial class CreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,7 +38,9 @@ namespace ForumClient.Migrations
                     Professional = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: true),
                     RoleId = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Look = table.Column<int>(type: "int", nullable: false),
+                    Share = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,8 +59,8 @@ namespace ForumClient.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "Id", "Address", "Birthday", "CreatedAt", "Email", "Experience", "Image", "Mobile", "Name", "Password", "Professional", "Qualification", "RoleId", "Status", "UserName" },
-                values: new object[] { 1, null, null, null, null, null, null, null, "Admin", "E10ADC3949BA59ABBE56E057F20F883E", null, null, "3", 0, "Admin" });
+                columns: new[] { "Id", "Address", "Birthday", "CreatedAt", "Email", "Experience", "Image", "Look", "Mobile", "Name", "Password", "Professional", "Qualification", "RoleId", "Share", "Status", "UserName" },
+                values: new object[] { 1, null, null, null, null, null, null, 1, null, "Admin", "E10ADC3949BA59ABBE56E057F20F883E", null, null, "1", 0, 0, "Admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

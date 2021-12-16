@@ -252,7 +252,7 @@
                 <div class="navbar-brand-wrapper">
                     <!-- Logo -->
                     <a class="navbar-brand" href="..\index.html" aria-label="Front">
-                        <img class="navbar-brand-logo" src="..\assets\svg\logos\logo.svg" alt="Logo">
+                        <img class="navbar-brand-logo" src="~/Content/images/logo.png" alt="Logo">
                         <img class="navbar-brand-logo-mini" src="..\assets\svg\logos\logo-short.svg" alt="Logo">
                     </a>
                     <!-- End Logo -->
@@ -862,8 +862,22 @@
                  "target": "#accountNavbarDropdown",
                  "type": "css-animation"
                }'>
+                                    @{
+                                        @using Microsoft.AspNetCore.Http
+                                        var Image = Context.Session.GetString("Image");
+                                        var Name = Context.Session.GetString("userId");
+                                    }
                                     <div class="avatar avatar-sm avatar-circle">
-                                        <img class="avatar-img" src="..\assets\img\160x160\img6.jpg" alt="Image Description">
+                                        @{
+                                            if (Image != "0")
+                                            {
+                                                <img class="avatar-img" src="~/update_images/@Image" alt="Image Description">
+                                            }
+                                            else
+                                            {
+                                                <img class="avatar-img" src="https://www.w3schools.com/howto/img_avatar.png" alt="Image Description">
+                                            }
+                                        }
                                         <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                                     </div>
                                 </a>
@@ -872,105 +886,43 @@
                                     <div class="dropdown-item-text">
                                         <div class="media align-items-center">
                                             <div class="avatar avatar-sm avatar-circle mr-2">
-                                                <img class="avatar-img" src="..\assets\img\160x160\img6.jpg" alt="Image Description">
+                                                @{
+                                                     if(Image != "0")
+                                                        {
+                                                            <img class="avatar-img" src="~/update_images/@Image" alt="Image Description">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img class="avatar-img" src="https://www.w3schools.com/howto/img_avatar.png" alt="Image Description">
+                                                        }
+                                                }
+                                                
                                             </div>
                                             <div class="media-body">
-                                                <span class="card-title h5">Mark Williams</span>
-                                                <span class="card-text">mark@example.com</span>
+                                                <span class="card-title h5">@Name</span>
+                                                <span class="card-text">Admin</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="dropdown-divider"></div>
 
-                                    <!-- Unfold -->
-                                    <div class="hs-unfold w-100">
-                                        <a class="js-hs-unfold-invoker navbar-dropdown-submenu-item dropdown-item d-flex align-items-center" href="javascript:;" data-hs-unfold-options='{
-                     "target": "#navSubmenuPagesAccountDropdown1",
-                     "event": "hover"
-                   }'>
-                                            <span class="text-truncate pr-2" title="Set status">Set status</span>
-                                            <i class="tio-chevron-right navbar-dropdown-submenu-item-invoker ml-auto"></i>
-                                        </a>
 
-                                        <div id="navSubmenuPagesAccountDropdown1" class="hs-unfold-content hs-unfold-has-submenu dropdown-unfold dropdown-menu navbar-dropdown-sub-menu">
-                                            <a class="dropdown-item" href="#">
-                                                <span class="legend-indicator bg-success mr-1"></span>
-                                                <span class="text-truncate pr-2" title="Available">Available</span>
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <span class="legend-indicator bg-danger mr-1"></span>
-                                                <span class="text-truncate pr-2" title="Busy">Busy</span>
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <span class="legend-indicator bg-warning mr-1"></span>
-                                                <span class="text-truncate pr-2" title="Away">Away</span>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">
-                                                <span class="text-truncate pr-2" title="Reset status">Reset status</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- End Unfold -->
 
                                     <a class="dropdown-item" href="#">
                                         <span class="text-truncate pr-2" title="Profile &amp; account">Profile &amp; account</span>
                                     </a>
 
                                     <a class="dropdown-item" href="#">
-                                        <span class="text-truncate pr-2" title="Settings">Settings</span>
+                                        <span class="text-truncate pr-2" title="Settings">Change Password</span>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <span class="text-truncate pr-2" title="Settings">Edit Infomation</span>
                                     </a>
 
                                     <div class="dropdown-divider"></div>
 
-                                    <a class="dropdown-item" href="#">
-                                        <div class="media align-items-center">
-                                            <div class="avatar avatar-sm avatar-dark avatar-circle mr-2">
-                                                <span class="avatar-initials">HS</span>
-                                            </div>
-                                            <div class="media-body">
-                                                <span class="card-title h5">Htmlstream <span class="badge badge-primary badge-pill text-uppercase ml-1">PRO</span></span>
-                                                <span class="card-text">hs.example.com</span>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <div class="dropdown-divider"></div>
-
-                                    <!-- Unfold -->
-                                    <div class="hs-unfold w-100">
-                                        <a class="js-hs-unfold-invoker navbar-dropdown-submenu-item dropdown-item d-flex align-items-center" href="javascript:;" data-hs-unfold-options='{
-                     "target": "#navSubmenuPagesAccountDropdown2",
-                     "event": "hover"
-                   }'>
-                                            <span class="text-truncate pr-2" title="Customization">Customization</span>
-                                            <i class="tio-chevron-right navbar-dropdown-submenu-item-invoker  ml-auto"></i>
-                                        </a>
-
-                                        <div id="navSubmenuPagesAccountDropdown2" class="hs-unfold-content hs-unfold-has-submenu dropdown-unfold dropdown-menu navbar-dropdown-sub-menu">
-                                            <a class="dropdown-item" href="#">
-                                                <span class="text-truncate pr-2" title="Invite people">Invite people</span>
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <span class="text-truncate pr-2" title="Analytics">Analytics</span>
-                                                <i class="tio-open-in-new"></i>
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <span class="text-truncate pr-2" title="Customize Front">Customize Front</span>
-                                                <i class="tio-open-in-new"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- End Unfold -->
-
-                                    <a class="dropdown-item" href="#">
-                                        <span class="text-truncate pr-2" title="Manage team">Manage team</span>
-                                    </a>
-
-                                    <div class="dropdown-divider"></div>
-
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" asp-action="LogOut">
                                         <span class="text-truncate pr-2" title="Sign out">Sign out</span>
                                     </a>
                                 </div>
@@ -1617,7 +1569,7 @@
                             <!-- Pages -->
                             <li class="hs-has-sub-menu">
                                 <a id="pagesDropdown" class="hs-mega-menu-invoker navbar-nav-link nav-link nav-link-toggle" href="javascript:;" aria-haspopup="true" aria-expanded="false" aria-labelledby="navLinkPagesDropdown">
-                                    <i class="tio-pages-outlined nav-icon"></i> Pages
+                                    <i class="tio-pages-outlined nav-icon"></i> Manage
                                 </a>
 
                                 <!-- Dropdown -->
@@ -2076,8 +2028,8 @@
                     <div class="navbar-nav-wrap">
                         <div class="navbar-brand-wrapper">
                             <!-- Logo -->
-                            <a class="navbar-brand" href="..\index.html" aria-label="Front">
-                                <img class="navbar-brand-logo" src="..\assets\svg\logos\logo-white.svg" alt="Logo">
+                            <a class="navbar-brand" asp-action="Home" aria-label="Front">
+                                <img class="navbar-brand-logo" src="~/Content/images/logo.png" alt="Logo">
                             </a>
                             <!-- End Logo -->
                         </div>
@@ -3292,8 +3244,7 @@
 
 
                         <a class="navbar-brand" href="..\index.html" aria-label="Front">
-                            <img class="navbar-brand-logo" src="..\assets\svg\logos\logo.svg" alt="Logo">
-                            <img class="navbar-brand-logo-mini" src="..\assets\svg\logos\logo-short.svg" alt="Logo">
+                            <h1 style="text-align:center">Admin</h1>
                         </a>
 
                         <!-- End Logo -->
@@ -3340,7 +3291,7 @@
                             <li class="navbar-vertical-aside-has-menu ">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Pages">
                                     <i class="tio-pages-outlined nav-icon"></i>
-                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Pages</span>
+                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Manage</span>
                                 </a>
 
                                 <ul class="js-navbar-vertical-aside-submenu nav nav-sub">

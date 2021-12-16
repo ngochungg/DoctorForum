@@ -41,5 +41,7 @@ namespace ForumClient.Models
         public string CreatedAt { get; set; }
         public string RoleId { get; set; }
         public int Status { get; set; }
+        public int Look { get; set; }
+        public int Share { get; set; }
     }
 }

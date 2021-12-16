@@ -41,7 +41,10 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-
+        public IActionResult Home()
+        {
+            return View();
+        }
         [Route("Admin")]
         [HttpPost]
         public async Task<IActionResult> LoginAdmin(LoginViewModel model)
@@ -51,40 +54,65 @@ namespace ForumClient.Controllers
                 var userdetails = await _context.User.SingleOrDefaultAsync(m => m.UserName == model.UserName && m.Password == CreateMD5(model.Password));
                 if (userdetails == null)
                 {
-                    ModelState.AddModelError("Password", "Invalid login attempt.");
+                    TempData["Message"] = "Username and password is not correct";
+                    return View("Index");
+                }
+                if (userdetails.Look == 0)
+                {
+                    TempData["Message"] = "Account has been locked.";
                     return View("Index");
                 }
                 if (userdetails.RoleId == "1")
                 {
+                    var is_admin = userdetails.Id.ToString();
+                    HttpContext.Response.Cookies.Append("is_admin", is_admin);
+                    HttpContext.Session.SetString("userId", userdetails.Name);
+                    if (userdetails.Image == null)
+                    {
+                        HttpContext.Session.SetString("Image", "0");
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("Image", userdetails.Image);
+                    }
                     return View("Home");
                 }
                 else
                 {
+                    TempData["Message"] = "Username does not have access rights";
                     return View("Index");
 
                 }
-                //HttpContext.Session.SetString("userId", userdetails.Name);
-                //HttpContext.Session.SetString("Role", userdetails.RoleId);
-                //var id = userdetails.Id.ToString();
-                //HttpContext.Session.SetString("Id", id);
             }
             else
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
-                //return Page();
                 return View("Index");
             }
         }
 
-        public IActionResult Home()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> UserView()
         {
-            var user = await _context.User.Select(c => new UserModel { Name = c.Name, Birthday = c.Birthday,Email = c.Email, Mobile = c.Mobile , Image = c.Image, RoleId = c.RoleId, Address = c.Address }).ToListAsync();
-            return View(user);
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                var user = await _context.User.Select(c => new UserModel { Name = c.Name, Birthday = c.Birthday, Email = c.Email, Mobile = c.Mobile, Image = c.Image, RoleId = c.RoleId, Address = c.Address }).ToListAsync();
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
+            return View("Index");
         }
     }
 }

@@ -85,6 +85,9 @@ namespace ForumClient.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Look")
+                        .HasColumnType("int");
+
                     b.Property<string>("Mobile")
                         .HasMaxLength(255)
                         .IsUnicode(false)
@@ -111,6 +114,9 @@ namespace ForumClient.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<int>("Share")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -127,9 +133,11 @@ namespace ForumClient.Migrations
                         new
                         {
                             Id = 1,
+                            Look = 1,
                             Name = "Admin",
                             Password = "E10ADC3949BA59ABBE56E057F20F883E",
-                            RoleId = "3",
+                            RoleId = "1",
+                            Share = 0,
                             Status = 0,
                             UserName = "Admin"
                         });

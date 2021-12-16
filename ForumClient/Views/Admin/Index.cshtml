@@ -62,6 +62,12 @@
                                 </div>
 
                                 <!-- Form Group -->
+                                @{
+                                    if (@TempData["Message"] != null)
+                                    {
+                                        <span style="color:red; font-weight:bold">@TempData["Message"]</span>
+                                    }
+                                }
                                 <div class="js-form-message form-group">
                                     <label class="input-label" asp-for="UserName"></label>
 
@@ -72,7 +78,7 @@
                                 <div class="js-form-message form-group">
                                     <label class="input-label" asp-for="Password" tabindex="0"></label>
                                     <div class="input-group input-group-merge">
-                                        <input type="password" asp-for="Password" class="js-toggle-password form-control form-control-lg" name="Password"  placeholder="Password" aria-label="Password" required="" data-msg="Your password is invalid. Please try again.">
+                                        <input type="password" asp-for="Password" class="js-toggle-password form-control form-control-lg" name="Password" placeholder="Password" aria-label="Password" required="" data-msg="Your password is invalid. Please try again.">
                                         <div id="changePassTarget" class="input-group-append">
                                             <a class="input-group-text" href="javascript:;">
                                                 <i id="changePassIcon" class="tio-visible-outlined"></i>
@@ -82,12 +88,12 @@
                                 </div>
                                 <!-- End Form Group -->
                                 <!-- Checkbox -->
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox">
                                         <label class="custom-control-label text-muted" for="termsCheckbox"> Remember me</label>
                                     </div>
-                                </div>
+                                </div>*@
                                 <!-- End Checkbox -->
 
                                 <button type="submit" class="btn btn-lg btn-block btn-primary">Sign in</button>
@@ -96,28 +102,6 @@
                         </div>
                     </div>
                     <!-- End Card -->
-                    <!-- Footer -->
-                    <div class="text-center">
-                        <small class="text-cap mb-4">Trusted by the world's best teams</small>
-
-                        <div class="w-85 mx-auto">
-                            <div class="row justify-content-between">
-                                <div class="col">
-                                    <img class="img-fluid" src="assets\svg\brands\gitlab-gray.svg" alt="Image Description">
-                                </div>
-                                <div class="col">
-                                    <img class="img-fluid" src="assets\svg\brands\fitbit-gray.svg" alt="Image Description">
-                                </div>
-                                <div class="col">
-                                    <img class="img-fluid" src="assets\svg\brands\flow-xo-gray.svg" alt="Image Description">
-                                </div>
-                                <div class="col">
-                                    <img class="img-fluid" src="assets\svg\brands\layar-gray.svg" alt="Image Description">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Footer -->
                 </div>
             </div>
         </div>

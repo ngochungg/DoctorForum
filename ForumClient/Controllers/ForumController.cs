@@ -43,7 +43,10 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-
+                    if (MyUser.Look == 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
                     Change_pass_view update = new Change_pass_view
                     {
                         id = MyUser.Id
@@ -106,7 +109,9 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-
+                    if (MyUser.Look == 0) {
+                        return RedirectToAction("Index");
+                    }
                     Confirmed_docter_view update = new Confirmed_docter_view
                     {
                         id = MyUser.Id,
@@ -166,7 +171,10 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-
+                    if (MyUser.Look == 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
                     UpdateUserView update = new UpdateUserView
                     {
                         id = MyUser.Id,
@@ -272,7 +280,11 @@ namespace ForumClient.Controllers
                     ModelState.AddModelError("Password", "Invalid login attempt.");
                     return View("User_Login");
                 }
-
+                if (userdetails.Look == 0)
+                {
+                    ModelState.AddModelError("Password", "Account has been locked.");
+                    return View("User_Login");
+                }
                 userdetails.Status += 1;
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("userId", userdetails.Name);
@@ -332,6 +344,8 @@ namespace ForumClient.Controllers
                     Image = uniqueFileName,
                     Status = 0,
                     RoleId = "3",
+                    Look = 1,
+                    Share = 1,
                     CreatedAt = DateTime.Now.ToString(),
                 };
                 _context.Add(user);

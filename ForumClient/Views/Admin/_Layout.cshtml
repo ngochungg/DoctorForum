@@ -13,7 +13,8 @@
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="~/Admin/css/vendor.min.css">
     <link rel="stylesheet" href="~/Admin/vendor/icon-set/style.css">
@@ -252,136 +253,11 @@
                 <div class="navbar-brand-wrapper">
                     <!-- Logo -->
                     <a class="navbar-brand" href="..\index.html" aria-label="Front">
-                        <img class="navbar-brand-logo" src="~/Content/images/logo.png" alt="Logo">
-                        <img class="navbar-brand-logo-mini" src="..\assets\svg\logos\logo-short.svg" alt="Logo">
+                        Admin
                     </a>
                     <!-- End Logo -->
                 </div>
 
-                <div class="navbar-nav-wrap-content-left">
-                    <!-- Navbar Vertical Toggle -->
-                    <button type="button" class="js-navbar-vertical-aside-toggle-invoker close mr-3">
-                        <i class="tio-first-page navbar-vertical-aside-toggle-short-align" data-toggle="tooltip" data-placement="right" title="Collapse"></i>
-                        <i class="tio-last-page navbar-vertical-aside-toggle-full-align" data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-toggle="tooltip" data-placement="right" title="Expand"></i>
-                    </button>
-                    <!-- End Navbar Vertical Toggle -->
-                    <!-- Search Form -->
-                    <div class="d-none d-md-block">
-                        <form class="position-relative">
-                            <!-- Input Group -->
-                            <div class="input-group input-group-merge input-group-borderless input-group-hover-light navbar-input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <i class="tio-search"></i>
-                                    </div>
-                                </div>
-                                <input type="search" class="js-form-search form-control" placeholder="Search in front" aria-label="Search in front" data-hs-form-search-options='{
-                     "clearIcon": "#clearSearchResultsIcon",
-                     "dropMenuElement": "#searchDropdownMenu",
-                     "dropMenuOffset": 20,
-                     "toggleIconOnFocus": true,
-                     "activeClass": "focus"
-                   }'>
-                                <a class="input-group-append" href="javascript:;">
-                                    <span class="input-group-text">
-                                        <i id="clearSearchResultsIcon" class="tio-clear" style="display: none;"></i>
-                                    </span>
-                                </a>
-                            </div>
-                            <!-- End Input Group -->
-                            <!-- Card Search Content -->
-                            <div id="searchDropdownMenu" class="hs-form-search-menu-content card dropdown-menu dropdown-card overflow-hidden">
-                                <!-- Body -->
-                                <div class="card-body-height py-3">
-                                    <small class="dropdown-header mb-n2">Recent searches</small>
-
-                                    <div class="dropdown-item bg-transparent text-wrap my-2">
-                                        <span class="h4 mr-1">
-                                            <a class="btn btn-xs btn-soft-dark btn-pill" href="..\index.html">
-                                                Gulp <i class="tio-search ml-1"></i>
-                                            </a>
-                                        </span>
-                                        <span class="h4">
-                                            <a class="btn btn-xs btn-soft-dark btn-pill" href="..\index.html">
-                                                Notification panel <i class="tio-search ml-1"></i>
-                                            </a>
-                                        </span>
-                                    </div>
-
-                                    <div class="dropdown-divider my-3"></div>
-
-                                    <small class="dropdown-header mb-n2">Tutorials</small>
-
-                                    <a class="dropdown-item my-2" href="..\index.html">
-                                        <div class="media align-items-center">
-                                            <span class="icon icon-xs icon-soft-dark icon-circle mr-2">
-                                                <i class="tio-tune"></i>
-                                            </span>
-
-                                            <div class="media-body text-truncate">
-                                                <span>How to set up Gulp?</span>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a class="dropdown-item my-2" href="..\index.html">
-                                        <div class="media align-items-center">
-                                            <span class="icon icon-xs icon-soft-dark icon-circle mr-2">
-                                                <i class="tio-paint-bucket"></i>
-                                            </span>
-
-                                            <div class="media-body text-truncate">
-                                                <span>How to change theme color?</span>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <div class="dropdown-divider my-3"></div>
-
-                                    <small class="dropdown-header mb-n2">Members</small>
-
-                                    <a class="dropdown-item my-2" href="..\index.html">
-                                        <div class="media align-items-center">
-                                            <img class="avatar avatar-xs avatar-circle mr-2" src="..\assets\img\160x160\img10.jpg" alt="Image Description">
-                                            <div class="media-body text-truncate">
-                                                <span>Amanda Harvey <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a class="dropdown-item my-2" href="..\index.html">
-                                        <div class="media align-items-center">
-                                            <img class="avatar avatar-xs avatar-circle mr-2" src="..\assets\img\160x160\img3.jpg" alt="Image Description">
-                                            <div class="media-body text-truncate">
-                                                <span>David Harrison</span>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a class="dropdown-item my-2" href="..\index.html">
-                                        <div class="media align-items-center">
-                                            <div class="avatar avatar-xs avatar-soft-info avatar-circle mr-2">
-                                                <span class="avatar-initials">A</span>
-                                            </div>
-                                            <div class="media-body text-truncate">
-                                                <span>Anne Richard</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- End Body -->
-                                <!-- Footer -->
-                                <a class="card-footer text-center" href="..\index.html">
-                                    See all results
-                                    <i class="tio-chevron-right"></i>
-                                </a>
-                                <!-- End Footer -->
-                            </div>
-                            <!-- End Card Search Content -->
-                        </form>
-                    </div>
-                    <!-- End Search Form -->
-                </div>
 
                 <!-- Secondary Content -->
                 <div class="navbar-nav-wrap-content-right">
@@ -2806,7 +2682,8 @@
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item" href="..\users-add-user.html">
-                                                        <span class="tio-circle-outlined nav-indicator-icon"></span> Add User <span class="badge badge-info badge-pill ml-1">Hot</span>
+                                                        <span class="tio-circle-outlined nav-indicator-icon"></span>
+                                                        <span class="badge badge-info badge-pill ml-1">Hot</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -3243,7 +3120,7 @@
                         <!-- Logo -->
 
 
-                        <a class="navbar-brand" href="..\index.html" aria-label="Front">
+                        <a class="navbar-brand" asp-action="Home" aria-label="Front">
                             <h1 style="text-align:center">Admin</h1>
                         </a>
 
@@ -3309,15 +3186,27 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link " href="..\users-leaderboard.html" title="Leaderboard">
+                                                <a class="nav-link" asp-action="DocterUser" title="Doctor User">
                                                     <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Leaderboard</span>
+                                                    <span class="text-truncate">Doctor User</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link " href="..\users-add-user.html" title="Add User">
+                                                <a class="nav-link" asp-action="CusUser" title="Customer User">
                                                     <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Add User <span class="badge badge-info badge-pill ml-1">Hot</span></span>
+                                                    <span class="text-truncate">Customer User</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" asp-action="Confirm_Doctor" title="Confirm Doctor">
+                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
+                                                    <span class="text-truncate">Confirm Doctor</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="..\users-add-user.html" title="Add User">
+                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
+                                                    <span class="text-truncate">Add User</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -3901,112 +3790,7 @@
                         </ul>
                     </div>
                     <!-- End Content -->
-                    <!-- Footer -->
-                    <div class="navbar-vertical-footer">
-                        <ul class="navbar-vertical-footer-list">
-                            <li class="navbar-vertical-footer-list-item">
-                                <!-- Unfold -->
-                                <div class="hs-unfold">
-                                    <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
-                  "target": "#styleSwitcherDropdown",
-                  "type": "css-animation",
-                  "animationIn": "fadeInRight",
-                  "animationOut": "fadeOutRight",
-                  "hasOverlay": true,
-                  "smartPositionOff": true
-                 }'>
-                                        <i class="tio-tune"></i>
-                                    </a>
-                                </div>
-                                <!-- End Unfold -->
-                            </li>
 
-                            <li class="navbar-vertical-footer-list-item">
-                                <!-- Other Links -->
-                                <div class="hs-unfold">
-                                    <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
-                  "target": "#otherLinksDropdown",
-                  "type": "css-animation",
-                  "animationIn": "slideInDown",
-                  "hideOnScroll": true
-                 }'>
-                                        <i class="tio-help-outlined"></i>
-                                    </a>
-
-                                    <div id="otherLinksDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu navbar-vertical-footer-dropdown">
-                                        <span class="dropdown-header">Help</span>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="tio-book-outlined dropdown-item-icon"></i>
-                                            <span class="text-truncate pr-2" title="Resources &amp; tutorials">Resources &amp; tutorials</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="tio-command-key dropdown-item-icon"></i>
-                                            <span class="text-truncate pr-2" title="Keyboard shortcuts">Keyboard shortcuts</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="tio-alt dropdown-item-icon"></i>
-                                            <span class="text-truncate pr-2" title="Connect other apps">Connect other apps</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="tio-gift dropdown-item-icon"></i>
-                                            <span class="text-truncate pr-2" title="What's new?">What's new?</span>
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <span class="dropdown-header">Contacts</span>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="tio-chat-outlined dropdown-item-icon"></i>
-                                            <span class="text-truncate pr-2" title="Contact support">Contact support</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- End Other Links -->
-                            </li>
-
-                            <li class="navbar-vertical-footer-list-item">
-                                <!-- Language -->
-                                <div class="hs-unfold">
-                                    <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
-                  "target": "#languageDropdown",
-                  "type": "css-animation",
-                  "animationIn": "slideInDown",
-                  "hideOnScroll": true
-                 }'>
-                                        <img class="avatar avatar-xss avatar-circle" src="..\assets\vendor\flag-icon-css\flags\1x1\us.svg" alt="United States Flag">
-                                    </a>
-
-                                    <div id="languageDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu navbar-vertical-footer-dropdown">
-                                        <span class="dropdown-header">Select language</span>
-                                        <a class="dropdown-item" href="#">
-                                            <img class="avatar avatar-xss avatar-circle mr-2" src="..\assets\vendor\flag-icon-css\flags\1x1\us.svg" alt="Flag">
-                                            <span class="text-truncate pr-2" title="English">English (US)</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <img class="avatar avatar-xss avatar-circle mr-2" src="..\assets\vendor\flag-icon-css\flags\1x1\gb.svg" alt="Flag">
-                                            <span class="text-truncate pr-2" title="English">English (UK)</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <img class="avatar avatar-xss avatar-circle mr-2" src="..\assets\vendor\flag-icon-css\flags\1x1\de.svg" alt="Flag">
-                                            <span class="text-truncate pr-2" title="Deutsch">Deutsch</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <img class="avatar avatar-xss avatar-circle mr-2" src="..\assets\vendor\flag-icon-css\flags\1x1\dk.svg" alt="Flag">
-                                            <span class="text-truncate pr-2" title="Dansk">Dansk</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <img class="avatar avatar-xss avatar-circle mr-2" src="..\assets\vendor\flag-icon-css\flags\1x1\it.svg" alt="Flag">
-                                            <span class="text-truncate pr-2" title="Italiano">Italiano</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <img class="avatar avatar-xss avatar-circle mr-2" src="..\assets\vendor\flag-icon-css\flags\1x1\cn.svg" alt="Flag">
-                                            <span class="text-truncate pr-2" title="中文 (繁體)">中文 (繁體)</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- End Language -->
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End Footer -->
                 </div>
             </div>
         </aside>

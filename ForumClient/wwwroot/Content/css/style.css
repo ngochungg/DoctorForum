@@ -7874,3 +7874,21 @@ html.ie.gecko body.modal-open {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.5);
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg); }
+  .profile-user{
+      background-image:url(../../update_images/background.jpg);
+
+  }
+.cont-avata{
+    
+}
+.avata-user {
+    margin-left:30px;
+    margin-top:10px;
+    width:500px;
+    height:auto;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+.confirm:hover{
+    color:#73fbd5
+}

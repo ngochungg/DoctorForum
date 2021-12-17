@@ -749,6 +749,7 @@
                                         @using Microsoft.AspNetCore.Http
                                         var Image = Context.Session.GetString("Image");
                                         var Name = Context.Session.GetString("userId");
+                                        var Uname = Context.Session.GetString("userName");
                                     }
                                     <div class="avatar avatar-sm avatar-circle">
                                         @{
@@ -792,7 +793,7 @@
 
 
 
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" asp-action="Profile_Admin" asp-route-id="@Uname">
                                         <span class="text-truncate pr-2" title="Profile &amp; account">Profile &amp; account</span>
                                     </a>
 

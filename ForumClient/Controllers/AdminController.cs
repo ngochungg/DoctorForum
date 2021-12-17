@@ -91,13 +91,26 @@ namespace ForumClient.Controllers
             }
         }
 
+
+        //page User
         public async Task<IActionResult> UserView()
         {
             var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
 
             if (is_admin == 1)
             {
-                var user = await _context.User.Select(c => new UserModel { Name = c.Name, Birthday = c.Birthday, Email = c.Email, Mobile = c.Mobile, Image = c.Image, RoleId = c.RoleId, Address = c.Address }).ToListAsync();
+                var user = await _context.User.Select(c => new UserModel { Name = c.Name, UserName = c.UserName, Email = c.Email, Mobile = c.Mobile, Image = c.Image, RoleId = c.RoleId, Status = c.Status, CreatedAt = c.CreatedAt}).ToListAsync();
+                var AllUser = user.Count();
+                ViewBag.AllUser = AllUser;
+                //user docter
+                var docter = await _context.User.Where(c => c.RoleId == "2").ToListAsync();
+                ViewBag.Docter = docter.Count();
+                //customer
+                var cus = await _context.User.Where(c => c.RoleId == "3").ToListAsync();
+                ViewBag.Cus = cus.Count();
+                //confirmDoc
+                var confirm = await _context.User.Where(c => c.Experience != null && c.RoleId == "3").ToListAsync();
+                ViewBag.confirm = confirm.Count();
                 return View(user);
             }
             else
@@ -114,5 +127,120 @@ namespace ForumClient.Controllers
             }
             return View("Index");
         }
+        public async Task<IActionResult> ProfileUser(string id)
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                UserModel user = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+                return View("UserProfile", user);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        
+        //page Docter
+        public async Task<IActionResult> DocterUser()
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                var docter = await _context.User.Where(c => c.RoleId == "2").ToListAsync();
+                return View(docter);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        public async Task<IActionResult> Enable_User(string id)
+        {
+                UserModel Enable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+                Enable_U.Look = 1;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("DocterUser");
+        }
+        public async Task<IActionResult> Disable_User(string id)
+        {
+            UserModel Disable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            Disable_U.Look = 0;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("DocterUser");
+        }
+   
+        //Page cus
+        public async Task<IActionResult> CusUser()
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                var docter = await _context.User.Where(c => c.RoleId == "3" ).ToListAsync();
+                return View(docter);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        public async Task<IActionResult> Enable_Cus(string id)
+        {
+            UserModel Enable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            Enable_U.Look = 1;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("CusUser");
+        }
+        public async Task<IActionResult> Disable_Cus(string id)
+        {
+            UserModel Disable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            Disable_U.Look = 0;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("CusUser");
+        }
+
+        //Page Confirm_Doctor
+        public async Task<IActionResult> Confirm_Doctor()
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                var confirm_Doctor = await _context.User.Where(c => c.RoleId == "3" && c.Experience !=null ).ToListAsync();
+                return View(confirm_Doctor);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        public async Task<IActionResult> Accept_User(string id)
+        {
+            UserModel Enable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            Enable_U.RoleId = "2";
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Confirm_Doctor");
+        }
+        public async Task<IActionResult> Not_Accept_User(string id)
+        {
+            UserModel Disable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            Disable_U.Experience = null;
+            Disable_U.Professional = null;
+            Disable_U.Qualification = null;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Confirm_Doctor");
+        }
+
+
+        //page add user
+        public IActionResult Add_admin_user()
+        {
+            return View();
+        }
+
+
     }
 }

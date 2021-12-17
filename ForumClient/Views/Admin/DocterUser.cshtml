@@ -1,0 +1,229 @@
+﻿@model IEnumerable<ForumClient.Models.UserModel>
+@{
+    ViewData["Title"] = "DocterUser";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+
+<main id="content" role="main" class="main">
+    <!-- Content -->
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header" style=" margin-top: 50px;">
+            <div class="row align-items-end">
+                <div class="col-sm mb-2 mb-sm-0">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb breadcrumb-no-gutter">
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Pages</a></li>
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Users</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Doctor</li>
+                        </ol>
+                    </nav>
+
+                    <h1 class="page-header-title">Doctor</h1>
+                </div>
+            </div>
+            <!-- End Row -->
+        </div>
+        <!-- End Page Header -->
+        <!-- Card -->
+        <div class="card">
+            <!-- Header -->
+            <div class="card-header">
+                <div class="row justify-content-between align-items-center flex-grow-1">
+                    <div class="col-sm-12 col-md-8 mb-5 mb-sm-0">
+                        <form>
+                            <!-- Search -->
+                            <div class="input-group input-group-merge input-group-flush">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="tio-search"></i>
+                                    </div>
+                                </div>
+                                <input type="text" id="myInputSearch" class="form-control" onkeyup="myFunctionSearch()" placeholder="Search for username.." aria-label="Search users">
+                            </div>
+                            <!-- End Search -->
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Row -->
+            <!-- Table -->
+            <div class="table-responsive datatable-custom">
+                <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table" >
+                    <thead class="thead-light">
+                        <tr>
+                            <th style="margin-left: 10px;">#</th>
+                            <th class="table-column-pl-0">Name</th>
+                            <th>username</th>
+                            <th>Status</th>
+                            <th>Phone number</th>
+                            <th>Role</th>
+                            <th>Create at</th>
+                            <th>Active</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{ int num = 0;}
+                        @foreach (var item in Model)
+                        {
+                            num = num + 1;
+                            <tr>
+                                <td style="margin-left: 10px;font-weight:bold">@num </td>
+                                <td class="table-column-pl-0">
+                                    <a class="d-flex align-items-center" asp-action="ProfileUser" asp-route-id="@item.UserName">
+                                        <div class="avatar avatar-circle">
+                                            @{
+                                                if (item.Image != null)
+                                                {
+                                                    <img class="avatar-img" src="~/update_images/@item.Image" alt="Image Description">
+                                                }
+                                                else
+                                                {
+                                                    <img class="avatar-img" src="https://www.w3schools.com/howto/img_avatar.png" alt="Image Description">
+                                                }
+                                            }
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="d-block h5 text-hover-primary mb-0">
+                                                @item.Name
+                                                @if (item.Look != 0)
+                                                {
+                                                    <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i>
+                                                }
+                                            </span>
+                                            <span class="d-block font-size-sm text-body">@item.Email</span>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td>@item.UserName</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    @item.Mobile
+                                </td>
+                                @if (item.RoleId == "1")
+                                {
+                                    <td>Admin</td>
+                                }
+                                @if (item.RoleId == "2")
+                                {
+                                    <td>Doctor</td>
+                                }
+                                @if (item.RoleId == "3")
+                                {
+                                    <td>User</td>
+                                }
+                                <td>@item.CreatedAt</td>
+                                <td>
+                                    @{
+                                        if (item.Look == 0)
+                                        {
+                                            <div>
+                                                <a class="btn btn-outline-success btn-sm" asp-action="Enable_User" asp-route-id="@item.UserName">
+                                                    <i class="fas fa-check"></i> Enable
+                                                </a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                <a class="btn btn-outline-danger btn-sm" asp-action="Disable_User" asp-route-id="@item.UserName">
+                                                    <i class="fas fa-times"></i> Disable
+                                                </a>
+                                            </div>
+                                        }
+                                    }
+
+                                </td>
+                                <td>
+                                    <div>
+                                        <a class="btn btn-outline-secondary btn-sm" asp-action="ProfileUser" asp-route-id="@item.UserName">
+                                            <i class="far fa-eye"></i> View
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+                <script>
+                    function myFunctionSearch() {
+                        // Declare variables
+                        var input, filter, table, tr, td, i, txtValue;
+                        input = document.getElementById("myInputSearch");
+                        filter = input.value.toUpperCase();
+                        table = document.getElementById("datatable");
+                        tr = table.getElementsByTagName("tr");
+
+                        // Loop through all table rows, and hide those who don't match the search query
+                        for (i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[2];
+                            if (td) {
+                                txtValue = td.textContent || td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                } else {
+                                    tr[i].style.display = "none";
+                                }
+                            }
+                        }
+                    }
+                </script>
+            </div>
+            <!-- End Table -->
+        </div>
+        <!-- End Card -->
+    </div>
+    <!-- End Content -->
+    <!-- Footer -->
+
+    <div class="footer">
+        <div class="row justify-content-between align-items-center">
+            <div class="col">
+                <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
+            </div>
+            <div class="col-auto">
+                <div class="d-flex justify-content-end">
+                    <!-- List Dot -->
+                    <ul class="list-inline list-separator">
+                        <li class="list-inline-item">
+                            <a class="list-separator-link" href="#">FAQ</a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a class="list-separator-link" href="#">License</a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <!-- Keyboard Shortcuts Toggle -->
+                            <div class="hs-unfold">
+                                <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
+                              "target": "#keyboardShortcutsSidebar",
+                              "type": "css-animation",
+                              "animationIn": "fadeInRight",
+                              "animationOut": "fadeOutRight",
+                              "hasOverlay": true,
+                              "smartPositionOff": true
+                             }'>
+                                    <i class="tio-command-key"></i>
+                                </a>
+                            </div>
+                            <!-- End Keyboard Shortcuts Toggle -->
+                        </li>
+                    </ul>
+                    <!-- End List Dot -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- End Footer -->
+</main>
+<!-- ========== END MAIN CONTENT ========== -->

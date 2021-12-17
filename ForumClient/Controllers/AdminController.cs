@@ -72,6 +72,7 @@ namespace ForumClient.Controllers
                     var is_admin = userdetails.Id.ToString();
                     HttpContext.Response.Cookies.Append("is_admin", is_admin);
                     HttpContext.Session.SetString("userId", userdetails.Name);
+                    HttpContext.Session.SetString("userName", userdetails.UserName);
                     if (userdetails.Image == null)
                     {
                         HttpContext.Session.SetString("Image", "0");
@@ -290,6 +291,8 @@ namespace ForumClient.Controllers
             }
             return RedirectToAction("UserView");
         }
+        
+        
         public string UploadedFile(RegistrationViewModel model)
         {
             string uniqueFileName = null;
@@ -307,6 +310,21 @@ namespace ForumClient.Controllers
             return uniqueFileName;
         }
 
+        //profile
+        public async Task<ActionResult> Profile_Admin(string id)
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                var profile = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+                return View(profile);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
     }
 }

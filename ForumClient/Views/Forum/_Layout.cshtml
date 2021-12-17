@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http
+@model ForumClient.Models.UserModel
 <!DOCTYPE html>
 
 <html lang="en">
@@ -169,7 +170,7 @@
                         var Role = Context.Session.GetString("Role");
                         var Id = Context.Session.GetString("Id");
                         var Image = Context.Session.GetString("Image");
-                        var Role2 =  Convert.ToInt16(Role);
+                        var Role2 = Convert.ToInt16(Role);
                         var Uid = Convert.ToInt16(Id);
                         int Image3;
                         bool Image2 = Int32.TryParse(Image, out Image3);
@@ -218,8 +219,8 @@
                                         </div>
                                     </a>
 
-                                     <a asp-action="Logout" style="font-weight: bold; margin-top: 12px; color: black;">Logout</a>
-  
+                                    <a asp-action="Logout" style="font-weight: bold; margin-top: 12px; color: black;">Logout</a>
+
                                 </div>
                             }
                         }
@@ -432,16 +433,14 @@
                         <div class="form-group">
                             <label for="minPostCount">Minimum Post Count</label>
                             <select class="form-control" id="minPostCount">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option selected>10</option>
+                                @{
+                                    var model = Model.Name;
+                                    foreach(var cus in model )
+                                    {
+                                        <option>cus</option>
+                                        }
+                                }
+
                             </select>
                         </div>
                         <div class="form-group">

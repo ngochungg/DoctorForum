@@ -183,10 +183,11 @@ namespace ForumClient.Controllers
                         Image = MyUser.Image,
                         Experience = MyUser.Experience,
                         Qualification = MyUser.Qualification,
-                        Professional  = MyUser.Professional,
+                        Professional = MyUser.Professional,
                         Email = MyUser.Email,
                         Mobile = MyUser.Mobile,
-                        RoleId = MyUser.RoleId
+                        RoleId = MyUser.RoleId,
+                        Birthday = MyUser.Birthday
                     };
                     if (mess != null)
                     {

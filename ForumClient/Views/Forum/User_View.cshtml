@@ -47,6 +47,26 @@
                                         <div class="cont-avata">
                                             <img src="~/update_images/@Model.Image" alt="Alternate Text" class="avata-user" />
                                         </div>
+                                        <br />
+                                        <div style="text-align:center; width:100%">
+                                            @{
+                                                var IRole = Convert.ToInt32(Model.RoleId);
+                                                if (IRole == 3)
+                                                {
+                                                    if (Model.Experience == null)
+                                                    {
+                                                        <button class="btn btn-success" style="background-color:#37d1e9">
+                                                            <a asp-action="Confirmed_docter_view" asp-route-id="@Model.Id" style="color: white;font-size:24px" class="confirm">Confirmed as a doctor</a>
+                                                        </button>
+                                                        <div>.</div>
+                                                    }
+
+                                                }
+                                            }
+
+                                        </div>
+                                            
+                                        
                                         <div style="width: 100%;height:10px;color:white">
                                             <hr />
                                         </div>
@@ -61,7 +81,7 @@
                                                         Qualification: @Model.Qualification
                                                         <br /><br />
                                                         Professtional: @Model.Professional
-                                                    <br />.
+                                                        <br />.
 
                                                     </div>
 
@@ -97,23 +117,7 @@
                                                 </button>
                                             </div>
                                             <br /><br /><br />
-                                            <div class="col-sm-12" style="text-align:right">
-
-                                                @{
-                                                    var IRole = Convert.ToInt32(Model.RoleId);
-                                                    if (IRole == 3)
-                                                    {
-                                                        if (Model.Experience == null)
-                                                        {
-                                                            
-                                                                <a asp-action="Confirmed_docter_view" asp-route-id="@Model.Id" style="color: white;font-size:24px" class="confirm">Confirmed as a doctor</a>
-                                                            
-                                                        }
-
-                                                    }
-                                                }
-
-                                            </div>
+                                           
                                         </div>
 
 

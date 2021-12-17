@@ -7892,3 +7892,9 @@ html.ie.gecko body.modal-open {
 .confirm:hover{
     color:#73fbd5
 }
+.form-con {
+    max-width: 800px;
+    max-height:auto;
+    border:solid 1px 2px;
+    border-radius:20%
+}

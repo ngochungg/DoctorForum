@@ -11,6 +11,7 @@ namespace ForumClient.Models
     public class UpdateUserView
     {
         public int id { get; set; }
+        public string UserName { get; set; }
         //[StringLength(15, ErrorMessage = "Name length can't be more than 15.")]
         public string Name { get; set; }
         public string Mobile { get; set; }

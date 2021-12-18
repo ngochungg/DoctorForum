@@ -413,5 +413,89 @@ namespace ForumClient.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Disable_Cus");
         }
+
+        //Edit Infomation
+        public async Task<IActionResult> EditAdmin(string id, string mess)
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+                if (MyUser.Look == 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                UpdateUserView update = new UpdateUserView
+                {
+                    UserName = MyUser.UserName,
+                    Name = MyUser.Name,
+                    Address = MyUser.Address,
+                    Image = MyUser.Image,
+                    Email = MyUser.Email,
+                    Mobile = MyUser.Mobile,
+                    RoleId = MyUser.RoleId,
+ 
+                };
+                if (mess != null)
+                {
+                    update.Mess = mess;
+                }
+                return View("Update_Admin", update);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditAdmin_Post(UpdateUserView model, string id)
+        {
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            if (model.ProfileImage != null)
+            {
+                string uniqueFileName = UpdateFile(model);
+                old_user.Image = uniqueFileName;
+            }
+            if (old_user != null)
+            {
+                if (old_user.Password == CreateMD5(model.Password))
+                {
+                    old_user.Name = model.Name;
+                    old_user.Email = model.Email;
+                    old_user.Address = model.Address;
+                    old_user.Mobile = model.Mobile;
+                    await _context.SaveChangesAsync();
+                    model.Mess = "Update successful...!";
+                    string sid = id;
+                    return RedirectToAction("EditAdmin", new { id = sid, mess = model.Mess });
+                }
+                else
+                {
+                    model.Mess = "Update failed...!";
+                    string sid = id;
+                    return RedirectToAction("EditAdmin", new { id = sid, mess = model.Mess });
+                }
+            }
+            model.Mess = "Update failed...!";
+            string uid = id;
+            return RedirectToAction("EditAdmin", new { id = uid, mess = model.Mess });
+        }
+        public string UpdateFile(UpdateUserView model)
+        {
+            string uniqueFileName = null;
+
+            if (model.ProfileImage != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "update_images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfileImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ProfileImage.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
     }
 }

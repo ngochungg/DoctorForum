@@ -797,7 +797,7 @@
                                         <span class="text-truncate pr-2" title="Profile &amp; account">Profile &amp; account</span>
                                     </a>
 
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" asp-action="Change_Pass_Admin" asp-route-id="@Uname">
                                         <span class="text-truncate pr-2" title="Settings">Change Password</span>
                                     </a>
                                     <a class="dropdown-item" href="#">
@@ -3188,33 +3188,39 @@
 
                                         <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                                             <li class="nav-item">
-                                                <a class="nav-link " asp-action="UserView" title="Overview">
+                                                <a class="nav-link " asp-action="UserView" title="Overview" asp-route-id="@Uname">
                                                     <span class="tio-circle-outlined nav-indicator-icon"></span>
                                                     <span class="text-truncate">Overview</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" asp-action="DocterUser" title="Doctor User">
+                                                <a class="nav-link" asp-action="DocterUser" title="Doctor User" asp-route-id="@Uname">
                                                     <span class="tio-circle-outlined nav-indicator-icon"></span>
                                                     <span class="text-truncate">Doctor User</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" asp-action="CusUser" title="Customer User">
+                                                <a class="nav-link" asp-action="CusUser" title="Customer User" asp-route-id="@Uname">
                                                     <span class="tio-circle-outlined nav-indicator-icon"></span>
                                                     <span class="text-truncate">Customer User</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" asp-action="Confirm_Doctor" title="Confirm Doctor">
+                                                <a class="nav-link" asp-action="Confirm_Doctor" title="Confirm Doctor" asp-route-id="@Uname">
                                                     <span class="tio-circle-outlined nav-indicator-icon"></span>
                                                     <span class="text-truncate">Confirm Doctor</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" asp-action="Add_admin_user" title="Add User">
+                                                <a class="nav-link" asp-action="Add_admin_user" title="Add User" asp-route-id="@Uname">
                                                     <span class="tio-circle-outlined nav-indicator-icon"></span>
                                                     <span class="text-truncate">Add Admin User</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" asp-action="Disable_Cus" title="Add User" asp-route-id="@Uname">
+                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
+                                                    <span class="text-truncate">User Disable</span>
                                                 </a>
                                             </li>
                                         </ul>

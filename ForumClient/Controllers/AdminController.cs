@@ -240,6 +240,39 @@ namespace ForumClient.Controllers
         {
             return View();
         }
+        public IActionResult Categories()
+        {
+            return View();
+        }
+        public async Task<ActionResult> CreateCategory(CategoriesModel request)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Categories.Add(request);
+                await _context.SaveChangesAsync();
+                ViewBag.Message = "Success";
+                return RedirectToAction("Categories");
+            }
+            ViewBag.Message = "Fail";
+            return RedirectToAction("Categories");
+        }
+        public async Task<ActionResult> UpdateCategory(CategoriesModel request)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Categories.Update(request);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Categories");
+        }
+        public async Task<ActionResult> DeleteCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null) return RedirectToAction("Categories");
+            await _context.SaveChangesAsync();
+            _context.Categories.Remove(category);
+            return RedirectToAction("Categories");
+        }
 
 
     }

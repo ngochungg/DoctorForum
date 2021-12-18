@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumClient.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20211216062123_CreateDB")]
-    partial class CreateDB
+    [Migration("20211217102918_DB")]
+    partial class DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,51 @@ namespace ForumClient.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ForumClient.Models.AppDBContext.PostModel", b =>
+                {
+                    b.Property<int>("Post_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Post_Id");
+
+                    b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("ForumClient.Models.CategoriesModel", b =>
+                {
+                    b.Property<int>("cate_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("created_at")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("created_by")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("cate_id");
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("ForumClient.Models.RoleModel", b =>
                 {
@@ -52,6 +97,33 @@ namespace ForumClient.Migrations
                             Id = 3,
                             RoleInfo = "Customer"
                         });
+                });
+
+            modelBuilder.Entity("ForumClient.Models.TopicModel", b =>
+                {
+                    b.Property<int>("topic_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("cate_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("created_at")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("usename")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("topic_id");
+
+                    b.ToTable("Topic");
                 });
 
             modelBuilder.Entity("ForumClient.Models.UserModel", b =>

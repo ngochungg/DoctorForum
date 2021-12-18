@@ -14,6 +14,9 @@ namespace ForumClient.Models.AppDBContext
         }
         public DbSet<UserModel> User { get; set; }
         public DbSet<RoleModel> Role { get; set; }
+        public DbSet<CategoriesModel> Categories { get; set; }
+        public DbSet<PostModel> Posts { get; set; }
+        public DbSet<TopicModel> Topic { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //UserTable

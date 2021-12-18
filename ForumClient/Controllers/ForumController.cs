@@ -395,10 +395,14 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-        public async Task<ActionResult> GetCategory()
+        public IActionResult Categories()
+        {
+            return View();
+        }
+        public async Task<ActionResult> ViewCategory()
         {
             var category = await _context.Categories.ToListAsync();
-            return View(category);
+            return View("Categories", category);
         }
         public async Task<ActionResult> CreatePost(PostModel request)
         {

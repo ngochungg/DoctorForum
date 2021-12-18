@@ -179,6 +179,7 @@ namespace ForumClient.Controllers
         }
    
         //Page cus
+        [Route("Customerr")]
         public async Task<IActionResult> CusUser()
         {
             var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
@@ -193,14 +194,14 @@ namespace ForumClient.Controllers
                 return RedirectToAction("Index");
             }
         }
-        public async Task<IActionResult> Enable_Cus(string id)
+        public async Task<IActionResult> Enable_Cuss(string id)
         {
             UserModel Enable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
             Enable_U.Look = 1;
             await _context.SaveChangesAsync();
             return RedirectToAction("CusUser");
         }
-        public async Task<IActionResult> Disable_Cus(string id)
+        public async Task<IActionResult> Disable_Cuss(string id)
         {
             UserModel Disable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
             Disable_U.Look = 0;

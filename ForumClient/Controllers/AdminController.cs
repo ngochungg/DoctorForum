@@ -69,8 +69,8 @@ namespace ForumClient.Controllers
                 }
                 if (userdetails.RoleId == "1")
                 {
-                    var is_admin = userdetails.Id.ToString();
-                    HttpContext.Response.Cookies.Append("is_admin", is_admin);
+                   
+                    HttpContext.Response.Cookies.Append("is_admin", "1");
                     HttpContext.Session.SetString("userId", userdetails.Name);
                     HttpContext.Session.SetString("userName", userdetails.UserName);
                     if (userdetails.Image == null)
@@ -326,5 +326,91 @@ namespace ForumClient.Controllers
             }
         }
 
+        //change Pass
+        public async Task<IActionResult> Change_Pass_Admin(string id, string mess)
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+            if (is_admin == 1)
+            {
+                UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+                Change_pass_view update = new Change_pass_view
+                {
+                    id = MyUser.Id
+                };
+                if (mess != null)
+                {
+                    update.Mess = mess;
+                }
+                return View(update);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        public async Task<IActionResult> OldPassword(Change_pass_view model, int id)
+        {
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            if (ModelState.IsValid)
+            {
+                if (old_user != null)
+                {
+                    string passOld = CreateMD5(model.OldPassword);
+                    if (old_user.Password == passOld)
+                    {
+                        old_user.Password = CreateMD5(model.Password);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Logout");
+                    }
+                    else
+                    {
+                        model.Mess = "Wrong password...!";
+                        string sid = old_user.UserName;
+                        return RedirectToAction("Change_Pass_Admin", new { id = sid, mess = model.Mess });
+                    }
+                }
+                model.Mess = "Change Fail";
+                string uid = old_user.UserName;
+                return RedirectToAction("Change_Pass_Admin", new { id = uid, mess = model.Mess });
+            }
+            else
+            {
+                model.Mess = "The new password is not the same...!";
+                string uid = old_user.UserName;
+                return RedirectToAction("Change_Pass_Admin", new { id = uid, mess = model.Mess });
+            }
+        }
+
+        //user Disable
+        [Route("Disable_Cus")]
+        public async Task<IActionResult> Disable_Cus()
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                var disable_Cus = await _context.User.Where(c => c.Look == 0).ToListAsync();
+                return View(disable_Cus);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        public async Task<IActionResult> Enable_Users(string id)
+        {
+            UserModel Enable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            Enable_U.Look = 1;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Disable_Cus");
+        }
+        public async Task<IActionResult> Remove_Cus(string id)
+        {
+            UserModel Cus = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            _context.User.Remove(Cus);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Disable_Cus");
+        }
     }
 }

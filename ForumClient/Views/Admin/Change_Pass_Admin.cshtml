@@ -1,8 +1,9 @@
-﻿@model RegistrationViewModel
+﻿@model Change_pass_view
 @{
-    ViewData["Title"] = "Add_admin_user";
+    ViewData["Title"] = "Change_Pass_Admin";
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
+
 <main id="content" role="main" class="main">
     <!-- Content -->
     <div class="content container-fluid">
@@ -13,12 +14,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Pages</a></li>
-                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Users</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Add Admin User</li>
+                            <li class="breadcrumb-item active" aria-current="page">Change Password</li>
                         </ol>
                     </nav>
 
-                    <h1 class="page-header-title">Add Admin User</h1>
+                    <h1 class="page-header-title">Change Password</h1>
                 </div>
             </div>
             <!-- End Row -->
@@ -29,61 +29,33 @@
             <!-- Header -->
             <div class="card-header">
                 <div class="row justify-content-between align-items-center flex-grow-1">
-                    <h3>Add Admin User</h3>
+                    <h3>Change Password</h3>
                 </div>
                 <!-- End Row -->
             </div>
             <!-- End Header -->
             <!-- form -->
-            <form style="margin-top: 20px" asp-action="Add_Admin_Post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="UserName">UserName</label>
-                    <input asp-for="UserName" name="UserName" type="text" class="form-control" id="UserName" placeholder="Enter UserName">
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                    @{
-                        if (@TempData["Message"] != null)
-                        {
-                            <span style="color:red">@TempData["Message"]</span>
-                        }
+            <form style="margin-top: 20px" asp-action="OldPassword" asp-route-id="@Model.id">
+                @{
+                    if (@Model.Mess != null)
+                    {
+                        <span style="font-weight: bold">@Model.Mess</span>
                     }
+                }
+                <div class="form-group">
+                    <label for="OldPassword">Old Password</label>
+                    <input asp-for="OldPassword" name="OldPassword" type="password" class="form-control" id="OldPassword" placeholder="Old Password" required>
                 </div>
                 <div class="form-group">
-                    <label for="Name">Name</label>
-                    <input asp-for="Name" name="Name" type="text" class="form-control" id="Name" placeholder="Enter Name">
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="Email">Email address</label>
-                    <input asp-for="Email" name="Email" type="email" class="form-control" id="Email" placeholder="Enter email">
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="Password">Password</label>
-                    <input asp-for="Password" name="Password" type="password" class="form-control" id="Password" placeholder="Password">
+                    <label for="Password">New Password</label>
+                    <input asp-for="Password" name="Password" type="password" class="form-control" id="Password" placeholder="Password" required>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label for="Confirm">Confirm Password</label>
-                    <input asp-for="ConfirmPassword" name="ConfirmPassword" type="password" class="form-control" id="Confirm" placeholder="Confirm Password">
+                    <input asp-for="ConfirmPassword" name="ConfirmPassword" type="password" class="form-control" id="Confirm" placeholder="Confirm Password" required>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label for="Mobile">Mobile</label>
-                    <input asp-for="Mobile" name="Mobile" type="text" class="form-control" id="Mobile" placeholder="Enter Mobile">
-                    <span asp-validation-for="Mobile" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="ProfileImage">Image</label>
-                    <input asp-for="ProfileImage" type="file" name="ProfileImage" class="form-control-file" id="ProfileImage" onchange="loadFile(event)">
-                    <p><img src="" id="output" width="200" class="rounded mx-auto d-block" /></p>
-                    <script>
-                        var loadFile = function (event) {
-                            var image = document.getElementById('output');
-                            image.src = URL.createObjectURL(event.target.files[0]);
-                        };
-                    </script>
-                </div>
-
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <!-- End form -->

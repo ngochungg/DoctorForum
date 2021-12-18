@@ -160,6 +160,13 @@ namespace ForumClient.Controllers
             int uid = id;
             return RedirectToAction("Confirmed_docter_view", new { id = uid, mess = model.Mess });
         }
+        public async Task<IActionResult>no_docter(Confirmed_docter_view model, int id)
+        {
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            
+            int uid = id;
+            return RedirectToAction("Confirmed_docter_view", new { id = uid, mess = model.Mess });
+        }
         #endregion
         #region update_infor
         public async Task<IActionResult> Update_User_View(int id, string mess)

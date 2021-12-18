@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="container">
         <div class="tt-wrapper-inner">
             <h2>Edit Information</h2>
@@ -43,97 +43,34 @@
                                                 <form class="form-default" method="post" enctype="multipart/form-data" asp-action="Update_User" asp-route-id="@Model.id">
 
                                                     <div class="row">
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-9">
                                                             <div class="form-group">
-                                                                
 
-                                                                <p><img src="~/update_images/@Model.Image" id="output" max-width="100%" style="border:solid 1px;width:300px;border-radius:50% " /></p>
+
+                                                                <p><img src="~/update_images/@Model.Image" id="output" max-width="100%" style="border:solid 1px;width:350px;border-radius:50% " /></p>
 
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                           
-                                                            <label for="ProfileImage" >
-                                                                <input  asp-for="ProfileImage" type="file" name="ProfileImage" class="form-control-file" id="ProfileImage" onchange="loadFile(event)">
+                                                        <div class="col-sm-3">
+
+                                                            <label for="ProfileImage" style="margin-top:100px;" >
+                                                                <input asp-for="ProfileImage" type="file" name="ProfileImage" class="form-control-file" id="ProfileImage" onchange="loadFile(event)" >
                                                             </label>
-</div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="loginName">Name</label>
-                                                        <input required asp-for="Name" type="text" name="Name" class="form-control" id="loginName"  value="@Model.Name" style="height:50px">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="loginUserEmail">Email</label>
-                                                        <input required asp-for="Email" type="text" name="Email" class="form-control" id="loginUserEmail" value="@Model.Email" style="height:50px">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="loginPassword">Password Old</label>
-                                                        <input required asp-for="Password" type="Password" name="Password" class="form-control" id="loginPassword" style="height:50px">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="Mobile">Phone</label>
-                                                        <input required asp-for="Mobile" type="text" name="Mobile" class="form-control" id="Mobile" value="@Model.Mobile" style="height:50px">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="Address">Address</label>
-                                                        <input asp-for="Address" type="text" name="Address" class="form-control" id="Address" value="@Model.Address" style="height:50px">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="Birthday">Birthday</label>
-                                                        <input asp-for="Birthday" type="date" name="Birthday" class="form-control" id="Birthday"  value="@Model.Birthday" style="height:50px">
-                                                    </div>
-
-
-                                                    <script>
-                                                        var loadFile = function (event) {
-                                                            var image = document.getElementById('output');
-                                                            image.src = URL.createObjectURL(event.target.files[0]);
-                                                        };
-                                                    </script>
-                                                    @{
-                                                        if (@Model.Mess != null)
-                                                        {
-                                                            <span style="font-weight: bold">@Model.Mess</span>
-                                                        }
-                                                    }
-
-                                                    <input type="submit" class="btn btn-secondary btn-block" value="Update Infomation" />
-
-                                                </form>
-                                            }
-                                            else
-                                            {
-                                                <form class="form-default" method="post" enctype="multipart/form-data" asp-action="Update_User" asp-route-id="@Model.id">
-
-
-
-                                                    <div class="form-group">
-                                                        <label for="loginUserEmail">Email</label>
-                                                        <input required asp-for="Email" type="text" name="Email" class="form-control" id="loginUserEmail" value="@Model.Email" style="height:50px">
+                                                        </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="loginName">Name</label>
                                                         <input required asp-for="Name" type="text" name="Name" class="form-control" id="loginName" value="@Model.Name" style="height:50px">
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="loginUserEmail">Email</label>
+                                                        <input required asp-for="Email" type="text" name="Email" class="form-control" id="loginUserEmail" value="@Model.Email" style="height:50px">
+                                                    </div>
+
+                                                    <div class="form-group">
                                                         <label for="loginPassword">Password Old</label>
                                                         <input required asp-for="Password" type="Password" name="Password" class="form-control" id="loginPassword" style="height:50px">
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <label for="Experience">Experience</label>
-                                                        <input asp-for="Experience" type="text" name="Experience" class="form-control" id="Experience" value="@Model.Experience" style="height:50px">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="Qualification">Qualification</label>
-                                                        <input asp-for="Qualification" type="text" name="Qualification" class="form-control" id="Qualification" value="@Model.Qualification" style="height:50px">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="Professional">Professional</label>
-                                                        <input asp-for="Professional" type="text" name="Professional" class="form-control" id="Professional" value="@Model.Professional" style="height:50px">
-                                                    </div>
-
                                                     <div class="form-group">
                                                         <label for="Mobile">Phone</label>
                                                         <input required asp-for="Mobile" type="text" name="Mobile" class="form-control" id="Mobile" value="@Model.Mobile" style="height:50px">
@@ -144,13 +81,9 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="Birthday">Birthday</label>
-                                                        <input asp-for="Birthday" type="date" name="Birthday" class="form-control" id="Birthday"  value="@Model.Birthday " style="height:50px">
+                                                        <input asp-for="Birthday" type="date" name="Birthday" class="form-control" id="Birthday" value="@Model.Birthday" style="height:50px">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="ProfileImage">Image</label>
-                                                        <input asp-for="ProfileImage" type="file" name="ProfileImage" class="form-control-file" id="ProfileImage" onchange="loadFile(event)">
-                                                        <p><img src="~/update_images/@Model.Image" id="output" width="200" /></p>
-                                                    </div>
+
 
                                                     <script>
                                                         var loadFile = function (event) {
@@ -165,9 +98,86 @@
                                                         }
                                                     }
 
-                                                    <input type="submit" class="btn btn-success btn-block" value="Update Infomation" style="width:50%" />
+                                                <div style="text-align:center"><input type="submit" class="btn btn-secondary btn-block right" value="Update Infomation" style="width:150px;background-color:orange; " /></div>
 
                                                 </form>
+                                            }
+                                            else
+                                            {
+                                    <form class="form-default" method="post" enctype="multipart/form-data" asp-action="Update_User" asp-route-id="@Model.id">
+
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+
+
+                                                    <p><img src="~/update_images/@Model.Image" id="output" max-width="100%" style="border:solid 1px;width:350px;border-radius:50% " /></p>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+
+                                                <label for="ProfileImage" style="margin-top:100px;">
+                                                    <input asp-for="ProfileImage" type="file" name="ProfileImage" class="form-control-file" id="ProfileImage" onchange="loadFile(event)">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="loginName">Name</label>
+                                            <input required asp-for="Name" type="text" name="Name" class="form-control" id="loginName" value="@Model.Name" style="height:50px">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="loginUserEmail">Email</label>
+                                            <input required asp-for="Email" type="text" name="Email" class="form-control" id="loginUserEmail" value="@Model.Email" style="height:50px">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="loginPassword">Password Old</label>
+                                            <input required asp-for="Password" type="Password" name="Password" class="form-control" id="loginPassword" style="height:50px">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Mobile">Phone</label>
+                                            <input required asp-for="Mobile" type="text" name="Mobile" class="form-control" id="Mobile" value="@Model.Mobile" style="height:50px">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Address">Address</label>
+                                            <input asp-for="Address" type="text" name="Address" class="form-control" id="Address" value="@Model.Address" style="height:50px">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Birthday">Birthday</label>
+                                            <input asp-for="Birthday" type="date" name="Birthday" class="form-control" id="Birthday" value="@Model.Birthday" style="height:50px">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="Experience">Experience</label>
+                                            <input asp-for="Experience" type="text" name="Experience" class="form-control" id="Experience" value="@Model.Experience" style="height:50px">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Qualification">Qualification</label>
+                                            <input asp-for="Qualification" type="text" name="Qualification" class="form-control" id="Qualification" value="@Model.Qualification" style="height:50px">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Professional">Professional</label>
+                                            <input asp-for="Professional" type="text" name="Professional" class="form-control" id="Professional" value="@Model.Professional" style="height:50px">
+                                        </div>
+                                        <script>
+                                            var loadFile = function (event) {
+                                                var image = document.getElementById('output');
+                                                image.src = URL.createObjectURL(event.target.files[0]);
+                                            };
+
+
+                                        </script>
+                                        @{
+                                            if (@Model.Mess != null)
+                                            {
+                                                <span style="font-weight: bold">@Model.Mess</span>
+                                            }
+                                        }
+                                    <div style="text-align:center">
+                                        <input type="submit" class="btn btn-success btn-block" value="Update Infomation" style="width:150px;background-color:orange; " />
+                                    </div>
+                                    </form>
                                             }
 
 

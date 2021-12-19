@@ -29,8 +29,8 @@
                         <input asp-for="Password" type="password" name="Password" class="form-control" id="loginUserPassword" placeholder="************">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
-                    @*<div class="row">
-            <div class="col">
+                    <div class="row">
+            @*<div class="col">
                 <div class="form-group">
                     <div class="checkbox-group">
                         <input type="checkbox" id="settingsCheckBox01" name="checkbox">
@@ -41,11 +41,11 @@
                         </label>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="col ml-auto text-right">
-                <a href="#" class="tt-underline">Forgot Password</a>
+                <a asp-action="Forgot_Password_View" class="tt-underline">Forgot Password</a>
             </div>
-        </div>*@
+        </div>
                     <input type="submit" class="btn btn-secondary btn-block" value="Log in" />
                     @*<p>Or login with social network</p>
         <div class="row">

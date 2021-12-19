@@ -1,4 +1,4 @@
-﻿using ForumClient.Models;
+using ForumClient.Models;
 using ForumClient.Models.AppDBContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Net.Mail;
 
 namespace ForumClient
 {
@@ -42,7 +41,6 @@ namespace ForumClient
             services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
 
             services.AddHttpContextAccessor();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

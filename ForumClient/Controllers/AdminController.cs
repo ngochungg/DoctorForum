@@ -260,15 +260,9 @@ namespace ForumClient.Controllers
         public async Task<ActionResult> Add_Admin_Post(RegistrationViewModel model)
         {
             var u = await _context.User.SingleOrDefaultAsync(m => m.UserName == model.UserName);
-            var g = await _context.User.SingleOrDefaultAsync(m => m.Email == model.Email);
             if (u != null)
             {
                 TempData["Message"] = "User already exists";
-                return View("Add_admin_user");
-            }
-            if (g != null)
-            {
-                TempData["Message"] = "Email already exists";
                 return View("Add_admin_user");
             }
             if (ModelState.IsValid)

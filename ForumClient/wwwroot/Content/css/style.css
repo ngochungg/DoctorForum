@@ -7962,3 +7962,19 @@ html.ie.gecko body.modal-open {
     .form-container .btn:hover, .open-button:hover {
         opacity: 1;
     }
+.body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    height: 600px;
+}
+
+canvas {
+    padding: 0;
+    margin: 0;
+}
+
+div.btnbg {
+    left: 0;
+    top: 0;
+}

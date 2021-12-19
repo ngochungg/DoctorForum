@@ -18,95 +18,64 @@
                         </ol>
                     </nav>
 
-                    <h1 class="page-header-title">Change Password</h1>
+                   
                 </div>
             </div>
             <!-- End Row -->
         </div>
         <!-- End Page Header -->
         <!-- Card -->
+       
+        <!-- End Card -->
+    </div>
+    <div class="container-fluid" style="width:600px">
         <div class="card" style="padding: 30px">
             <!-- Header -->
             <div class="card-header">
-                <div class="row justify-content-between align-items-center flex-grow-1">
-                    <h3>Change Password</h3>
+                <div class="row justify-content-between align-items-center flex-grow-1" style="text-align:center;display:block">
+                    <h2 style="text-align:center;color:#00c9a7;font-family:unset">Change Password</h2>
                 </div>
                 <!-- End Row -->
             </div>
             <!-- End Header -->
             <!-- form -->
-            <form style="margin-top: 20px" asp-action="OldPassword" asp-route-id="@Model.id">
-                @{
-                    if (@Model.Mess != null)
-                    {
-                        <span style="font-weight: bold">@Model.Mess</span>
-                    }
-                }
-                <div class="form-group">
-                    <label for="OldPassword">Old Password</label>
-                    <input asp-for="OldPassword" name="OldPassword" type="password" class="form-control" id="OldPassword" placeholder="Old Password" required>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <form style="margin-top: 20px" asp-action="OldPassword" asp-route-id="@Model.id">
+
+                            <div class="form-group">
+                                <label for="OldPassword">Old Password</label>
+                                <input asp-for="OldPassword" name="OldPassword" type="password" class="form-control" id="OldPassword" placeholder="Old Password" style="opacity:0.5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">New Password</label>
+                                <input asp-for="Password" name="Password" type="password" class="form-control" id="Password" placeholder="New Password" style="opacity:0.5" required>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Confirm">Confirm Password</label>
+                                <input asp-for="ConfirmPassword" name="ConfirmPassword" type="password" class="form-control" id="Confirm" placeholder="Confirm Password" style="opacity:0.5" required>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            @{
+                                if (@Model.Mess != null)
+                                {
+                                    <span style="font-weight: bold;color:red">@Model.Mess</span>
+                                }
+                            }
+                        <div style="text-align:center"><button type="submit" class="btn btn-success" style="width:100px">Submit</button></div>
+                        </form>
+                    </div>
+                    <div class="col-sm-1"></div>
                 </div>
-                <div class="form-group">
-                    <label for="Password">New Password</label>
-                    <input asp-for="Password" name="Password" type="password" class="form-control" id="Password" placeholder="Password" required>
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="Confirm">Confirm Password</label>
-                    <input asp-for="ConfirmPassword" name="ConfirmPassword" type="password" class="form-control" id="Confirm" placeholder="Confirm Password" required>
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
+
             <!-- End form -->
         </div>
-        <!-- End Card -->
     </div>
     <!-- End Content -->
-    <!-- Footer -->
-
-    <div class="footer">
-        <div class="row justify-content-between align-items-center">
-            <div class="col">
-                <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
-            </div>
-            <div class="col-auto">
-                <div class="d-flex justify-content-end">
-                    <!-- List Dot -->
-                    <ul class="list-inline list-separator">
-                        <li class="list-inline-item">
-                            <a class="list-separator-link" href="#">FAQ</a>
-                        </li>
-
-                        <li class="list-inline-item">
-                            <a class="list-separator-link" href="#">License</a>
-                        </li>
-
-                        <li class="list-inline-item">
-                            <!-- Keyboard Shortcuts Toggle -->
-                            <div class="hs-unfold">
-                                <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
-                              "target": "#keyboardShortcutsSidebar",
-                              "type": "css-animation",
-                              "animationIn": "fadeInRight",
-                              "animationOut": "fadeOutRight",
-                              "hasOverlay": true,
-                              "smartPositionOff": true
-                             }'>
-                                    <i class="tio-command-key"></i>
-                                </a>
-                            </div>
-                            <!-- End Keyboard Shortcuts Toggle -->
-                        </li>
-                    </ul>
-                    <!-- End List Dot -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- End Footer -->
+  
 </main>
 

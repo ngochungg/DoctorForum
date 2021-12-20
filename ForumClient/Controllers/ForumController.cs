@@ -404,7 +404,7 @@ namespace ForumClient.Controllers
             {
                 TopicModel topic = new TopicModel
                 {
-                    Categogies_id = request.Categogies_id,
+                    Categogies_name = request.Categogies_name,
                     Contents = request.Contents,
                     Created_at = DateTime.Now.ToString(),
                     Title = request.Title,

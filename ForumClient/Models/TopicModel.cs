@@ -11,7 +11,7 @@ namespace ForumClient.Models
     {
         [Key]
         public int Topic_Id { set; get; }
-        public int Categogies_id { set; get; }
+        public string Categogies_name { set; get; }
         public string Username { set; get; }
         public string Title { set; get; }
         public string Contents { set; get; }

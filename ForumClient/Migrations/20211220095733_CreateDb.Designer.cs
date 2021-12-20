@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumClient.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20211220090015_CreateDb")]
+    [Migration("20211220095733_CreateDb")]
     partial class CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,8 +85,8 @@ namespace ForumClient.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Categogies_id")
-                        .HasColumnType("int");
+                    b.Property<string>("Categogies_name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Contents")
                         .HasColumnType("nvarchar(max)");

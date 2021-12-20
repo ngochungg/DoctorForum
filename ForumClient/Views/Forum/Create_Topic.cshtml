@@ -32,11 +32,11 @@
                 </div>
                 <div class="form-group">
                     <label>Topic Type</label>
-                    <select asp-for="Categogies_id" class='form-control'>
+                    <select asp-for="Categogies_name" class='form-control'>
                         @{
                             foreach (var cate in @ViewBag.cate)
                             {
-                                <option value="@cate.cate_id">@cate.name</option>
+                                <option value="@cate.name">@cate.name</option>
                             }
                         }
                         <option></option>

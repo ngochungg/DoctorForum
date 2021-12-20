@@ -35,6 +35,7 @@ namespace ForumClient.Controllers
             var post = await _context.Topic.ToListAsync();
             return View(post);
         }
+
         #region User
         #region change_password
         public async Task<IActionResult> Change_Password_View(int id, string mess)
@@ -308,7 +309,7 @@ namespace ForumClient.Controllers
                 //return Page();
                 return View("User_Login");
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public IActionResult User_Signup()
@@ -376,7 +377,7 @@ namespace ForumClient.Controllers
             {
                 Response.Cookies.Delete(cookie);
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
         #endregion
         #region Forgot_Password

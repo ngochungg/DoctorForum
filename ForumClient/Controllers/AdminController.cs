@@ -46,10 +46,6 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-        public IActionResult Home()
-        {
-            return View();
-        }
         [Route("Admin")]
         [HttpPost]
         public async Task<IActionResult> LoginAdmin(LoginViewModel model)

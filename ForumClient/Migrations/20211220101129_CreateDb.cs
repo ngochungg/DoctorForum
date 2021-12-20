@@ -2,10 +2,26 @@
 
 namespace ForumClient.Migrations
 {
-    public partial class CreateDB : Migration
+    public partial class CreateDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    cate_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.cate_id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Role",
                 columns: table => new
@@ -17,6 +33,24 @@ namespace ForumClient.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Topic",
+                columns: table => new
+                {
+                    Topic_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Categogies_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Contents = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created_at = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Topic", x => x.Topic_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,7 +100,13 @@ namespace ForumClient.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
                 name: "Role");
+
+            migrationBuilder.DropTable(
+                name: "Topic");
 
             migrationBuilder.DropTable(
                 name: "User");

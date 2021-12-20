@@ -24,15 +24,16 @@ namespace ForumClient.Controllers
 
         private readonly IWebHostEnvironment webHostEnvironment;
 
-        public ForumController(AppDBContext context,IWebHostEnvironment webHostEnvironment)
+        public ForumController(AppDBContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             this.webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var post = await _context.Topic.ToListAsync();
+            return View(post);
         }
         #region User
         #region change_password
@@ -45,10 +46,7 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-                    if (MyUser.Look == 0)
-                    {
-                        return RedirectToAction("Index");
-                    }
+
                     Change_pass_view update = new Change_pass_view
                     {
                         id = MyUser.Id
@@ -111,9 +109,7 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-                    if (MyUser.Look == 0) {
-                        return RedirectToAction("Index");
-                    }
+
                     Confirmed_docter_view update = new Confirmed_docter_view
                     {
                         id = MyUser.Id,
@@ -180,10 +176,7 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-                    if (MyUser.Look == 0)
-                    {
-                        return RedirectToAction("Index");
-                    }
+
                     UpdateUserView update = new UpdateUserView
                     {
                         id = MyUser.Id,
@@ -200,7 +193,7 @@ namespace ForumClient.Controllers
                     };
                     if (mess != null)
                     {
-                       update.Mess  = mess;
+                        update.Mess = mess;
                     }
                     return View("User_Update", update);
                 }
@@ -214,16 +207,16 @@ namespace ForumClient.Controllers
         [HttpPost]
         public async Task<IActionResult> Update_User(UpdateUserView model, int id)
         {
-                UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-                if(model.ProfileImage != null)
-                {
-                    string uniqueFileName = UpdateFile(model);
-                    old_user.Image = uniqueFileName;
-                }
-                if (model.Birthday != null)
-                {
-                    old_user.Birthday = model.Birthday;
-                }
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            if (model.ProfileImage != null)
+            {
+                string uniqueFileName = UpdateFile(model);
+                old_user.Image = uniqueFileName;
+            }
+            if (model.Birthday != null)
+            {
+                old_user.Birthday = model.Birthday;
+            }
             if (old_user != null)
             {
                 if (old_user.Password == CreateMD5(model.Password))
@@ -290,11 +283,7 @@ namespace ForumClient.Controllers
                     ModelState.AddModelError("Password", "Invalid login attempt.");
                     return View("User_Login");
                 }
-                if (userdetails.Look == 0)
-                {
-                    ModelState.AddModelError("Password", "Account has been locked.");
-                    return View("User_Login");
-                }
+
                 userdetails.Status += 1;
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("userId", userdetails.Name);
@@ -360,8 +349,6 @@ namespace ForumClient.Controllers
                     Image = uniqueFileName,
                     Status = 0,
                     RoleId = "3",
-                    Look = 1,
-                    Share = 1,
                     CreatedAt = DateTime.Now.ToString(),
                 };
                 _context.Add(user);
@@ -459,19 +446,11 @@ namespace ForumClient.Controllers
 
 
 
-        public IActionResult Categories()
-        {
-            return View();
-        }
         public IActionResult Trending()
         {
             return View();
         }
-        public IActionResult New()
-        {
-            return View();
-        }
-
+        
         public IActionResult Doctor_Login()
         {
             return View();
@@ -480,9 +459,56 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-        public IActionResult Create_Post()
+        public async Task<ActionResult> Categories()
         {
+            var category = await _context.Categories.ToListAsync();
+            return View(category);
+        }
+        public IActionResult Create_Topic()
+        {
+            var cate = _context.Categories;
+            ViewBag.cate = cate;
             return View();
+        }
+        public async Task<ActionResult> CreatePost(TopicModel request)
+        {
+            if (ModelState.IsValid && HttpContext.Session.GetString("userId") != null)
+            {
+                TopicModel topic = new TopicModel
+                {
+                    Categogies_name = request.Categogies_name,
+                    Contents = request.Contents,
+                    Created_at = DateTime.Now.ToString(),
+                    Title = request.Title,
+                    Username = HttpContext.Session.GetString("userId"),
+                    Status = 0
+                };
+                _context.Topic.Add(topic);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Success";
+            }
+            else
+            {
+                TempData["Message"] = "Could not create maybe because you are not logged in";
+            }
+            return RedirectToAction("Create_Topic");
+        }
+        public async Task<ActionResult> UpdatePost(TopicModel request)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Topic.Update(request);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Create_Post");
+        }
+        public async Task<ActionResult> DeletePost(int id)
+        {
+            var category = await _context.Topic.FindAsync(id);
+            if (category == null) return RedirectToAction("Index");
+            await _context.SaveChangesAsync();
+            _context.Topic.Remove(category);
+            return RedirectToAction("Create_Post");
         }
 
         public static string CreateMD5(string input)

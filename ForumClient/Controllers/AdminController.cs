@@ -389,6 +389,96 @@ namespace ForumClient.Controllers
             }
         }
 
+        //topic
+        public async Task<IActionResult> TopicView()
+        {
+            var category = await _context.Topic.ToListAsync();
+            return View(category);
+        }
+
+
+        public async Task<ActionResult> TopicDelete(int id)
+        {
+            var category = await _context.Topic.FindAsync(id);
+            if (category == null)
+            {
+                TempData["Message"] = "Delete Error";
+            }
+            else
+            {
+                await _context.SaveChangesAsync();
+                _context.Topic.Remove(category);
+                TempData["Message"] = "Delete Success";
+            }
+            return RedirectToAction("TopicView");
+        }
+
+
+
+
+        //category
+        public IActionResult Categories()
+        {
+            return View();
+        }
+        public async Task<IActionResult> CategoriesView()
+        {
+            var category = await _context.Categories.ToListAsync();
+            if (category == null)
+            {
+                TempData["Message"] = "Have 0 Category";
+            }
+            return View(category);
+        }
+        public async Task<ActionResult> CreateCategory(CategoriesModel request)
+        {
+            if (ModelState.IsValid)
+            {
+                if (request.created_by == null)
+                {
+                    request.created_by = HttpContext.Session.GetString("userId");
+                }
+                request.created_at = DateTime.Now.ToString();
+                _context.Categories.Add(request);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Create Success";
+            }
+            else
+            {
+                TempData["Message"] = "Create Fail";
+            }
+            return RedirectToAction(nameof(CategoriesView));
+        }
+        public async Task<ActionResult> UpdateCategory(CategoriesModel request)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Categories.Update(request);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("CategoriesView");
+        }
+        public async Task<ActionResult> DeleteCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                TempData["Message"] = "Delete Errr";
+            }
+            else
+            {
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Delete Success";
+            }
+
+            return RedirectToAction("CategoriesView");
+        }
+        public async Task<ActionResult> DetailCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            return View(category);
+        }
         //user Disable
         [Route("Disable_Cus")]
         public async Task<IActionResult> Disable_Cus()

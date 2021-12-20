@@ -1845,23 +1845,13 @@
                                 <!-- Dropdown -->
                                 <ul id="navLinkappsNavDropdown" class="hs-sub-menu dropdown-menu dropdown-menu-lg" aria-labelledby="appsNavDropdown" style="min-width: 16rem;">
                                     <li>
-                                        <a class="dropdown-item" href="..\apps-kanban.html">
-                                            <span class="tio-circle nav-indicator-icon"></span> Kanban
+                                        <a class="dropdown-item" asp-action="Categories">
+                                            <span class="tio-circle nav-indicator-icon"></span> Create category
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="..\apps-calendar.html">
                                             <span class="tio-circle nav-indicator-icon"></span> Calendar <span class="badge badge-info badge-pill ml-1">New</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="..\apps-invoice-generator.html">
-                                            <span class="tio-circle nav-indicator-icon"></span> Invoice Generator
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="..\apps-file-manager.html">
-                                            <span class="tio-circle nav-indicator-icon"></span> File Manager
                                         </a>
                                     </li>
                                 </ul>
@@ -3059,23 +3049,13 @@
                                     <!-- Dropdown -->
                                     <ul id="navLinkappsNavDropdown" class="hs-sub-menu dropdown-menu dropdown-menu-lg" aria-labelledby="appsNavDropdown" style="min-width: 16rem;">
                                         <li>
-                                            <a class="dropdown-item" href="..\apps-kanban.html">
-                                                <span class="tio-circle nav-indicator-icon"></span> Kanban
+                                            <a class="dropdown-item" asp-action="Categories">
+                                                <span class="tio-circle nav-indicator-icon"></span> Create categories
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="..\apps-calendar.html">
-                                                <span class="tio-circle nav-indicator-icon"></span> Calendar <span class="badge badge-info badge-pill ml-1">New</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="..\apps-invoice-generator.html">
-                                                <span class="tio-circle nav-indicator-icon"></span> Invoice Generator
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="..\apps-file-manager.html">
-                                                <span class="tio-circle nav-indicator-icon"></span> File Manager
+                                            <a class="dropdown-item" asp-action="CategoriesView">
+                                                <span class="tio-circle nav-indicator-icon"></span> View categories <span class="badge badge-info badge-pill ml-1">New</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -3223,32 +3203,20 @@
                             <li class="navbar-vertical-aside-has-menu ">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Apps">
                                     <i class="tio-apps nav-icon"></i>
-                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Apps <span class="badge badge-info badge-pill ml-1">Hot</span></span>
+                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Categories <span class="badge badge-info badge-pill ml-1">Hot</span></span>
                                 </a>
 
                                 <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                                     <li class="nav-item">
-                                        <a class="nav-link " href="..\apps-kanban.html" title="Kanban">
+                                        <a class="nav-link " asp-action="Categories" title="Create category">
                                             <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Kanban</span>
+                                            <span class="text-truncate">Create category</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " href="..\apps-calendar.html" title="Calendar">
+                                        <a class="nav-link " asp-action="CategoriesView" title="View categories">
                                             <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Calendar <span class="badge badge-info badge-pill ml-1">New</span></span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="..\apps-invoice-generator.html" title="Invoice Generator">
-                                            <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Invoice Generator</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="..\apps-file-manager.html" title="File Manager">
-                                            <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">File Manager</span>
+                                            <span class="text-truncate">View categories </span>
                                         </a>
                                     </li>
                                 </ul>
@@ -3258,138 +3226,14 @@
                             <li class="navbar-vertical-aside-has-menu ">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Authentication">
                                     <i class="tio-lock-outlined nav-icon"></i>
-                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Authentication</span>
+                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Topic</span>
                                 </a>
 
                                 <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                                    <li class="navbar-vertical-aside-has-menu ">
-                                        <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="Sign In">
-                                            <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Sign In</span>
-                                        </a>
-
-                                        <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-signin-basic.html" title="Basic">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Basic</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-signin-cover.html" title="Cover">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Cover</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="navbar-vertical-aside-has-menu ">
-                                        <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="Sign Up">
-                                            <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Sign Up</span>
-                                        </a>
-
-                                        <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-signup-basic.html" title="Basic">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Basic</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-signup-cover.html" title="Cover">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Cover</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="navbar-vertical-aside-has-menu ">
-                                        <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="Reset Password">
-                                            <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Reset Password</span>
-                                        </a>
-
-                                        <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-reset-password-basic.html" title="Basic">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Basic</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-reset-password-cover.html" title="Cover">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Cover</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="navbar-vertical-aside-has-menu ">
-                                        <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="Email Verification">
-                                            <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Email Verification</span>
-                                        </a>
-
-                                        <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-email-verification-basic.html" title="Basic">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Basic</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-email-verification-cover.html" title="Cover">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Cover</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="navbar-vertical-aside-has-menu ">
-                                        <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="2-step Verification">
-                                            <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">2-step Verification</span>
-                                        </a>
-
-                                        <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-two-step-verification-basic.html" title="Basic">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Basic</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="..\authentication-two-step-verification-cover.html" title="Cover">
-                                                    <span class="tio-circle-outlined nav-indicator-icon"></span>
-                                                    <span class="text-truncate">Cover</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:;" data-toggle="modal" data-target="#welcomeMessageModal" title="Welcome Message">
+                                        <a class="nav-link " asp-action="TopicView" title="View Topic">
                                             <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Welcome Message</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="..\error-404.html" title="Error 404">
-                                            <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Error 404</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="..\error-500.html" title="Error 500">
-                                            <span class="tio-circle nav-indicator-icon"></span>
-                                            <span class="text-truncate">Error 500</span>
+                                            <span class="text-truncate">View Topic </span>
                                         </a>
                                     </li>
                                 </ul>
@@ -3882,32 +3726,20 @@
                         <li class="navbar-vertical-aside-has-menu nav-item">
                             <a class="js-navbar-vertical-aside-menu-link nav-link " href="javascript:;" title="Apps">
                                 <i class="tio-apps nav-icon"></i>
-                                <span class="nav-compact-title text-truncate">Apps</span>
+                                <span class="nav-compact-title text-truncate">Categories</span>
                             </a>
 
                             <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                                 <li class="nav-item">
-                                    <a class="nav-link " href="..\apps-kanban.html" title="Kanban">
+                                    <a class="nav-link " asp-action="Categories" title="Kanban">
                                         <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Kanban</span>
+                                        <span class="text-truncate">Create category</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link " href="..\apps-calendar.html" title="Calendar">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">Calendar <span class="badge badge-info badge-pill ml-1">New</span></span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " href="..\apps-invoice-generator.html" title="Invoice Generator">
-                                        <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Invoice Generator</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " href="..\apps-file-manager.html" title="File Manager">
-                                        <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">File Manager</span>
                                     </a>
                                 </li>
                             </ul>

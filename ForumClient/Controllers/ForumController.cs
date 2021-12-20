@@ -28,9 +28,10 @@ namespace ForumClient.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var post = await _context.Topic.ToListAsync();
+            return View(post);
         }
         #region User
         #region change_password

@@ -45,7 +45,8 @@ namespace ForumClient.Migrations
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contents = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created_at = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Created_at = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

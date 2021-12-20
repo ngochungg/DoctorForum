@@ -408,7 +408,8 @@ namespace ForumClient.Controllers
                     Contents = request.Contents,
                     Created_at = DateTime.Now.ToString(),
                     Title = request.Title,
-                    Username = HttpContext.Session.GetString("userId")
+                    Username = HttpContext.Session.GetString("userId"),
+                    Status = 0
                 };
                 _context.Topic.Add(topic);
                 await _context.SaveChangesAsync();

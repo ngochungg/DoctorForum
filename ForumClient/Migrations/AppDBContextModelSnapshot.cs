@@ -92,6 +92,9 @@ namespace ForumClient.Migrations
                     b.Property<string>("Created_at")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 

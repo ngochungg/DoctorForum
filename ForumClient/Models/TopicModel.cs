@@ -16,6 +16,6 @@ namespace ForumClient.Models
         public string Title { set; get; }
         public string Contents { set; get; }
         public string Created_at { set; get; }
-
+        public int Status { set; get; }
     }
 }

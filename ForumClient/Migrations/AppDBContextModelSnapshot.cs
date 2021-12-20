@@ -18,27 +18,6 @@ namespace ForumClient.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ForumClient.Models.AppDBContext.PostModel", b =>
-                {
-                    b.Property<int>("Post_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Post_Id");
-
-                    b.ToTable("Posts");
-                });
-
             modelBuilder.Entity("ForumClient.Models.CategoriesModel", b =>
                 {
                     b.Property<int>("cate_id")
@@ -99,27 +78,27 @@ namespace ForumClient.Migrations
 
             modelBuilder.Entity("ForumClient.Models.TopicModel", b =>
                 {
-                    b.Property<int>("topic_id")
+                    b.Property<int>("Topic_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("cate_id")
+                    b.Property<int>("Categogies_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("content")
+                    b.Property<string>("Contents")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("created_at")
+                    b.Property<string>("Created_at")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("title")
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("usename")
+                    b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("topic_id");
+                    b.HasKey("Topic_Id");
 
                     b.ToTable("Topic");
                 });

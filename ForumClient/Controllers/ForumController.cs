@@ -378,11 +378,7 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-        public IActionResult Create_Topic()
-        {
-            return View();
-        }
-
+        
         public IActionResult Doctor_Login()
         {
             return View();
@@ -391,41 +387,54 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-        public IActionResult Create_Post()
-        {
-            return View();
-        }
         public async Task<ActionResult> Categories()
         {
             var category = await _context.Categories.ToListAsync();
             return View(category);
         }
-        public async Task<ActionResult> CreatePost(PostModel request)
+        public IActionResult Create_Topic()
         {
-            if (ModelState.IsValid)
-            {
-                _context.Posts.Add(request);
-                await _context.SaveChangesAsync();
-                ViewBag.Message = "Success";
-            }
-            ViewBag.Message = "Fail";
-            return RedirectToAction("Create_Post");
+            var cate = _context.Categories;
+            ViewBag.cate = cate;
+            return View();
         }
-        public async Task<ActionResult> UpdatePost(PostModel request)
+        public async Task<ActionResult> CreatePost(TopicModel request)
+        {
+            if (ModelState.IsValid && HttpContext.Session.GetString("userId") != null)
+            {
+                TopicModel topic = new TopicModel
+                {
+                    Categogies_id = request.Categogies_id,
+                    Contents = request.Contents,
+                    Created_at = DateTime.Now.ToString(),
+                    Title = request.Title,
+                    Username = HttpContext.Session.GetString("userId")
+                };
+                _context.Topic.Add(topic);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Success";
+            }
+            else
+            {
+                TempData["Message"] = "Could not create maybe because you are not logged in";
+            }
+            return RedirectToAction("Create_Topic");
+        }
+        public async Task<ActionResult> UpdatePost(TopicModel request)
         {
             if (ModelState.IsValid)
             {
-                _context.Posts.Update(request);
+                _context.Topic.Update(request);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Create_Post");
         }
         public async Task<ActionResult> DeletePost(int id)
         {
-            var category = await _context.Posts.FindAsync(id);
+            var category = await _context.Topic.FindAsync(id);
             if (category == null) return RedirectToAction("Index");
             await _context.SaveChangesAsync();
-            _context.Posts.Remove(category);
+            _context.Topic.Remove(category);
             return RedirectToAction("Create_Post");
         }
 

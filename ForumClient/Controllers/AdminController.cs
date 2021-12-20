@@ -1,10 +1,12 @@
 ﻿using ForumClient.Models;
 using ForumClient.Models.AppDBContext;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,9 +18,12 @@ namespace ForumClient.Controllers
     {
         private readonly AppDBContext _context;
 
-        public AdminController(AppDBContext context)
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public AdminController(AppDBContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public static string CreateMD5(string input)
@@ -64,9 +69,10 @@ namespace ForumClient.Controllers
                 }
                 if (userdetails.RoleId == "1")
                 {
-                    var is_admin = userdetails.Id.ToString();
-                    HttpContext.Response.Cookies.Append("is_admin", is_admin);
+                   
+                    HttpContext.Response.Cookies.Append("is_admin", "1");
                     HttpContext.Session.SetString("userId", userdetails.Name);
+                    HttpContext.Session.SetString("userName", userdetails.UserName);
                     if (userdetails.Image == null)
                     {
                         HttpContext.Session.SetString("Image", "0");
@@ -173,6 +179,7 @@ namespace ForumClient.Controllers
         }
    
         //Page cus
+        [Route("Customerr")]
         public async Task<IActionResult> CusUser()
         {
             var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
@@ -187,14 +194,14 @@ namespace ForumClient.Controllers
                 return RedirectToAction("Index");
             }
         }
-        public async Task<IActionResult> Enable_Cus(string id)
+        public async Task<IActionResult> Enable_Cuss(string id)
         {
             UserModel Enable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
             Enable_U.Look = 1;
             await _context.SaveChangesAsync();
             return RedirectToAction("CusUser");
         }
-        public async Task<IActionResult> Disable_Cus(string id)
+        public async Task<IActionResult> Disable_Cuss(string id)
         {
             UserModel Disable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
             Disable_U.Look = 0;
@@ -238,7 +245,148 @@ namespace ForumClient.Controllers
         //page add user
         public IActionResult Add_admin_user()
         {
-            return View();
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        public async Task<ActionResult> Add_Admin_Post(RegistrationViewModel model)
+        {
+            var u = await _context.User.SingleOrDefaultAsync(m => m.UserName == model.UserName);
+            var g = await _context.User.SingleOrDefaultAsync(m => m.Email == model.Email);
+            if (u != null)
+            {
+                TempData["Message"] = "User already exists";
+                return View("Add_admin_user");
+            }
+            if (g != null)
+            {
+                TempData["Message"] = "Email already exists";
+                return View("Add_admin_user");
+            }
+            if (ModelState.IsValid)
+            {
+                string uniqueFileName = UploadedFile(model);
+
+                UserModel user = new UserModel
+                {
+                    UserName = model.UserName,
+                    Name = model.Name,
+                    Email = model.Email,
+                    Password = CreateMD5(model.Password),
+                    Mobile = model.Mobile,
+                    Image = uniqueFileName,
+                    Status = 0,
+                    RoleId = "1",
+                    Look = 1,
+                    Share = 1,
+                    CreatedAt = DateTime.Now.ToString(),
+                };
+                _context.Add(user);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return View("Add_admin_user");
+            }
+            return RedirectToAction("UserView");
+        }
+
+
+        public string UploadedFile(RegistrationViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.ProfileImage != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "update_images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfileImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ProfileImage.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
+
+        //profile
+        public async Task<ActionResult> Profile_Admin(string id)
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                var profile = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+                return View(profile);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        //change Pass
+        public async Task<IActionResult> Change_Pass_Admin(string id, string mess)
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+            if (is_admin == 1)
+            {
+                UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+                Change_pass_view update = new Change_pass_view
+                {
+                    id = MyUser.Id
+                };
+                if (mess != null)
+                {
+                    update.Mess = mess;
+                }
+                return View(update);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        public async Task<IActionResult> OldPassword(Change_pass_view model, int id)
+        {
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            if (ModelState.IsValid)
+            {
+                if (old_user != null)
+                {
+                    string passOld = CreateMD5(model.OldPassword);
+                    if (old_user.Password == passOld)
+                    {
+                        old_user.Password = CreateMD5(model.Password);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Logout");
+                    }
+                    else
+                    {
+                        model.Mess = "Wrong password...!";
+                        string sid = old_user.UserName;
+                        return RedirectToAction("Change_Pass_Admin", new { id = sid, mess = model.Mess });
+                    }
+                }
+                model.Mess = "Change Fail";
+                string uid = old_user.UserName;
+                return RedirectToAction("Change_Pass_Admin", new { id = uid, mess = model.Mess });
+            }
+            else
+            {
+                model.Mess = "The new password is not the same...!";
+                string uid = old_user.UserName;
+                return RedirectToAction("Change_Pass_Admin", new { id = uid, mess = model.Mess });
+            }
         }
 
         //topic
@@ -331,7 +479,119 @@ namespace ForumClient.Controllers
             var category = await _context.Categories.FindAsync(id);
             return View(category);
         }
+        //user Disable
+        [Route("Disable_Cus")]
+        public async Task<IActionResult> Disable_Cus()
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
 
+            if (is_admin == 1)
+            {
+                var disable_Cus = await _context.User.Where(c => c.Look == 0).ToListAsync();
+                return View(disable_Cus);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        public async Task<IActionResult> Enable_Users(string id)
+        {
+            UserModel Enable_U = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            Enable_U.Look = 1;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Disable_Cus");
+        }
+        public async Task<IActionResult> Remove_Cus(string id)
+        {
+            UserModel Cus = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            _context.User.Remove(Cus);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Disable_Cus");
+        }
 
+        //Edit Infomation
+        public async Task<IActionResult> EditAdmin(string id, string mess)
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+                if (MyUser.Look == 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                UpdateUserView update = new UpdateUserView
+                {
+                    UserName = MyUser.UserName,
+                    Name = MyUser.Name,
+                    Address = MyUser.Address,
+                    Image = MyUser.Image,
+                    Email = MyUser.Email,
+                    Mobile = MyUser.Mobile,
+                    RoleId = MyUser.RoleId,
+ 
+                };
+                if (mess != null)
+                {
+                    update.Mess = mess;
+                }
+                return View("Update_Admin", update);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditAdmin_Post(UpdateUserView model, string id)
+        {
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            if (model.ProfileImage != null)
+            {
+                string uniqueFileName = UpdateFile(model);
+                old_user.Image = uniqueFileName;
+            }
+            if (old_user != null)
+            {
+                if (old_user.Password == CreateMD5(model.Password))
+                {
+                    old_user.Name = model.Name;
+                    old_user.Email = model.Email;
+                    old_user.Address = model.Address;
+                    old_user.Mobile = model.Mobile;
+                    await _context.SaveChangesAsync();
+                    model.Mess = "Update successful...!";
+                    string sid = id;
+                    return RedirectToAction("EditAdmin", new { id = sid, mess = model.Mess });
+                }
+                else
+                {
+                    model.Mess = "Update failed...!";
+                    string sid = id;
+                    return RedirectToAction("EditAdmin", new { id = sid, mess = model.Mess });
+                }
+            }
+            model.Mess = "Update failed...!";
+            string uid = id;
+            return RedirectToAction("EditAdmin", new { id = uid, mess = model.Mess });
+        }
+        public string UpdateFile(UpdateUserView model)
+        {
+            string uniqueFileName = null;
+
+            if (model.ProfileImage != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "update_images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfileImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ProfileImage.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
     }
 }

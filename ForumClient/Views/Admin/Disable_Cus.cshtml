@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ForumClient.Models.UserModel>
 @{
-    ViewData["Title"] = "DocterUser";
+    ViewData["Title"] = "Disable_Cus";
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 
@@ -16,11 +16,8 @@
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Pages</a></li>
                             <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Users</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Doctor</li>
                         </ol>
                     </nav>
-
-                    <h1 class="page-header-title">Doctor</h1>
                 </div>
             </div>
             <!-- End Row -->
@@ -48,10 +45,10 @@
                     </div>
                 </div>
             </div>
-            <!-- End Row -->
+            <!-- End Header -->
             <!-- Table -->
             <div class="table-responsive datatable-custom">
-                <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table" >
+                <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                     <thead class="thead-light">
                         <tr>
                             <th style="margin-left: 10px;">#</th>
@@ -61,7 +58,8 @@
                             <th>Phone number</th>
                             <th>Role</th>
                             <th>Create at</th>
-                            <th>Active</th>
+                            <th></th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -118,26 +116,21 @@
                                 }
                                 <td>@item.CreatedAt</td>
                                 <td>
-                                    @{
-                                        if (item.Look == 0)
-                                        {
-                                            <div>
-                                                <a class="btn btn-outline-success btn-sm" asp-action="Enable_User" asp-route-id="@item.UserName">
-                                                    <i class="fas fa-check"></i> Enable
-                                                </a>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div>
-                                                <a class="btn btn-outline-danger btn-sm" asp-action="Disable_User" asp-route-id="@item.UserName">
-                                                    <i class="fas fa-times"></i> Disable
-                                                </a>
-                                            </div>
-                                        }
-                                    }
-
+                                <div>
+                                    <a class="btn btn-outline-success btn-sm" asp-action="Enable_Users" asp-route-id="@item.UserName">
+                                        <i class="fas fa-check"></i> Enable
+                                    </a>
+                                </div>
                                 </td>
+
+                                <td>
+                                <div>
+                                <a class="btn btn-outline-danger btn-sm" asp-action="Remove_Cus" asp-route-id="@item.UserName">
+                                    <i class="fas fa-times"></i> Remove
+                                </a>
+                                </div>
+                                </td>
+
                                 <td>
                                     <div>
                                         <a class="btn btn-outline-secondary btn-sm" asp-action="ProfileUser" asp-route-id="@item.UserName">

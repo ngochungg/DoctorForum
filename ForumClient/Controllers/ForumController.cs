@@ -13,6 +13,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace ForumClient.Controllers
 {
@@ -156,6 +158,13 @@ namespace ForumClient.Controllers
             int uid = id;
             return RedirectToAction("Confirmed_docter_view", new { id = uid, mess = model.Mess });
         }
+        public async Task<IActionResult>no_docter(Confirmed_docter_view model, int id)
+        {
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            
+            int uid = id;
+            return RedirectToAction("Confirmed_docter_view", new { id = uid, mess = model.Mess });
+        }
         #endregion
         #region update_infor
         public async Task<IActionResult> Update_User_View(int id, string mess)
@@ -179,7 +188,8 @@ namespace ForumClient.Controllers
                         Professional = MyUser.Professional,
                         Email = MyUser.Email,
                         Mobile = MyUser.Mobile,
-                        RoleId = MyUser.RoleId
+                        RoleId = MyUser.RoleId,
+                        Birthday = MyUser.Birthday
                     };
                     if (mess != null)
                     {
@@ -311,6 +321,18 @@ namespace ForumClient.Controllers
         [HttpPost]
         public async Task<ActionResult> Registar(RegistrationViewModel model)
         {
+            var u = await _context.User.SingleOrDefaultAsync(m => m.UserName == model.UserName);
+            var g = await _context.User.SingleOrDefaultAsync(m => m.Email == model.Email);
+            if (u != null)
+            {
+                TempData["Message"] = "User already exists";
+                return View("User_Signup");
+            }
+            if (g != null)
+            {
+                TempData["Message"] = "Email already exists";
+                return View("User_Signup");
+            }
             if (ModelState.IsValid)
             {
                 string uniqueFileName = UploadedFile(model);
@@ -357,6 +379,55 @@ namespace ForumClient.Controllers
             return View("Index");
         }
         #endregion
+        #region Forgot_Password
+        public IActionResult Forgot_Password_View()
+        {
+            return View();
+        }
+        public async Task<ActionResult> Forgot_Password_Post(string Email)
+        {
+            var userdetails = await _context.User.SingleOrDefaultAsync(m => m.Email == Email);
+            if (userdetails != null)
+            {
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var stringChars = new char[8];
+                var random = new Random();
+
+                for (int i = 0; i < stringChars.Length; i++)
+                {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+
+                var finalString = new String(stringChars);
+
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("ForumDocter", "baoduong2978@gmail.com"));
+                message.To.Add(new MailboxAddress("Client", Email));
+                message.Subject = "Reset Password";
+                message.Body = new TextPart("plain")
+                {
+                    Text = @"The new password is: " + finalString
+                };
+                using (var smtpClient = new SmtpClient())
+                {
+                    await smtpClient.ConnectAsync("smtp.gmail.com", 587, false);
+                    await smtpClient.AuthenticateAsync("baoduong2978@gmail.com", "Hoaibao2001");
+                    await smtpClient.SendAsync(message);
+                    await smtpClient.DisconnectAsync(true);
+                }
+                userdetails.Password = CreateMD5(finalString);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("User_Login");
+            }
+            else
+            {
+                TempData["Message"] = "Email does not exist";
+                return View("Forgot_Password_View");
+            }
+        }
+        #endregion
+
+
         #endregion
         public void ValidationMessage(string key, string alert, string value)
         {

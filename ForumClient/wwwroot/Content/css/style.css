@@ -7919,8 +7919,8 @@ html.ie.gecko body.modal-open {
     display: none;
     bottom: 0;
     right: 15px;
-   
     z-index: 9;
+    box-shadow: 0 1px 33px 5px lightgrey;
 }
 
 /* Add styles to the form container */

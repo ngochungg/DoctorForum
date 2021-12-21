@@ -14,7 +14,7 @@
                         Hello @Model.Name are you a doctor?
                     </h2>
                     <div class="container">
-                        <div class="row">
+                        <div class="row" style="margin-bottom: 5px; margin-left: -27px;">
                             <div class="col-sm-5"> <button class="open-button" onclick="openForm()">Yes</button></div>
                             <div class="col-sm-6" style=" margin-left: -70px;">
                                 <form asp-action="no_docter">
@@ -26,7 +26,7 @@
 
 
 
-                    <div class="form-popup" id="myForm">
+                    <div class="form-popup" id="myForm" style="box-shadow: 0 1px 33px 5px lightgrey;border:none">
                         <form action="/action_page.php" class="form-container">
                             <div class="col-sm-6 " style="display: block">
                             <div class="col-sm-6 " style="border: solid 1px white; width: 400px; height: auto ;display: block; background-color: white; border-radius: 2%; margin-top: 50px; margin-left:100px">
@@ -39,7 +39,7 @@
                                 </div>
 
                             </div>
-
+                                </div>
 
                         </form>
                             <div class="container-fluid">
@@ -78,14 +78,15 @@
                                             <br />
                                         </form>
                            
-                                    </div>                                     
+                                    </div>     
+                                    <div class="col-sm-1" style="background-color:white"></div>
                                 </div>
-                                <div class="col-sm-1" style="background-color:white"></div>
+                                
                             </div>
                             </div>
                             
                     </div>
-                    <div style="color:white"> done</div>
+                    
                 </div>
 
                 
@@ -94,7 +95,7 @@
 
 
         </div>
-    </div>
+    <div style="color:white"> done</div>
     <script>
         function openForm() {
             document.getElementById("myForm").style.display = "block";

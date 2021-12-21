@@ -46,10 +46,6 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-        public IActionResult Home()
-        {
-            return View();
-        }
         [Route("Admin")]
         [HttpPost]
         public async Task<IActionResult> LoginAdmin(LoginViewModel model)
@@ -256,13 +252,19 @@ namespace ForumClient.Controllers
                 return RedirectToAction("Index");
             }
         }
-        
+
         public async Task<ActionResult> Add_Admin_Post(RegistrationViewModel model)
         {
             var u = await _context.User.SingleOrDefaultAsync(m => m.UserName == model.UserName);
+            var g = await _context.User.SingleOrDefaultAsync(m => m.Email == model.Email);
             if (u != null)
             {
                 TempData["Message"] = "User already exists";
+                return View("Add_admin_user");
+            }
+            if (g != null)
+            {
+                TempData["Message"] = "Email already exists";
                 return View("Add_admin_user");
             }
             if (ModelState.IsValid)
@@ -292,8 +294,8 @@ namespace ForumClient.Controllers
             }
             return RedirectToAction("UserView");
         }
-        
-        
+
+
         public string UploadedFile(RegistrationViewModel model)
         {
             string uniqueFileName = null;
@@ -383,6 +385,96 @@ namespace ForumClient.Controllers
             }
         }
 
+        //topic
+        public async Task<IActionResult> TopicView()
+        {
+            var category = await _context.Topic.ToListAsync();
+            return View(category);
+        }
+
+
+        public async Task<ActionResult> TopicDelete(int id)
+        {
+            var category = await _context.Topic.FindAsync(id);
+            if (category == null)
+            {
+                TempData["Message"] = "Delete Error";
+            }
+            else
+            {
+                await _context.SaveChangesAsync();
+                _context.Topic.Remove(category);
+                TempData["Message"] = "Delete Success";
+            }
+            return RedirectToAction("TopicView");
+        }
+
+
+
+
+        //category
+        public IActionResult Categories()
+        {
+            return View();
+        }
+        public async Task<IActionResult> CategoriesView()
+        {
+            var category = await _context.Categories.ToListAsync();
+            if (category == null)
+            {
+                TempData["Message"] = "Have 0 Category";
+            }
+            return View(category);
+        }
+        public async Task<ActionResult> CreateCategory(CategoriesModel request)
+        {
+            if (ModelState.IsValid)
+            {
+                if (request.created_by == null)
+                {
+                    request.created_by = HttpContext.Session.GetString("userId");
+                }
+                request.created_at = DateTime.Now.ToString();
+                _context.Categories.Add(request);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Create Success";
+            }
+            else
+            {
+                TempData["Message"] = "Create Fail";
+            }
+            return RedirectToAction(nameof(CategoriesView));
+        }
+        public async Task<ActionResult> UpdateCategory(CategoriesModel request)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Categories.Update(request);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("CategoriesView");
+        }
+        public async Task<ActionResult> DeleteCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                TempData["Message"] = "Delete Errr";
+            }
+            else
+            {
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Delete Success";
+            }
+
+            return RedirectToAction("CategoriesView");
+        }
+        public async Task<ActionResult> DetailCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            return View(category);
+        }
         //user Disable
         [Route("Disable_Cus")]
         public async Task<IActionResult> Disable_Cus()
@@ -412,6 +504,90 @@ namespace ForumClient.Controllers
             _context.User.Remove(Cus);
             await _context.SaveChangesAsync();
             return RedirectToAction("Disable_Cus");
+        }
+
+        //Edit Infomation
+        public async Task<IActionResult> EditAdmin(string id, string mess)
+        {
+            var is_admin = Convert.ToInt32(HttpContext.Request.Cookies["is_admin"]);
+
+            if (is_admin == 1)
+            {
+                UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+                if (MyUser.Look == 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                UpdateUserView update = new UpdateUserView
+                {
+                    UserName = MyUser.UserName,
+                    Name = MyUser.Name,
+                    Address = MyUser.Address,
+                    Image = MyUser.Image,
+                    Email = MyUser.Email,
+                    Mobile = MyUser.Mobile,
+                    RoleId = MyUser.RoleId,
+ 
+                };
+                if (mess != null)
+                {
+                    update.Mess = mess;
+                }
+                return View("Update_Admin", update);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditAdmin_Post(UpdateUserView model, string id)
+        {
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.UserName == id);
+            if (model.ProfileImage != null)
+            {
+                string uniqueFileName = UpdateFile(model);
+                old_user.Image = uniqueFileName;
+            }
+            if (old_user != null)
+            {
+                if (old_user.Password == CreateMD5(model.Password))
+                {
+                    old_user.Name = model.Name;
+                    old_user.Email = model.Email;
+                    old_user.Address = model.Address;
+                    old_user.Mobile = model.Mobile;
+                    await _context.SaveChangesAsync();
+                    model.Mess = "Update successful...!";
+                    string sid = id;
+                    return RedirectToAction("EditAdmin", new { id = sid, mess = model.Mess });
+                }
+                else
+                {
+                    model.Mess = "Update failed...!";
+                    string sid = id;
+                    return RedirectToAction("EditAdmin", new { id = sid, mess = model.Mess });
+                }
+            }
+            model.Mess = "Update failed...!";
+            string uid = id;
+            return RedirectToAction("EditAdmin", new { id = uid, mess = model.Mess });
+        }
+        public string UpdateFile(UpdateUserView model)
+        {
+            string uniqueFileName = null;
+
+            if (model.ProfileImage != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "update_images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfileImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ProfileImage.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
     }
 }

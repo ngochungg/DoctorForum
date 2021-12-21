@@ -29,18 +29,17 @@
                     <div class="form-popup" id="myForm">
                         <form action="/action_page.php" class="form-container">
                             <div class="col-sm-6 " style="display: block">
+                            <div class="col-sm-6 " style="border: solid 1px white; width: 400px; height: auto ;display: block; background-color: white; border-radius: 2%; margin-top: 50px; margin-left:100px">
                                 <div class="tab-content">
                                     <div class="tab-pane tt-indent-none  show active" id="tt-tab-01" role="tabpanel">
                                         <div class="tt-item">
-
-
-
                                             <br />
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
+
 
                         </form>
                             <div class="container-fluid">
@@ -64,6 +63,10 @@
                                                 <label for="Professional">Professional</label>
                                                 <input asp-for="Professional" type="text" name="Professional" class="form-control" id="Professional" value="@Model.Professional">
                                             </div>
+
+                           
+                    </div>
+
 
                                             <p><img src="~/update_images/@Model.Image" id="output" width="200" /></p>
                                             @{

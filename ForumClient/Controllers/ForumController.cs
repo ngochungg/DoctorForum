@@ -13,6 +13,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace ForumClient.Controllers
 {
@@ -22,16 +24,18 @@ namespace ForumClient.Controllers
 
         private readonly IWebHostEnvironment webHostEnvironment;
 
-        public ForumController(AppDBContext context,IWebHostEnvironment webHostEnvironment)
+        public ForumController(AppDBContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             this.webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var post = await _context.Topic.ToListAsync();
+            return View(post);
         }
+
         #region User
         #region change_password
         public async Task<IActionResult> Change_Password_View(int id, string mess)
@@ -43,10 +47,7 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-                    if (MyUser.Look == 0)
-                    {
-                        return RedirectToAction("Index");
-                    }
+
                     Change_pass_view update = new Change_pass_view
                     {
                         id = MyUser.Id
@@ -109,9 +110,7 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-                    if (MyUser.Look == 0) {
-                        return RedirectToAction("Index");
-                    }
+
                     Confirmed_docter_view update = new Confirmed_docter_view
                     {
                         id = MyUser.Id,
@@ -178,10 +177,7 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-                    if (MyUser.Look == 0)
-                    {
-                        return RedirectToAction("Index");
-                    }
+
                     UpdateUserView update = new UpdateUserView
                     {
                         id = MyUser.Id,
@@ -198,7 +194,7 @@ namespace ForumClient.Controllers
                     };
                     if (mess != null)
                     {
-                       update.Mess  = mess;
+                        update.Mess = mess;
                     }
                     return View("User_Update", update);
                 }
@@ -212,16 +208,16 @@ namespace ForumClient.Controllers
         [HttpPost]
         public async Task<IActionResult> Update_User(UpdateUserView model, int id)
         {
-                UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
-                if(model.ProfileImage != null)
-                {
-                    string uniqueFileName = UpdateFile(model);
-                    old_user.Image = uniqueFileName;
-                }
-                if (model.Birthday != null)
-                {
-                    old_user.Birthday = model.Birthday;
-                }
+            UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            if (model.ProfileImage != null)
+            {
+                string uniqueFileName = UpdateFile(model);
+                old_user.Image = uniqueFileName;
+            }
+            if (model.Birthday != null)
+            {
+                old_user.Birthday = model.Birthday;
+            }
             if (old_user != null)
             {
                 if (old_user.Password == CreateMD5(model.Password))
@@ -288,11 +284,7 @@ namespace ForumClient.Controllers
                     ModelState.AddModelError("Password", "Invalid login attempt.");
                     return View("User_Login");
                 }
-                if (userdetails.Look == 0)
-                {
-                    ModelState.AddModelError("Password", "Account has been locked.");
-                    return View("User_Login");
-                }
+
                 userdetails.Status += 1;
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("userId", userdetails.Name);
@@ -317,7 +309,7 @@ namespace ForumClient.Controllers
                 //return Page();
                 return View("User_Login");
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public IActionResult User_Signup()
@@ -331,9 +323,15 @@ namespace ForumClient.Controllers
         public async Task<ActionResult> Registar(RegistrationViewModel model)
         {
             var u = await _context.User.SingleOrDefaultAsync(m => m.UserName == model.UserName);
-            if(u != null)
+            var g = await _context.User.SingleOrDefaultAsync(m => m.Email == model.Email);
+            if (u != null)
             {
                 TempData["Message"] = "User already exists";
+                return View("User_Signup");
+            }
+            if (g != null)
+            {
+                TempData["Message"] = "Email already exists";
                 return View("User_Signup");
             }
             if (ModelState.IsValid)
@@ -352,8 +350,6 @@ namespace ForumClient.Controllers
                     Image = uniqueFileName,
                     Status = 0,
                     RoleId = "3",
-                    Look = 1,
-                    Share = 1,
                     CreatedAt = DateTime.Now.ToString(),
                 };
                 _context.Add(user);
@@ -381,9 +377,58 @@ namespace ForumClient.Controllers
             {
                 Response.Cookies.Delete(cookie);
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
         #endregion
+        #region Forgot_Password
+        public IActionResult Forgot_Password_View()
+        {
+            return View();
+        }
+        public async Task<ActionResult> Forgot_Password_Post(string Email)
+        {
+            var userdetails = await _context.User.SingleOrDefaultAsync(m => m.Email == Email);
+            if (userdetails != null)
+            {
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var stringChars = new char[8];
+                var random = new Random();
+
+                for (int i = 0; i < stringChars.Length; i++)
+                {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+
+                var finalString = new String(stringChars);
+
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("ForumDocter", "baoduong2978@gmail.com"));
+                message.To.Add(new MailboxAddress("Client", Email));
+                message.Subject = "Reset Password";
+                message.Body = new TextPart("plain")
+                {
+                    Text = @"The new password is: " + finalString
+                };
+                using (var smtpClient = new SmtpClient())
+                {
+                    await smtpClient.ConnectAsync("smtp.gmail.com", 587, false);
+                    await smtpClient.AuthenticateAsync("baoduong2978@gmail.com", "Hoaibao2001");
+                    await smtpClient.SendAsync(message);
+                    await smtpClient.DisconnectAsync(true);
+                }
+                userdetails.Password = CreateMD5(finalString);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("User_Login");
+            }
+            else
+            {
+                TempData["Message"] = "Email does not exist";
+                return View("Forgot_Password_View");
+            }
+        }
+        #endregion
+
+
         #endregion
         public void ValidationMessage(string key, string alert, string value)
         {
@@ -402,19 +447,11 @@ namespace ForumClient.Controllers
 
 
 
-        public IActionResult Categories()
-        {
-            return View();
-        }
         public IActionResult Trending()
         {
             return View();
         }
-        public IActionResult New()
-        {
-            return View();
-        }
-
+        
         public IActionResult Doctor_Login()
         {
             return View();
@@ -423,9 +460,56 @@ namespace ForumClient.Controllers
         {
             return View();
         }
-        public IActionResult Create_Post()
+        public async Task<ActionResult> Categories()
         {
+            var category = await _context.Categories.ToListAsync();
+            return View(category);
+        }
+        public IActionResult Create_Topic()
+        {
+            var cate = _context.Categories;
+            ViewBag.cate = cate;
             return View();
+        }
+        public async Task<ActionResult> CreatePost(TopicModel request)
+        {
+            if (ModelState.IsValid && HttpContext.Session.GetString("userId") != null)
+            {
+                TopicModel topic = new TopicModel
+                {
+                    Categogies_name = request.Categogies_name,
+                    Contents = request.Contents,
+                    Created_at = DateTime.Now.ToString(),
+                    Title = request.Title,
+                    Username = HttpContext.Session.GetString("userId"),
+                    Status = 0
+                };
+                _context.Topic.Add(topic);
+                await _context.SaveChangesAsync();
+                TempData["Message"] = "Success";
+            }
+            else
+            {
+                TempData["Message"] = "Could not create maybe because you are not logged in";
+            }
+            return RedirectToAction("Create_Topic");
+        }
+        public async Task<ActionResult> UpdatePost(TopicModel request)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Topic.Update(request);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Create_Post");
+        }
+        public async Task<ActionResult> DeletePost(int id)
+        {
+            var category = await _context.Topic.FindAsync(id);
+            if (category == null) return RedirectToAction("Index");
+            await _context.SaveChangesAsync();
+            _context.Topic.Remove(category);
+            return RedirectToAction("Create_Post");
         }
 
         public static string CreateMD5(string input)

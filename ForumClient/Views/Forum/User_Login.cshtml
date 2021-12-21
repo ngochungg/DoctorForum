@@ -21,7 +21,7 @@
 
                     <div class="form-group">
                         <label for="loginUserName">Username</label>
-                        <input asp-for="UserName" type="text" name="UserName" class="form-control" id="loginUserName" placeholder="azyrusmax">
+                        <input asp-for="UserName" type="text" name="UserName" class="form-control" id="loginUserName" placeholder="Username">
                         <span asp-validation-for="UserName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -29,52 +29,51 @@
                         <input asp-for="Password" type="password" name="Password" class="form-control" id="loginUserPassword" placeholder="************">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
-                    @*<div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="settingsCheckBox01" name="checkbox">
-                        <label for="settingsCheckBox01">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                            <span class="tt-text">Remember me</span>
-                        </label>
+                    <div class="row">
+                        @*<div class="col">
+                                <div class="form-group">
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" id="settingsCheckBox01" name="checkbox">
+                                        <label for="settingsCheckBox01">
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            <span class="tt-text">Remember me</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="col ml-auto text-right">
+                            <a asp-action="Forgot_Password_View" class="tt-underline">Forgot Password</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col ml-auto text-right">
-                <a href="#" class="tt-underline">Forgot Password</a>
-            </div>
-        </div>*@
                     <input type="submit" class="btn btn-secondary btn-block" value="Log in" />
                     @*<p>Or login with social network</p>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <a href="#" class="btn btn-color01 btn-secondary btn-block">
-                        <i>
-                            <svg class="icon">
-                                <use xlink:href="#facebook-f-brands"></use>
-                            </svg>
-                        </i>
-                        Facebook
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <a href="#" class="btn btn-color02 btn-block">
-                        <i>
-                            <svg class="icon">
-                                <use xlink:href="#twitter-brands"></use>
-                            </svg>
-                        </i>
-                        Twitter
-                    </a>
-                </div>
-            </div>
-        </div>*@
-                    <p>Are you a Doctor? <a asp-action="Doctor_Signup" class="tt-underline">Login here</a></p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <a href="#" class="btn btn-color01 btn-secondary btn-block">
+                                        <i>
+                                            <svg class="icon">
+                                                <use xlink:href="#facebook-f-brands"></use>
+                                            </svg>
+                                        </i>
+                                        Facebook
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <a href="#" class="btn btn-color02 btn-block">
+                                        <i>
+                                            <svg class="icon">
+                                                <use xlink:href="#twitter-brands"></use>
+                                            </svg>
+                                        </i>
+                                        Twitter
+                                    </a>
+                                </div>
+                            </div>
+                        </div>*@
                     <p>Don’t have an account? <a asp-action="User_Signup" class="tt-underline">Sign up here</a></p>
                     <div class="tt-notes">
                         By Logging in, signing in or continuing, I agree to
@@ -85,4 +84,3 @@
         </div>
     </div>
 </main>
-

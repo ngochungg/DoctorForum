@@ -23,56 +23,69 @@
                             </div>
                         </div>
                     </div>
-                   
-                   
+
+
 
                     <div class="form-popup" id="myForm">
                         <form action="/action_page.php" class="form-container">
-                            <div class="col-sm-6 " style="border: solid 1px white; width: 400px; height: auto ;display: block; background-color: white; border-radius: 2%; margin-top: 50px; margin-left:100px">
+                            <div class="col-sm-6 " style="display: block">
                                 <div class="tab-content">
                                     <div class="tab-pane tt-indent-none  show active" id="tt-tab-01" role="tabpanel">
                                         <div class="tt-item">
 
-                                            <form class="form-default" method="post" enctype="multipart/form-data" asp-action="Confirmed_docter" asp-route-id="@Model.id">
-                                                
-                                                <div class="form-group">
-                                                    <label for="loginPassword">Password Old</label>
-                                                    <input required asp-for="Password" type="Password" name="Password" class="form-control" id="loginPassword">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Experience">Experience</label>
-                                                    <input asp-for="Experience" type="text" name="Experience" class="form-control" id="Experience" value="@Model.Experience">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Qualification">Qualification</label>
-                                                    <input asp-for="Qualification" type="text" name="Qualification" class="form-control" id="Qualification" value="@Model.Qualification">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Professional">Professional</label>
-                                                    <input asp-for="Professional" type="text" name="Professional" class="form-control" id="Professional" value="@Model.Professional">
-                                                </div>
 
-                                                <p><img src="~/update_images/@Model.Image" id="output" width="200" /></p>
-                                                @{
-                                                    if (@Model.Mess != null)
-                                                    {
-                                                        <span style="font-weight: bold">@Model.Mess</span>
-                                                    }
-                                                }
-                                                <input type="submit" class="btn btn-secondary btn-block" value="Update Infomation" />
-                                                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                                            </form>
 
-                                            <br /><br /><br />
+                                            <br />
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-                           
-                        </form>
-                    </div>
 
+                        </form>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-1" style="background-color:white"></div>
+                                    <div class="col-sm-10" style="background-color:white">
+                                        <form class="form-default" style="background-color: white" method="post" enctype="multipart/form-data" asp-action="Confirmed_docter" asp-route-id="@Model.id">
+                                            <div class="form-group">
+                                                <label for="loginPassword">Password Old</label>
+                                                <input required asp-for="Password" type="Password" name="Password" class="form-control" id="loginPassword">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Experience">Experience</label>
+                                                <input asp-for="Experience" type="text" name="Experience" class="form-control" id="Experience" value="@Model.Experience">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Qualification">Qualification</label>
+                                                <input asp-for="Qualification" type="text" name="Qualification" class="form-control" id="Qualification" value="@Model.Qualification">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Professional">Professional</label>
+                                                <input asp-for="Professional" type="text" name="Professional" class="form-control" id="Professional" value="@Model.Professional">
+                                            </div>
+
+                                            <p><img src="~/update_images/@Model.Image" id="output" width="200" /></p>
+                                            @{
+                                                if (@Model.Mess != null)
+                                                {
+                                                    <span style="font-weight: bold">@Model.Mess</span>
+                                                }
+                                            }
+
+                                            <div style="text-align:center">
+                                                <input type="submit" style="width:50%" class="btn btn-secondary btn-block" value="Update Infomation" />
+                                            </div>
+
+                                            <br />
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-1" style="background-color:white"></div>
+                                </div>
+                            </div>
+                            
+                    </div>
+                    <div style="color:white"> done</div>
                 </div>
 
                 

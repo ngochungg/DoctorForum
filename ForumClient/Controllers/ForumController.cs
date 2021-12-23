@@ -465,6 +465,13 @@ namespace ForumClient.Controllers
             var category = await _context.Categories.ToListAsync();
             return View(category);
         }
+
+        public async Task<IActionResult> ViewPostInCate(string name)
+        {
+            var post = await _context.Topic.Where(x => x.Categogies_name == name).ToListAsync();
+            return View(post);
+        }
+
         public IActionResult Create_Topic()
         {
             var cate = _context.Categories;

@@ -20,7 +20,8 @@
             </div>
             @foreach (var post in Model)
             {
-                <div class="tt-item tt-itemselect">
+                <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
+                    <div class="tt-item tt-itemselect" >
                     <div class="tt-col-avatar">
                         <svg class="tt-icon">
                             <use xlink:href="#icon-ava-h"></use>
@@ -53,6 +54,8 @@
                     <div class="tt-col-value hide-mobile">@post.Status</div>
                     <div class="tt-col-value hide-mobile">@post.Created_at</div>
                 </div>
+                </a>
+                
             }
 
             <div class="tt-row-btn">

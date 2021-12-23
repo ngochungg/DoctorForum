@@ -1,0 +1,109 @@
+﻿@model ForumClient.Models.ReplyModel
+
+left ViewData["Title"] = "ViewReply";
+    Layout = "~/Views/Forum/_Layout.cshtml";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<main id="tt-pageContent">
+    <div class="container">
+        <div class="tt-single-topic-list">
+             <div class="tt-item">
+                 <div class="tt-single-topic">
+                    <div class="tt-item-header">
+                        <div class="tt-item-info info-top">
+                            <div class="tt-avatar-icon">
+                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-d"></use></svg></i>
+                            </div>
+                            <div class="tt-avatar-title">
+                               <a href="#">@ViewBag.Comments.username</a>
+                            </div>
+                            <a href="#" class="tt-info-time">
+                                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@ViewBag.Comments.create_at
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tt-item-description">
+                        <p>
+                           @ViewBag.Comments.comment
+                        </p>
+                    </div>
+                    <div class="tt-item-info info-bottom">
+                        <a href="#" class="tt-icon-btn">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
+                            <span class="tt-text">671</span>
+                        </a>
+                        <a href="#" class="tt-icon-btn">
+                             <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
+                            <span class="tt-text">39</span>
+                        </a>
+                        <a href="#" class="tt-icon-btn">
+                             <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
+                            <span class="tt-text">12</span>
+                        </a>
+                        <div class="col-separator"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+             @{
+                if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-primary" role="alert">
+                      @TempData["Message"]
+                    </div>
+                }
+            }
+             <form asp-action="CreateReply">
+        <label class="form-label">Nhập nội dung</label>
+        <input asp-for="Reply" class='form-control' />
+        <input type='hidden' asp-for="comment_id" value='@ViewBag.Comments.comment_id' />
+        <button class='btn btn-primary' type='submit'>Enter</button>
+    </form>
+           @foreach(var cmt in @ViewBag.Replys)
+        {
+            <div class="tt-item" style='margin-left:5%;width:80%'>
+                 <div class="tt-single-topic">
+                    <div class="tt-item-header pt-noborder">
+                        <div class="tt-item-info info-top">
+                            <div class="tt-avatar-icon">
+                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-t"></use></svg></i>
+                            </div>
+                            <div class="tt-avatar-title">
+                               <a href="#">@cmt.username</a>
+                            </div>
+                            <a href="#" class="tt-info-time">
+                                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@cmt.create_at
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tt-item-description">
+                        @cmt.Reply
+                    </div>
+                    <div class="tt-item-info info-bottom">
+                        <a href="#" class="tt-icon-btn">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
+                            <span class="tt-text">671</span>
+                        </a>
+                        <a href="#" class="tt-icon-btn">
+                             <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
+                            <span class="tt-text">39</span>
+                        </a>
+                        <a href="#" class="tt-icon-btn">
+                             <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
+                            <span class="tt-text">12</span>
+                        </a>
+                        <div class="col-separator"></div>
+                    </div>
+                </div>
+            </div>
+        }
+            <div class="tt-row-btn">
+                <button type="button" class="btn-icon js-topiclist-showmore">
+                    <svg class="tt-icon">
+                      <use xlink:href="#icon-load_lore_icon"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>

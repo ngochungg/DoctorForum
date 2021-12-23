@@ -559,5 +559,52 @@ namespace ForumClient.Controllers
             }
             return uniqueFileName;
         }
+        public ActionResult ViewComment(int Id)
+        {
+            ViewBag.Comments = _context.Comments.Where(x => x.topic_id.Equals(Id));
+            ViewBag.Topics = _context.Topic.Find(Id);
+            return View();
+        }
+
+        public ActionResult CreateComment(CommentModel model)
+        {
+            if (ModelState.IsValid && HttpContext.Session.GetString("userId") != null)
+            {
+                model.username = HttpContext.Session.GetString("userId");
+                model.create_at = DateTime.Now.ToString();
+                _context.Comments.Add(model);
+                _context.SaveChanges();
+                TempData["Message"] = "Create Comment Success";
+            }
+            else
+            {
+                TempData["Message"] = "Could not create maybe because you are not logged in";
+            }
+            return Redirect("/Forum/ViewComment/" + model.topic_id);
+        }
+     
+        public ActionResult ViewReply(int Id)
+        {
+            ViewBag.Comments=_context.Comments.Find(Id);
+            ViewBag.Replys=_context.Replys.Where(x=>x.comment_id.Equals(Id));
+            return View();
+        }
+        public ActionResult CreateReply(ReplyModel model)
+        {
+            if (ModelState.IsValid && HttpContext.Session.GetString("userId") != null)
+            {
+                model.username = HttpContext.Session.GetString("userId");
+                model.create_at = DateTime.Now.ToString();
+                _context.Replys.Add(model);
+                _context.SaveChanges();
+                TempData["Message"] = "Create Comment Success";
+            }
+            else
+            {
+                TempData["Message"] = "Could not create maybe because you are not logged in";
+            }
+            return Redirect("/Forum/ViewReply/" + model.comment_id);
+        }
+
     }
 }

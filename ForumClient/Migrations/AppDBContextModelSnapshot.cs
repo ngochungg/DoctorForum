@@ -42,6 +42,54 @@ namespace ForumClient.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("ForumClient.Models.CommentModel", b =>
+                {
+                    b.Property<int>("comment_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("create_at")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("topic_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("comment_id");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("ForumClient.Models.ReplyModel", b =>
+                {
+                    b.Property<int>("reply_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Reply")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("comment_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("create_at")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("reply_id");
+
+                    b.ToTable("Replys");
+                });
+
             modelBuilder.Entity("ForumClient.Models.RoleModel", b =>
                 {
                     b.Property<int>("Id")

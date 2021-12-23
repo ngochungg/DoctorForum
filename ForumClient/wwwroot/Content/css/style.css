@@ -3566,10 +3566,6 @@ textarea:focus:-ms-input-placeholder {
     Default form
 */
 .form-default {
- /*   border:solid 1px ;
-    background-color:white;
-    width: 500px;
-    height:auto;*/
   position: relative;
   /* Custom Input Search */ }
   .form-default .form-group {
@@ -7919,13 +7915,15 @@ html.ie.gecko body.modal-open {
     display: none;
     bottom: 0;
     right: 15px;
+    border: 3px solid #f1f1f1;
     z-index: 9;
-    box-shadow: 0 1px 33px 5px lightgrey;
 }
 
 /* Add styles to the form container */
 .form-container {
-    
+    max-width: auto;
+    padding: 10px;
+    background-color: white;
 }
 
     /* Full-width input fields */

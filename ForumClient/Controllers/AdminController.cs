@@ -402,8 +402,8 @@ namespace ForumClient.Controllers
             }
             else
             {
-                await _context.SaveChangesAsync();
                 _context.Topic.Remove(category);
+                await _context.SaveChangesAsync();
                 TempData["Message"] = "Delete Success";
             }
             return RedirectToAction("TopicView");
@@ -457,6 +457,7 @@ namespace ForumClient.Controllers
         public async Task<ActionResult> DeleteCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
+
             if (category == null)
             {
                 TempData["Message"] = "Delete Errr";

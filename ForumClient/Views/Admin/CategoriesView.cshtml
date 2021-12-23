@@ -57,7 +57,7 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.cate_id">Edit</a> |
                 <a asp-action="DetailCategory" asp-route-id="@item.cate_id">Details</a> |
-                <a asp-action="DeleteCategory" asp-route-id="@item.cate_id">Delete</a>
+                <a asp-action="DeleteCategory" asp-route-name="@item.name">Delete</a>
             </td>
         </tr>
 }

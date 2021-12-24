@@ -45,7 +45,7 @@
                 <div class="pt-editor">
                     <h6 class="pt-title">Topic Body</h6>
                     <div class="form-group">
-                        <textarea id="NoiDung" required asp-for="Contents" class="form-control ClassEditor" rows="5" placeholder="Lets get started"></textarea>
+                        <textarea id="summernote" rows="10" required asp-for="Contents" class="form-control" placeholder="Lets get started"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-auto ml-md-auto">
@@ -58,22 +58,23 @@
 
     </div>
 </main>
-<script src="~/ckeditor/ckeditor.js"></script>
+
+<!-- include libraries(jQuery, bootstrap) -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+<script src="~/summernote/summernote-bs4.js"></script>
+<link href="~/summernote/summernote-bs4.min.css" rel="stylesheet">
 
 <script>
-
-    CKEDITOR.replace("NoiDung");
-
-</script>
-
-<script src="~/ckeditor/ckeditor.js"></script>
-
-<script>
-
-    $('.ClassEditor').each(function () {
-
-        CKEDITOR.replace($(this).attr('id'));
-
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            height: 400,   //set editable area's height
+            codemirror: { // codemirror options
+                theme: 'monokai'
+            }
+        });
     });
-
 </script>

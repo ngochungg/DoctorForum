@@ -39,7 +39,6 @@ namespace ForumClient
 
             string connectionString = Configuration.GetConnectionString("default");
             services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
-
             services.AddHttpContextAccessor();
         }
 

@@ -31,10 +31,10 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="tt-item-description">   
-                        
-                           @ViewBag.Topics.Contents
-                        
+                    <div class="tt-item-description">
+
+                        @Html.Raw(ViewBag.Topics.Contents);
+
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn">

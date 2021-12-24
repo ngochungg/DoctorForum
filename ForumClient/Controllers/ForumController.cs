@@ -566,10 +566,13 @@ namespace ForumClient.Controllers
             }
             return uniqueFileName;
         }
-        public ActionResult ViewComment(int Id)
+        public async Task<IActionResult> ViewComment(int Id)
         {
             ViewBag.Comments = _context.Comments.Where(x => x.topic_id.Equals(Id));
             ViewBag.Topics = _context.Topic.Find(Id);
+            var topic = _context.Topic.Find(Id);
+            topic.Status += 1;
+            await _context.SaveChangesAsync();
             return View();
         }
 

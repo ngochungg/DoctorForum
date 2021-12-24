@@ -24,7 +24,10 @@
                     <div class="tt-item tt-itemselect" >
                     <div class="tt-col-avatar">
                         <svg class="tt-icon">
-                            <use xlink:href="#icon-ava-h"></use>
+                            @{
+                                var str = post.Username.Substring(0, 1).ToLower();
+                            }
+                            <use xlink:href="#icon-ava-@str"></use>
                         </svg>
                     </div>
                     <div class="tt-col-description">

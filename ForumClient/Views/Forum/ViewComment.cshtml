@@ -13,7 +13,10 @@
                     <div class="tt-item-header">
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-d"></use></svg></i>
+                                @{
+                                    var str = ViewBag.Topics.Username.Substring(0, 1).ToLower();
+                                }
+                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-@str"></use></svg></i>
                             </div>
                             <div class="tt-avatar-title">
                                <a href="#">@ViewBag.Topics.Username</a>
@@ -138,7 +141,10 @@
                     <div class="tt-item-header pt-noborder">
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-t"></use></svg></i>
+                                @{
+                                    var strcmt = cmt.username.Substring(0, 1).ToLower();
+                                }
+                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-@strcmt"></use></svg></i>
                             </div>
                             <div class="tt-avatar-title">
                                <a href="#">@cmt.username</a>

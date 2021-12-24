@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ForumClient.Models
 {
-    partial class CommentModel
+    public partial class CommentModel
     {
         [Key]
         public int comment_id { get; set; }
         public int topic_id { get; set; }
-        public string usename { get; set; }
+        public string username { get; set; }
         public string comment { get; set; }
         public string create_at { get; set; }
     }

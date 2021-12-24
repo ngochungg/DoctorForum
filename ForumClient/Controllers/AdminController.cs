@@ -402,8 +402,8 @@ namespace ForumClient.Controllers
             }
             else
             {
-                await _context.SaveChangesAsync();
                 _context.Topic.Remove(category);
+                await _context.SaveChangesAsync();
                 TempData["Message"] = "Delete Success";
             }
             return RedirectToAction("TopicView");
@@ -454,9 +454,9 @@ namespace ForumClient.Controllers
             }
             return RedirectToAction("CategoriesView");
         }
-        public async Task<ActionResult> DeleteCategory(int id)
+        public async Task<ActionResult> DeleteCategory(string name)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _context.Categories.SingleOrDefaultAsync(x=>x.name == name);
             if (category == null)
             {
                 TempData["Message"] = "Delete Errr";
@@ -467,7 +467,15 @@ namespace ForumClient.Controllers
                 await _context.SaveChangesAsync();
                 TempData["Message"] = "Delete Success";
             }
-
+            var topics = await _context.Topic.ToListAsync();
+            foreach (var topic in topics)
+            {
+                if (topic.Categogies_name == name)
+                {
+                    _context.Topic.Remove(topic);
+                    await _context.SaveChangesAsync();
+                }
+            }
             return RedirectToAction("CategoriesView");
         }
         public async Task<ActionResult> DetailCategory(int id)

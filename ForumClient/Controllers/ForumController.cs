@@ -33,6 +33,17 @@ namespace ForumClient.Controllers
         public async Task<IActionResult> Index()
         {
             var post = await _context.Topic.ToListAsync();
+            //Count User
+            var UserCount = await _context.User.ToListAsync();
+            var UCount = UserCount.Count().ToString();
+            HttpContext.Session.SetString("UCount", UCount);
+
+            int UserStatus = 0;
+            foreach (var Item in UserCount)
+            {
+                UserStatus += Item.Status;
+            }
+            HttpContext.Session.SetString("UserStatus", UserStatus.ToString());
             return View(post);
         }
 

@@ -267,6 +267,7 @@ namespace ForumClient.Controllers
                 if (login_id == id)
                 {
                     UserModel MyUser = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+                    ViewBag.Posts = _context.Topic.Where(x => x.Username.Equals(MyUser.UserName));
                     return View("User_View", MyUser);
                 }
                 return RedirectToAction("Index");
@@ -299,6 +300,7 @@ namespace ForumClient.Controllers
                 userdetails.Status += 1;
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("userId", userdetails.Name);
+                HttpContext.Session.SetString("Username_Login", userdetails.UserName);
                 HttpContext.Session.SetString("Role", userdetails.RoleId);
                 var is_login = userdetails.Id.ToString();
                 HttpContext.Response.Cookies.Append("is_Login", is_login);
@@ -499,7 +501,7 @@ namespace ForumClient.Controllers
                     Contents = request.Contents,
                     Created_at = DateTime.Now.ToString(),
                     Title = request.Title,
-                    Username = HttpContext.Session.GetString("userId"),
+                    Username = HttpContext.Session.GetString("Username_Login"),
                     Status = 0
                 };
                 _context.Topic.Add(topic);

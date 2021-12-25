@@ -629,5 +629,11 @@ namespace ForumClient.Controllers
             return Redirect("/Forum/ViewReply/" + model.comment_id);
         }
 
+        public IActionResult ViewInfomation(string Id)
+        {
+            var Userss = _context.User.SingleOrDefault(x => x.UserName.Equals(Id));
+            return View(Userss);
+        }
+
     }
 }

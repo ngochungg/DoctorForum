@@ -19,18 +19,18 @@
                                 <i class="tt-icon"><svg><use xlink:href="#icon-ava-@str"></use></svg></i>
                             </div>
                             <div class="tt-avatar-title">
-                               <a href="#">@ViewBag.Topics.Username</a>
+                               <a asp-action="ViewInfomation" asp-route-id="@ViewBag.Topics.Username" target="_blank">@ViewBag.Topics.Username</a>
                             </div>
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@ViewBag.Topics.Created_at
                             </a>
                         </div>
                         <h3 class="tt-item-title">
-                            <a href="#">@ViewBag.Topics.Title</a>
+                           @ViewBag.Topics.Title
                         </h3>
                         <div class="tt-item-tag">
                             <ul class="tt-list-badge">
-                                <li><a href="#"><span class="tt-color03 tt-badge">@ViewBag.Topics.Categogies_name</span></a></li>
+                                <li><span class="tt-color03 tt-badge">@ViewBag.Topics.Categogies_name</span></li>
                             </ul>
                         </div>
                     </div>

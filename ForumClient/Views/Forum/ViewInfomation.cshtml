@@ -1,0 +1,36 @@
+﻿@model ForumClient.Models.UserModel
+    @{
+        ViewData["Title"] = "ViewInfomation";
+        Layout = "~/Views/Forum/_Layout.cshtml";
+    }
+
+    <main id="tt-pageContent" class="tt-offset-small">
+        <div class="tt-wrapper-section">
+            <div class="container">
+                <div class="tt-user-header">
+                    <div class="tt-col-avatar">
+                        @*<img src="~/update_images/@Model.Image" alt="Avatar" id="avatarr">*@
+                    </div>
+                    <div class="tt-col-title">
+                        <div class="tt-title">
+                            <a href="#"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            @{ if (Model.Share == 0)
+                {
+            <div>@Model.Name</div>
+            <div>@Model.Mobile</div>
+            }
+                    else
+                    {
+                        <div>private</div>
+                    }
+                }
+        </div>
+
+    </main>
+

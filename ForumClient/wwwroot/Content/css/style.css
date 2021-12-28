@@ -7999,11 +7999,19 @@ div.btnbg {
     margin-bottom:20px;
 
 }
-.layout_footer div a:hover {
+.layout_footer div:hover  {
     color: dodgerblue;
     font-size: 26px;
 }
 .foot-title:hover{
     color: white;
-    font-size: 25px;
+    font-size: 30px;
+}
+h3.m_title {
+    text-transform: capitalize;
+    display: block;
+}
+
+h3.m_title:first-letter {
+    text-transform: uppercase;
 }

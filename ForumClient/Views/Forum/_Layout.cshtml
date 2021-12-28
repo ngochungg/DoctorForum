@@ -187,11 +187,11 @@
                                 <div class="tt-user-info d-flex justify-content-center">
                                     @if (Image2 == true)
                                     {
-                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="avatarr"></a>
+                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="avatarr" style=""></a>
                                     }
                                     else
                                     {
-                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="~/update_images/@Image" alt="Avatar" id="avatarr" style="margin-top:13px"></a>
+                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="~/update_images/@Image" alt="Avatar" id="avatarr" style="margin-top:0px"></a>
                                     }
                                     <a asp-action="User_View" asp-route-id="@Uid">
                                         <div style="margin-top: 13px;">
@@ -210,7 +210,7 @@
                                     }
                                     else
                                     {
-                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="~/update_images/@Image" alt="Avatar" id="avatarr" style="margin-top:13px"></a>
+                                        <a asp-action="User_View" asp-route-id="@Uid"><img src="~/update_images/@Image" alt="Avatar" id="avatarr" style="margin-top:0px"></a>
                                     }
                                     <a asp-action="User_View" asp-route-id="@Uid">
                                         <div style="margin-top: 13px;">
@@ -665,34 +665,39 @@
         @RenderBody()
     </div>
 
-    <div class="container-fluid ">
-        <div class="row" style="background-color:darkgray; ">
-            <div class="col-sm-3" style="margin-left:160px; margin-top: 30px; ">
-                @{ 
-                    var UCount = Context.Session.GetString("UCount");
-                    var UserStatus = Context.Session.GetString("UserStatus");
-                }
-                <div>Số User: @UCount/ Số Lượt đăng nhập: @UserStatus </div>
-                <div><a asp-action="Categories" style=" font-size: 20px;" class="foot-title">Categories</a></div><br />
-                <div><a asp-action="Trending" style=" font-size: 20px;" class="foot-title">Trending</a></div><br />
-                <div><a asp-action="Create_Topic" style=" font-size: 20px;" class="foot-title">News</a></div><br />
+
+</body>
+<div class="container-fluid " style="margin-top:150px">
+    <div class="row" style="background-color:darkgray; ">
+        <div class="col-sm-2" style="margin-left:160px; margin-top: 30px; ">
+            @{
+                var UCount = Context.Session.GetString("UCount");
+                var UserStatus = Context.Session.GetString("UserStatus");
+            }
+
+            <div><a asp-action="Categories" style=" font-size: 20px; text-decoration: none;" class="foot-title">Categories</a></div><br />
+            <div><a asp-action="Trending" style=" font-size: 20px; text-decoration: none;" class="foot-title">Trending</a></div><br />
+            <div><a asp-action="Create_Topic" style=" font-size: 20px; text-decoration: none;" class="foot-title">News</a></div><br />
 
 
-            </div>
-            <div class="col-sm-3" style="margin-top:30px; ">
-                <div><a asp-action="User_Login" style=" font-size: 20px;" class="foot-title" >Login</a></div><br />
-                <div><a asp-action="USer_Signup" style=" font-size: 20px;"  class="foot-title">Sign up</a></div><br />
-            </div>
+        </div>
+        <div class="col-sm-2" style="margin-top:30px; ">
+            <div><a asp-action="User_Login" style=" font-size: 20px; text-decoration: none;" class="foot-title">Login</a></div><br />
+            <div><a asp-action="USer_Signup" style=" font-size: 20px; text-decoration: none;" class="foot-title">Sign up</a></div><br />
+        </div>
+        <div class="col-sm-2" style=" margin-top: 30px; ">
 
-            <div class="col-sm-4" style="">
-                <div>
-                    <img src="~/Content/images/logo.png" alt="" style="width:150px; margin-top:30px;margin-bottom:15px;float:right">
-                </div>
-            </div>
-            <div class="col-sm-12" style="text-align:center">
-                Create by H-B-N-L
+            <div style=" font-size: 20px; cursor: -webkit-zoom-in" class="foot-title">Users : @UCount</div><br />
+            <div style=" font-size: 20px;  cursor: -webkit-zoom-in" class="foot-title">Logins : @UserStatus </div>
+        </div>
+        <div class="col-sm-4" style="">
+            <div>
+                <img src="~/Content/images/logo.png" alt="" style="width:150px; margin-top:30px;margin-bottom:15px;float:right">
             </div>
         </div>
+        <div class="col-sm-12" style="text-align:center">
+            Create by H-B-N-L
+        </div>
     </div>
-</body>
+</div>
 </html>

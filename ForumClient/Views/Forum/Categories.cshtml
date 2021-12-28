@@ -30,15 +30,15 @@
             <div class="row">
                 @foreach (var item in Model)
                 {
-                    <div class="col-md-6 col-lg-4">
-                        <div class="tt-item">
+                    <div class="col-md-6 col-lg-4" >
+                        <div class="tt-item" style="border-radius: 3%;">
                             <div class="tt-item-header">
                                 <ul class="tt-list-badge">
-                                    <li><a asp-action="ViewPostInCate" asp-for="name" asp-route-name="@item.name"><span class="tt-color01 tt-badge">@item.name</span></a></li>
+                                    <li><a asp-action="ViewPostInCate" asp-for="name" asp-route-name="@item.name"><span class="tt-color01 tt-badge" style="font-size: 20px;">@item.name</span></a></li>
                                 </ul>
                                 <h6 class="tt-title"><a href=""></a></h6>
                             </div>
-                            <div class="tt-item-layout">
+                            <div class="tt-item-layout" >
                                 <div class="innerwrapper">
                                     @item.description
                                 </div>

@@ -21,7 +21,7 @@
             @foreach (var post in Model)
             {
                 <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
-                    <div class="tt-item tt-itemselect" >
+                    <div class="tt-item tt-itemselect" style="word-wrap: break-word;" >
                     <div class="tt-col-avatar">
                         <svg class="tt-icon">
                             @{

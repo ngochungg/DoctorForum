@@ -90,9 +90,9 @@
                             </svg>
                         </button>
                         <!-- /toggle -->
-                        <form class="search-wrapper">
+                        <form method="get" asp-action="Search" class="search-wrapper">
                             <div class="search-form">
-                                <input type="text" class="tt-search__input" placeholder="Search">
+                                <input type="text" class="tt-search__input" placeholder="Search" name="name" id="name">
                                 <button class="tt-search__btn" type="submit">
                                     <svg class="tt-icon">
                                         <use xlink:href="#icon-search"></use>
@@ -104,7 +104,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <div class="search-results">
+                            @*<div class="search-results">
                                 <div class="tt-search-scroll">
                                     <ul>
                                         <li>
@@ -158,7 +158,7 @@
                                     </ul>
                                 </div>
                                 <button type="button" class="tt-view-all" data-toggle="modal" data-target="#modalAdvancedSearch">Advanced Search</button>
-                            </div>
+                            </div>*@
                         </form>
                     </div>
                     <!-- /tt-search -->

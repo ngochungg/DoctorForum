@@ -458,21 +458,12 @@ namespace ForumClient.Controllers
 
         }
 
-
-
         public IActionResult Trending()
         {
-            return View();
+            ViewBag.Trending = _context.Topic.OrderByDescending(x => x.Status).ToList();
+            return View() ;
         }
         
-        public IActionResult Doctor_Login()
-        {
-            return View();
-        }
-        public IActionResult Doctor_Signup()
-        {
-            return View();
-        }
         public async Task<ActionResult> Categories()
         {
             var category = await _context.Categories.ToListAsync();
@@ -593,7 +584,7 @@ namespace ForumClient.Controllers
         {
             if (ModelState.IsValid && HttpContext.Session.GetString("userId") != null)
             {
-                model.username = HttpContext.Session.GetString("userId");
+                model.username = HttpContext.Session.GetString("Username_Login");
                 model.create_at = DateTime.Now.ToString();
                 _context.Comments.Add(model);
                 _context.SaveChanges();
@@ -635,5 +626,15 @@ namespace ForumClient.Controllers
             return View(Userss);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Search(string name)
+        {
+            var customers = await _context.Topic.Where(c => c.Title.Contains(name)).ToListAsync();
+            if(customers.Count == 0)
+            {
+                ViewBag.Search = "There aren’t any search results";
+            }
+            return View(customers);
+        }
     }
 }

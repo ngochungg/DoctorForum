@@ -20,7 +20,7 @@
             @foreach (var post in Model)
             {
                 <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
-                    <div class="tt-item tt-itemselect" >
+                    <div class="tt-item tt-itemselect" style="word-wrap: break-word;" >
                     <div class="tt-col-avatar">
                         <svg class="tt-icon">
                             @{
@@ -29,7 +29,7 @@
                             <use xlink:href="#icon-ava-@str"></use>
                         </svg>
                     </div>
-                    <div class="tt-col-description">
+                    <div class="tt-col-description" style="word-wrap:break-word">
                         <h6 class="tt-title">
                             <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
                                 <svg class="tt-icon">

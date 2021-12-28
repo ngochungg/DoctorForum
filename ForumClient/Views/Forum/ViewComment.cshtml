@@ -8,48 +8,61 @@
 <main id="tt-pageContent">
     <div class="container">
         <div class="tt-single-topic-list">
-             <div class="tt-item">
-                 <div class="tt-single-topic">
+            <div class="tt-item">
+                <div class="tt-single-topic">
                     <div class="tt-item-header">
                         <div class="tt-item-info info-top">
-                            <div class="tt-avatar-icon">
-                                @{
-                                    var str = ViewBag.Topics.Username.Substring(0, 1).ToLower();
-                                }
-                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-@str"></use></svg></i>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-10" style="margin-top: -50px;word-wrap:break-word">
+                                        <div class="tt-item-tag">
+                                            <ul class="tt-list-badge" style="margin-bottom:20px">
+                                                <li><span class="tt-color03 tt-badge">@ViewBag.Topics.Categogies_name</span></li>
+                                            </ul>
+                                            <h3 class="m_title" style="text-transform:uppercase; font-size: 30px;">
+                                                @ViewBag.Topics.Title
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2" style="text-align:center">
+                                        <div class="tt-avatar-icon">
+                                            @{
+                                                var str = ViewBag.Topics.Username.Substring(0, 1).ToLower();
+                                            }
+                                            <i class="tt-icon"><svg style="margin-left: 30px; margin-top: -150px;"><use xlink:href="#icon-ava-@str"></use></svg></i>
+                                        </div>
+                                        <div class="tt-avatar-title">
+                                            <a asp-action="ViewInfomation" asp-route-id="@ViewBag.Topics.Username" target="_blank">@ViewBag.Topics.Username</a>
+                                        </div>
+                                        <a href="#" class="tt-info-time" style="text-decoration:none">
+                                            <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@ViewBag.Topics.Created_at
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tt-avatar-title">
-                               <a asp-action="ViewInfomation" asp-route-id="@ViewBag.Topics.Username" target="_blank">@ViewBag.Topics.Username</a>
-                            </div>
-                            <a href="#" class="tt-info-time">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@ViewBag.Topics.Created_at
-                            </a>
+
                         </div>
-                        <h3 class="tt-item-title">
-                           @ViewBag.Topics.Title
-                        </h3>
-                        <div class="tt-item-tag">
-                            <ul class="tt-list-badge">
-                                <li><span class="tt-color03 tt-badge">@ViewBag.Topics.Categogies_name</span></li>
-                            </ul>
+
+
+                    </div>
+                    <div class="tt-item-description" >
+
+                        <div class="container" style="word-wrap: break-word; text-indent: 30px; text-transform: initial; ">
+                            @Html.Raw(ViewBag.Topics.Contents);
                         </div>
                     </div>
-                    <div class="tt-item-description">
-
-                        @Html.Raw(ViewBag.Topics.Contents);
-
-                    </div>
+                    <hr  style=" width: 60%; margin-left: 300px; margin-bottom: -50px;"/>
                     <div class="tt-item-info info-bottom">
-                        <a href="#" class="tt-icon-btn">
+                        <a href="#" class="tt-icon-btn" style="text-decoration: none;">
                             <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
                             <span class="tt-text">671</span>
                         </a>
-                        <a href="#" class="tt-icon-btn">
-                             <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
+                        <a href="#" class="tt-icon-btn" style="text-decoration: none;">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
                             <span class="tt-text">39</span>
                         </a>
-                        <a href="#" class="tt-icon-btn">
-                             <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
+                        <a href="#" class="tt-icon-btn" style="text-decoration: none;">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
                             <span class="tt-text">12</span>
                         </a>
                         <div class="col-separator"></div>
@@ -60,84 +73,42 @@
                             <i class="tt-icon"><svg><use xlink:href="#icon-flag"></use></svg></i>
                         </a>
                         <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                             <i class="tt-icon"><svg><use xlink:href="#icon-reply"></use></svg></i>
+                            <i class="tt-icon"><svg><use xlink:href="#icon-reply"></use></svg></i>
                         </a>
                     </div>
                 </div>
             </div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-info-box">
-                    <h6 class="tt-title">Thread Status</h6>
-                    <div class="tt-row-icon">
-                        <div class="tt-item">
-                            <a href="#" class="tt-icon-btn tt-position-bottom">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-reply"></use></svg></i>
-                                <span class="tt-text">283</span>
-                            </a>
-                        </div>
-                        <div class="tt-item">
-                            <a href="#" class="tt-icon-btn tt-position-bottom">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i>
-                                <span class="tt-text">10.5k</span>
-                            </a>
-                        </div>
-                        <div class="tt-item">
-                            <a href="#" class="tt-icon-btn tt-position-bottom">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-user"></use></svg></i>
-                                <span class="tt-text">168</span>
-                            </a>
-                        </div>
-                        <div class="tt-item">
-                            <a href="#" class="tt-icon-btn tt-position-bottom">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
-                                <span class="tt-text">2.4k</span>
-                            </a>
-                        </div>
-                        <div class="tt-item">
-                            <a href="#" class="tt-icon-btn tt-position-bottom">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
-                                <span class="tt-text">951</span>
-                            </a>
-                        </div>
-                        <div class="tt-item">
-                              <a href="#" class="tt-icon-btn tt-position-bottom">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-share"></use></svg></i>
-                                <span class="tt-text">32</span>
-                            </a>
-                        </div>
+        </div>
+      
+        @{
+            if (TempData["Message"] != null)
+            {
+                <div class="alert alert-primary" role="alert">
+                    @TempData["Message"]
+                </div>
+            }
+        }
+        <form asp-action="CreateComment">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2" style="margin-left: 30px;">
+                        <button class='btn btn-primary' type='submit'>Add Comment</button>
                     </div>
-                    <hr>
-
-                    <div class="row-object-inline form-default">
-                        <select class="tt-select form-control">
-                            <option value="Recent">Recent</option>
-                            <option value="Most Liked">Most Liked</option>
-                            <option value="Longest">Longest</option>
-                            <option value="Shortest">Shortest</option>
-                            <option value="Accepted Answer">Accepted Answer</option>
-                        </select>
+                    <div class="col-sm-9" style="margin-left: -70px; /* position: absolute; */ width: 85%;">
+                        <input asp-for="comment" class='form-control' placeholder="Comment" />
+                        <input type='hidden' asp-for="topic_id" value='@ViewBag.Topics.Topic_Id' placeholder="Comment" />
+                        
                     </div>
+                    
                 </div>
             </div>
-             @{
-                if (TempData["Message"] != null)
-                {
-                    <div class="alert alert-primary" role="alert">
-                      @TempData["Message"]
-                    </div>
-                }
-            }
-             <form asp-action="CreateComment">
-        <label class="form-label">Nhập nội dung</label>
-        <input asp-for="comment" class='form-control' />
-        <input type='hidden' asp-for="topic_id" value='@ViewBag.Topics.Topic_Id' />
-        <button class='btn btn-primary' type='submit'>Add new Comment</button>
-    </form>
-           @foreach(var cmt in @ViewBag.Comments)
+            
+            
+        </form>
+        @foreach (var cmt in @ViewBag.Comments)
         {
             <div class="tt-item">
-                 <div class="tt-single-topic">
+                <div class="tt-single-topic">
                     <div class="tt-item-header pt-noborder">
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
@@ -146,45 +117,37 @@
                                 }
                                 <i class="tt-icon"><svg><use xlink:href="#icon-ava-@strcmt"></use></svg></i>
                             </div>
-                            <div class="tt-avatar-title">
-                               <a href="#">@cmt.username</a>
+                            <div class="tt-avatar-title" style=" margin-left: -30px;">
+                                <a href="#">@cmt.username</a>
                             </div>
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@cmt.create_at
                             </a>
                         </div>
                     </div>
-                    <div class="tt-item-description">
+                    <div class="tt-item-description" style=" margin-left: -30px;">
                         @cmt.comment
                     </div>
-                    <div class="tt-item-info info-bottom">
-                        <a href="#" class="tt-icon-btn">
+                    <div class="tt-item-info info-bottom" style="margin-left: -30px; margin-top: 5px;">
+                        <a href="#" class="tt-icon-btn" style="text-decoration: none;">
                             <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
                             <span class="tt-text">671</span>
                         </a>
-                        <a href="#" class="tt-icon-btn">
-                             <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
+                        <a href="#" class="tt-icon-btn" style="text-decoration: none;">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
                             <span class="tt-text">39</span>
                         </a>
-                        <a href="#" class="tt-icon-btn">
-                             <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
+                        <a href="#" class="tt-icon-btn" style="text-decoration: none;">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
                             <span class="tt-text">12</span>
                         </a>
-                        <div class="col-separator"></div>
-                        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-share"></use></svg></i>
-                        </a>
-                        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-flag"></use></svg></i>
-                        </a>
-                        <a asp-action='ViewReply' asp-route-id="@cmt.comment_id" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                             <i class="tt-icon"><svg><use xlink:href="#icon-reply"></use></svg></i>
-                        </a>
+                     
+                        
                     </div>
                 </div>
             </div>
         }
-                     <div class="tt-wrapper-inner">
+        <div class="tt-wrapper-inner">
             <h4 class="tt-title-separator"><span>You’ve reached the end of replies</span></h4>
         </div>
         <div class="tt-topic-list tt-ofset-30">
@@ -196,13 +159,13 @@
                         <div class="search-form">
                             <input type="text" class="tt-search__input" placeholder="Search for topics">
                             <button class="tt-search__btn" type="submit">
-                               <svg class="tt-icon">
-                                  <use xlink:href="#icon-search"></use>
+                                <svg class="tt-icon">
+                                    <use xlink:href="#icon-search"></use>
                                 </svg>
                             </button>
-                             <button class="tt-search__close">
-                               <svg class="tt-icon">
-                                  <use xlink:href="#icon-cancel"></use>
+                            <button class="tt-search__close">
+                                <svg class="tt-icon">
+                                    <use xlink:href="#icon-cancel"></use>
                                 </svg>
                             </button>
                         </div>
@@ -221,13 +184,15 @@
             <div class="tt-item">
                 <div class="tt-col-avatar">
                     <svg class="tt-icon">
-                      <use xlink:href="#icon-ava-n"></use>
+                        <use xlink:href="#icon-ava-n"></use>
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                        Does Envato act against the authors of Envato markets?
-                    </a></h6>
+                    <h6 class="tt-title">
+                        <a href="#">
+                            Does Envato act against the authors of Envato markets?
+                        </a>
+                    </h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-11">
                             <ul class="tt-list-badge">
@@ -235,7 +200,7 @@
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
-                           <div class="tt-value">1d</div>
+                            <div class="tt-value">1d</div>
                         </div>
                     </div>
                 </div>
@@ -247,17 +212,19 @@
             </div>
             <div class="tt-item">
                 <div class="tt-col-avatar">
-                   <svg class="tt-icon">
-                      <use xlink:href="#icon-ava-h"></use>
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-ava-h"></use>
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                        <svg class="tt-icon">
-                          <use xlink:href="#icon-locked"></use>
-                        </svg>
-                        We Want to Hear From You! What Would You Like?
-                    </a></h6>
+                    <h6 class="tt-title">
+                        <a href="#">
+                            <svg class="tt-icon">
+                                <use xlink:href="#icon-locked"></use>
+                            </svg>
+                            We Want to Hear From You! What Would You Like?
+                        </a>
+                    </h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-11">
                             <ul class="tt-list-badge">
@@ -265,7 +232,7 @@
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
-                           <div class="tt-value">2d</div>
+                            <div class="tt-value">2d</div>
                         </div>
                     </div>
                 </div>
@@ -277,14 +244,16 @@
             </div>
             <div class="tt-item">
                 <div class="tt-col-avatar">
-                   <svg class="tt-icon">
-                      <use xlink:href="#icon-ava-j"></use>
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-ava-j"></use>
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                       Seeking partner backend developer
-                    </a></h6>
+                    <h6 class="tt-title">
+                        <a href="#">
+                            Seeking partner backend developer
+                        </a>
+                    </h6>
                     <div class="row align-items-center no-gutters">
                         <div class="col-11">
                             <ul class="tt-list-badge">
@@ -294,7 +263,7 @@
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
-                           <div class="tt-value">2d</div>
+                            <div class="tt-value">2d</div>
                         </div>
                     </div>
                 </div>
@@ -306,14 +275,16 @@
             </div>
             <div class="tt-item">
                 <div class="tt-col-avatar">
-                   <svg class="tt-icon">
-                      <use xlink:href="#icon-ava-t"></use>
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-ava-t"></use>
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                        Cannot customize my intro
-                    </a></h6>
+                    <h6 class="tt-title">
+                        <a href="#">
+                            Cannot customize my intro
+                        </a>
+                    </h6>
                     <div class="row align-items-center no-gutters">
                         <div class="col-11">
                             <ul class="tt-list-badge">
@@ -323,7 +294,7 @@
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
-                           <div class="tt-value">2d</div>
+                            <div class="tt-value">2d</div>
                         </div>
                     </div>
                 </div>
@@ -335,17 +306,19 @@
             </div>
             <div class="tt-item">
                 <div class="tt-col-avatar">
-                   <svg class="tt-icon">
-                      <use xlink:href="#icon-ava-k"></use>
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-ava-k"></use>
                     </svg>
                 </div>
                 <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                        <svg class="tt-icon">
-                          <use xlink:href="#icon-verified"></use>
-                        </svg>
-                        Microsoft Word and Power Point
-                    </a></h6>
+                    <h6 class="tt-title">
+                        <a href="#">
+                            <svg class="tt-icon">
+                                <use xlink:href="#icon-verified"></use>
+                            </svg>
+                            Microsoft Word and Power Point
+                        </a>
+                    </h6>
                     <div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-11">
                             <ul class="tt-list-badge">
@@ -353,7 +326,7 @@
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
-                           <div class="tt-value">3d</div>
+                            <div class="tt-value">3d</div>
                         </div>
                     </div>
                 </div>
@@ -366,7 +339,7 @@
             <div class="tt-row-btn">
                 <button type="button" class="btn-icon js-topiclist-showmore">
                     <svg class="tt-icon">
-                      <use xlink:href="#icon-load_lore_icon"></use>
+                        <use xlink:href="#icon-load_lore_icon"></use>
                     </svg>
                 </button>
             </div>

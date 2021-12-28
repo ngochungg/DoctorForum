@@ -20,16 +20,15 @@
             </div>
         </div>
         <div class="container">
-            @{ if (Model.Share == 0)
+            @if (Model.Share == 0)
                 {
             <div>@Model.Name</div>
             <div>@Model.Mobile</div>
             }
-                    else
-                    {
-                        <div>private</div>
-                    }
-                }
+            else
+            {
+                <div>private</div>
+            }
         </div>
 
     </main>

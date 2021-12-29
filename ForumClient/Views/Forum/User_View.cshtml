@@ -95,7 +95,11 @@
                                     <div class="col-sm-1"></div>
                                     <div class="col-sm-5">
                                         <br /><br />
-                                        <div style="font-size:40px; color:white;margin-left:-60px"> Hello @Model.Name ! </div>
+                                        <div style="font-size:40px; color:white;margin-left:-60px"> Hello @Model.Name ! 
+                                            <button class="btn btn-success" style="background-color:#da6ef5;float:right;">
+                                                <a asp-action="Change_Password_View" asp-route-id="@Model.Id" style="color: white">pulic</a><br />
+                                            </button>
+                                        </div>
                                         <br /><br />
                                         <div style="font-size:20px; color:white">
                                             Email: @Model.Email
@@ -128,7 +132,7 @@
                         </div>
                     </div>
                     <div class="tt-item">
-
+                        x
                     </div>
                 </div>
 
@@ -138,6 +142,7 @@
                             <div class="tt-col-topic">Topic</div>
                             <div class="tt-col-value-large hide-mobile">Category</div>
                             <div class="tt-col-value-large hide-mobile">View</div>
+                            <div class="tt-col-value-large hide-mobile">Delete</div>
                             <div class="tt-col-value-large hide-mobile">Create at</div>
                         </div>
                         @foreach (var post in ViewBag.Posts)

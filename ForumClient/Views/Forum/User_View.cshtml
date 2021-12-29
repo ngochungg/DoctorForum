@@ -159,43 +159,46 @@
                         </div>
                         @foreach (var post in ViewBag.Posts)
                         {
-                            <div class="tt-item">
-                                <div class="tt-col-avatar">
-                                    <svg class="tt-icon">
-                                        @{
-                                            var strP = post.Username.Substring(0, 1).ToLower();
-                                        }
-                                        <use xlink:href="#icon-ava-@strP"></use>
-                                    </svg>
-                                </div>
-                                <div class="tt-col-description">
-                                    <h6 class="tt-title">
-                                        <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
-                                            @post.Title
-                                        </a>
-                                    </h6>
-                                    <div class="row align-items-center no-gutters hide-desktope">
-                                        <div class="col-9">
-                                            <ul class="tt-list-badge">
-                                                <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">@post.Categogies_name</span></a></li>
-                                            </ul>
-                                            <div>
-                                                @post.Status
-                                            </div>
-                                        </div>
-                                        <div class="col-3 ml-auto show-mobile">
-                                            <div class="tt-value">@post.Created_at</div>
-                                        </div>
+                    <div class="tt-item">
+                        <div class="tt-col-avatar">
+                            <svg class="tt-icon">
+                                @{
+                                    var strP = post.Username.Substring(0, 1).ToLower();
+                                }
+                                <use xlink:href="#icon-ava-@strP"></use>
+                            </svg>
+                        </div>
+                        <div class="tt-col-description">
+                            <h6 class="tt-title">
+                                <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
+                                    @post.Title
+                                </a>
+                            </h6>
+                            <div class="row align-items-center no-gutters hide-desktope">
+                                <div class="col-9">
+                                    <ul class="tt-list-badge">
+                                        <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">@post.Categogies_name</span></a></li>
+                                    </ul>
+                                    <div>
+                                        @post.Status
                                     </div>
                                 </div>
-                                <div class="tt-col-category tt-col-value-large hide-mobile"><span class="tt-color06 tt-badge">movies</span></div>
-                                <div class="tt-col-value-large hide-mobile">
-                                    <a href="#" class="tt-btn-icon">
-                                        <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
-                                    </a>
+                                <div class="col-3 ml-auto show-mobile">
+                                    <div class="tt-value">@post.Created_at</div>
                                 </div>
-                                <div class="tt-col-value-large hide-mobile">5 Jan,19</div>
                             </div>
+                        </div>
+                        <div class="tt-col-category tt-col-value-large hide-mobile"><span class="tt-color06 tt-badge">movies</span></div>
+                        <div class="tt-col-value-large hide-mobile">
+                            <a href="#" class="tt-btn-icon">
+                                <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
+                            </a>
+                        </div>
+                        <div class="tt-col-value-large hide-mobile">
+                            longem
+                        </div>
+                        <div class="tt-col-value-large hide-mobile">5 Jan,19</div>
+                    </div>
                         }
                         </div>
                 </div>

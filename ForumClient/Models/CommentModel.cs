@@ -13,6 +13,7 @@ namespace ForumClient.Models
         public int topic_id { get; set; }
         public string username { get; set; }
         public string comment { get; set; }
+        public int countReply { get; set; }
         public string create_at { get; set; }
     }
 }

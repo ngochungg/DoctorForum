@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumClient.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20211227063137_db")]
+    [Migration("20211229125151_db")]
     partial class db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,6 +53,9 @@ namespace ForumClient.Migrations
 
                     b.Property<string>("comment")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("countReply")
+                        .HasColumnType("int");
 
                     b.Property<string>("create_at")
                         .HasColumnType("nvarchar(max)");

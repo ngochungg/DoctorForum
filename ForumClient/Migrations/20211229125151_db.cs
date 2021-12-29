@@ -31,6 +31,7 @@ namespace ForumClient.Migrations
                     topic_id = table.Column<int>(type: "int", nullable: false),
                     username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    countReply = table.Column<int>(type: "int", nullable: false),
                     create_at = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

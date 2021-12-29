@@ -22,6 +22,12 @@
                 }
             }
 <div class="content container-fluid">
+    <form method="get" asp-action="Search" class="search-wrapper">
+        <div class="search-form">
+            <input type="text" class="tt-search__input" placeholder="Search" name="name" id="name">
+            <button value="submit">Search</button>
+        </div>
+    </form>
     <table class="table">
         <thead>
             <tr>
@@ -63,8 +69,7 @@
                         @Html.DisplayFor(modelItem => item.Created_at)
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Topic_Id">Details</a> |
-                        <a asp-action="TopicDelete" asp-route-name="@item.Topic_Id">Delete</a>
+                        <a asp-action="TopicDelete" asp-route-id="@item.Topic_Id">Delete</a>
                     </td>
                 </tr>
             }
@@ -83,7 +88,7 @@
             </div>
         </div>
     </div>
-
+    </div>
     <!-- End Footer -->
 </main>
 <!-- ========== END MAIN CONTENT ========== -->

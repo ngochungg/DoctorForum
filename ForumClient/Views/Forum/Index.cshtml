@@ -10,13 +10,8 @@
             <div class="tt-list-header">
                 <div class="tt-col-topic">Topic</div>
                 <div class="tt-col-category">Category</div>
-                <div class="tt-col-value hide-mobile">Likes</div>
-                <div class="tt-col-value hide-mobile">Replies</div>
                 <div class="tt-col-value hide-mobile">Views</div>
                 <div class="tt-col-value">Activity</div>
-            </div>
-            <div class="tt-topic-alert tt-alert-default" role="alert">
-                <a href="#" target="_blank">4 new posts</a> are added recently, click here to load them.
             </div>
             @foreach (var post in Model)
             {
@@ -49,8 +44,6 @@
                         </div>
                     </div>
                     <div class="tt-col-category"><span class="tt-color01 tt-badge">@post.Categogies_name</span></div>
-                    <div class="tt-col-value hide-mobile">985</div>
-                    <div class="tt-col-value tt-color-select hide-mobile">502</div>
                     <div class="tt-col-value hide-mobile">@post.Status</div>
                     <div class="tt-col-value hide-mobile">@post.Created_at</div>
                 </div>

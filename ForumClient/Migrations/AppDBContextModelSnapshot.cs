@@ -52,6 +52,9 @@ namespace ForumClient.Migrations
                     b.Property<string>("comment")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("countReply")
+                        .HasColumnType("int");
+
                     b.Property<string>("create_at")
                         .HasColumnType("nvarchar(max)");
 

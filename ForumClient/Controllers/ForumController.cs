@@ -520,7 +520,7 @@ namespace ForumClient.Controllers
             if (category == null) return RedirectToAction("Index");
             _context.Topic.Remove(category);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Create_Post");
+            return RedirectToAction("Index");
         }
 
         public static string CreateMD5(string input)
@@ -596,7 +596,7 @@ namespace ForumClient.Controllers
             }
             return Redirect("/Forum/ViewComment/" + model.topic_id);
         }
-     
+
         public ActionResult ViewReply(int Id)
         {
             ViewBag.Comments=_context.Comments.Find(Id);
@@ -607,9 +607,11 @@ namespace ForumClient.Controllers
         {
             if (ModelState.IsValid && HttpContext.Session.GetString("userId") != null)
             {
-                model.username = HttpContext.Session.GetString("userId");
+                model.username = HttpContext.Session.GetString("Username_Login");
                 model.create_at = DateTime.Now.ToString();
                 _context.Replys.Add(model);
+                var comment = _context.Comments.Find(model.comment_id);
+                comment.countReply += 1;
                 _context.SaveChanges();
                 TempData["Message"] = "Create Comment Success";
             }

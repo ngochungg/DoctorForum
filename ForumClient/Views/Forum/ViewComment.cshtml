@@ -48,7 +48,7 @@
                     <div class="tt-item-description">
 
                         <div class="container" style="word-wrap: break-word; text-indent: 30px; text-transform: initial; ">
-                            @*@Html.Raw(ViewBag.Topics.Contents);*@
+                            @Html.Raw(ViewBag.Topics.Contents)
                         </div>
                     </div>
                     <hr style=" width: 60%; margin-left: 300px; margin-bottom: -50px;" />
@@ -102,18 +102,9 @@
             </div>
         </div>
     </form>
-             @{
-                if (TempData["Message"] != null)
-                {
-                    <div class="alert alert-primary" role="alert">
-                      @TempData["Message"]
-                    </div>
-                }
-            }
             
-            
-           @foreach(var cmt in @ViewBag.Comments)
-        {
+           @foreach (var cmt in @ViewBag.Comments)
+           {
     <div class="tt-item">
         <div class="tt-single-topic">
             <div class="tt-item-header pt-noborder">
@@ -133,7 +124,7 @@
                 </div>
                 <div class="tt-item-info info-bottom" style="margin-left: -30px; margin-top: 5px;">
                     <a asp-action='ViewReply' asp-route-id="@cmt.comment_id" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                        <i class="tt-icon">Reply<svg><use xlink:href="#icon-reply"></use></svg></i>
+                        <i class="tt-icon">@cmt.countReply Reply<svg><use xlink:href="#icon-reply"></use></svg></i>
                     </a>
                 </div>
             </div>

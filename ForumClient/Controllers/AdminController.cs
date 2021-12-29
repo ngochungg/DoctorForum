@@ -409,9 +409,6 @@ namespace ForumClient.Controllers
             return RedirectToAction("TopicView");
         }
 
-
-
-
         //category
         public IActionResult Categories()
         {
@@ -596,6 +593,17 @@ namespace ForumClient.Controllers
                 }
             }
             return uniqueFileName;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string name)
+        {
+            var customers = await _context.Topic.Where(c => c.Title.Contains(name)).ToListAsync();
+            if (customers.Count == 0)
+            {
+                ViewBag.Search = "There aren’t any search results";
+            }
+            return View("TopicView",customers);
         }
     }
 }

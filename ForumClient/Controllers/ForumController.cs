@@ -520,7 +520,7 @@ namespace ForumClient.Controllers
             if (category == null) return RedirectToAction("Index");
             _context.Topic.Remove(category);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Create_Post");
+            return RedirectToAction("Index");
         }
 
         public static string CreateMD5(string input)
@@ -596,7 +596,7 @@ namespace ForumClient.Controllers
             }
             return Redirect("/Forum/ViewComment/" + model.topic_id);
         }
-     
+
         public ActionResult ViewReply(int Id)
         {
             ViewBag.Comments=_context.Comments.Find(Id);

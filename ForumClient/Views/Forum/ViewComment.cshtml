@@ -45,13 +45,13 @@
 
 
                     </div>
-                    <div class="tt-item-description" >
+                    <div class="tt-item-description">
 
                         <div class="container" style="word-wrap: break-word; text-indent: 30px; text-transform: initial; ">
                             @Html.Raw(ViewBag.Topics.Contents);
                         </div>
                     </div>
-                    <hr  style=" width: 60%; margin-left: 300px; margin-bottom: -50px;"/>
+                    <hr style=" width: 60%; margin-left: 300px; margin-bottom: -50px;" />
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn" style="text-decoration: none;">
                             <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-      
+
         @{
             if (TempData["Message"] != null)
             {
@@ -97,69 +97,44 @@
                     <div class="col-sm-9" style="margin-left: -70px; /* position: absolute; */ width: 85%;">
                         <input asp-for="comment" class='form-control' placeholder="Comment" />
                         <input type='hidden' asp-for="topic_id" value='@ViewBag.Topics.Topic_Id' placeholder="Comment" />
-                        
+
                     </div>
-                    
                 </div>
             </div>
-             @{
-                if (TempData["Message"] != null)
-                {
-                    <div class="alert alert-primary" role="alert">
-                      @TempData["Message"]
-                    </div>
-                }
-            }
-             <form asp-action="CreateComment">
-        <label class="form-label">Enter your comment</label>
-        <input asp-for="comment" class='form-control' />
-        <input type='hidden' asp-for="topic_id" value='@ViewBag.Topics.Topic_Id' />
-        <button class='btn btn-primary' type='submit'>Add new Comment</button>
-    </form>
-           @foreach(var cmt in @ViewBag.Comments)
-        {
-            <div class="tt-item">
-                <div class="tt-single-topic">
-                    <div class="tt-item-header pt-noborder">
-                        <div class="tt-item-info info-top">
-                            <div class="tt-avatar-icon">
-                                @{
-                                    var strcmt = cmt.username.Substring(0, 1).ToLower();
-                                }
-                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-@strcmt"></use></svg></i>
+        </form>
+            @foreach (var cmt in @ViewBag.Comments)
+            {
+                <div class="tt-item">
+                    <div class="tt-single-topic">
+                        <div class="tt-item-header pt-noborder">
+                            <div class="tt-item-info info-top">
+                                <div class="tt-avatar-icon">
+                                    @{
+                                        var strcmt = cmt.username.Substring(0, 1).ToLower();
+                                    }
+                                    <i class="tt-icon"><svg><use xlink:href="#icon-ava-@strcmt"></use></svg></i>
+                                </div>
+                                <div class="tt-avatar-title" style="margin-left: -30px;">
+                                    <a asp-action="ViewInfomation" asp-route-id="@cmt.username">@cmt.username</a>
+                                </div>
+                                <a href="#" class="tt-info-time">
+                                    <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@cmt.create_at
+                                </a>
                             </div>
-                            <div class="tt-avatar-title" style=" margin-left: -30px;>
-                               <a asp-action="ViewInfomation" asp-route-id="@cmt.username">@cmt.username</a>
-                            </div>
-                            <a href="#" class="tt-info-time">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@cmt.create_at
+                        </div>
+                        <div class="tt-item-description" style=" margin-left: -30px;">
+                            @cmt.comment
+                        </div>
+                        <div class="tt-item-info info-bottom" style="margin-left: -30px; margin-top: 5px;">
+                            <a asp-action='ViewReply' asp-route-id="@cmt.comment_id" class="tt-icon-btn tt-hover-02 tt-small-indent">
+                                <i class="tt-icon">Reply<svg><use xlink:href="#icon-reply"></use></svg></i>
                             </a>
                         </div>
                     </div>
-                    <div class="tt-item-description" style=" margin-left: -30px;">
-                        @cmt.comment
-                    </div>
-                    <div class="tt-item-info info-bottom" style="margin-left: -30px; margin-top: 5px;">
-                        <a href="#" class="tt-icon-btn" style="text-decoration: none;">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
-                            <span class="tt-text">671</span>
-                        </a>
-                        <a href="#" class="tt-icon-btn" style="text-decoration: none;">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
-                            <span class="tt-text">39</span>
-                        </a>
-                        <a href="#" class="tt-icon-btn" style="text-decoration: none;">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
-                            <span class="tt-text">12</span>
-                        </a>
-                     
-                        
-                    </div>
                 </div>
+            }
+            <div class="tt-wrapper-inner">
+                <h4 class="tt-title-separator"><span>You’ve reached the end of replies</span></h4>
             </div>
-        }
-        <div class="tt-wrapper-inner">
-            <h4 class="tt-title-separator"><span>You’ve reached the end of replies</span></h4>
-        </div>
     </div>
 </main>

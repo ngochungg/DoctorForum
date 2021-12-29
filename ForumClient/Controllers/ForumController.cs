@@ -518,8 +518,8 @@ namespace ForumClient.Controllers
         {
             var category = await _context.Topic.FindAsync(id);
             if (category == null) return RedirectToAction("Index");
-            await _context.SaveChangesAsync();
             _context.Topic.Remove(category);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Create_Post");
         }
 

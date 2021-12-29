@@ -654,5 +654,13 @@ namespace ForumClient.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("User_View", customers);
         }
+
+        public async Task<IActionResult> Delete_MyPost(int id)
+        {
+            var category = await _context.Topic.FindAsync(id);
+             _context.Topic.Remove(category);
+             await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

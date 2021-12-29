@@ -2,7 +2,7 @@
 
 namespace ForumClient.Migrations
 {
-    public partial class db : Migration
+    public partial class CreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

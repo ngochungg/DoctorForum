@@ -638,5 +638,21 @@ namespace ForumClient.Controllers
             }
             return View(customers);
         }
+
+
+        public async Task<IActionResult> Public_User(int id)
+        {
+            var customers = await _context.User.SingleOrDefaultAsync(c=> c.Id == id);
+            customers.Share = 0;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("User_View", customers);
+        }
+        public async Task<IActionResult> Private_User(int id)
+        {
+            var customers = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
+            customers.Share = 1;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("User_View", customers);
+        }
     }
 }

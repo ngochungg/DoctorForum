@@ -95,11 +95,23 @@
                                     <div class="col-sm-1"></div>
                                     <div class="col-sm-5">
                                         <br /><br />
-                                        <div style="font-size:40px; color:white;margin-left:-60px"> Hello @Model.Name ! 
-                                            <button class="btn btn-success" style="background-color:#da6ef5;float:right;">
-                                                <a asp-action="Change_Password_View" asp-route-id="@Model.Id" style="color: white">pulic</a><br />
-                                            </button>
-                                        </div>
+                                              <div style="font-size:40px; color:white;margin-left:-60px">
+                                                  Hello @Model.Name !
+                                                  @{
+                                                      if (Model.Share == 1)
+                                                      {
+                                                          <button class="btn btn-success" style="background-color:#da6ef5;float:right;">
+                                                              <a asp-action="Public_User" asp-route-id="@Model.Id" style="color: white">Public</a><br />
+                                                          </button>
+                                                      }
+                                                      else
+                                                      {
+                                                          <button class="btn btn-success" style="background-color:#da6ef5;float:right;">
+                                                              <a asp-action="Private_User" asp-route-id="@Model.Id" style="color: white">Private</a><br />
+                                                          </button>
+                                                      }
+                                                  }
+                                              </div>
                                         <br /><br />
                                         <div style="font-size:20px; color:white">
                                             Email: @Model.Email

@@ -1,35 +1,67 @@
 ﻿@model ForumClient.Models.UserModel
-    @{
-        ViewData["Title"] = "ViewInfomation";
-        Layout = "~/Views/Forum/_Layout.cshtml";
-    }
+@{
+    ViewData["Title"] = "ViewInfomation";
+    Layout = "~/Views/Forum/_Layout.cshtml";
+}
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<main id="tt-pageContent" class="tt-offset-small">
+    <div class="tt-wrapper-section">
+        <div class="container" style="width: 1000px">
+            <div class="tt-user-header">
+                <div class="">
+                    <div class="row">
+                        @if (Model.Share == 0)
+                        {
+                            <div class="col-sm-6" style="font-size: 20px; color: darkcyan; line-height: 35px; margin-top: 20px;">
 
-    <main id="tt-pageContent" class="tt-offset-small">
-        <div class="tt-wrapper-section">
-            <div class="container">
-                <div class="tt-user-header">
-                    <div class="tt-col-avatar">
-                        @*<img src="~/update_images/@Model.Image" alt="Avatar" id="avatarr">*@
+                                <div><i class='far fa-edit' style='font-size:24px'></i>Article author: @Model.Name</div>
+                                <div><i class="fa fa-phone" style="font-size:24px"></i> Contact me by: @Model.Mobile</div>
+                                @{
+                                    var iRole = Convert.ToInt32(Model.RoleId);
+                                    if (iRole == 2 || iRole == 1)
+                                    {
+                                        <div style="font-size: 20px; color: dimgrey; margin-top: 50px; line-height: 25px; color: darkcyan ">
+                                            Experience: @Model.Experience
+                                            <br /><br />
+                                            Qualification: @Model.Qualification
+                                            <br /><br />
+                                            Professtional: @Model.Professional
+                                            <br />.
+
+                                        </div>
+
+                                    }
+                                }
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                <div style="">
+                                    <img src="~/update_images/@Model.Image" alt="Avatar" id="" style="max-width:500px;height:auto">
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>private</div>
+                        }
+
                     </div>
-                    <div class="tt-col-title">
-                        <div class="tt-title">
-                            <a href="#"></a>
-                        </div>
+
+
+                </div>
+                <div class="tt-col-title">
+                    <div class="tt-title">
+                        <a href="#"></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
-            @if (Model.Share == 0)
-                {
-            <div>@Model.Name</div>
-            <div>@Model.Mobile</div>
-            }
-            else
-            {
-                <div>private</div>
-            }
-        </div>
+    </div>
 
-    </main>
+
+
+</main>
 

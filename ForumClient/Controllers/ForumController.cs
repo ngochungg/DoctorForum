@@ -607,9 +607,11 @@ namespace ForumClient.Controllers
         {
             if (ModelState.IsValid && HttpContext.Session.GetString("userId") != null)
             {
-                model.username = HttpContext.Session.GetString("userId");
+                model.username = HttpContext.Session.GetString("Username_Login");
                 model.create_at = DateTime.Now.ToString();
                 _context.Replys.Add(model);
+                var comment = _context.Comments.Find(model.comment_id);
+                comment.countReply += 1;
                 _context.SaveChanges();
                 TempData["Message"] = "Create Comment Success";
             }

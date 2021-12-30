@@ -1,0 +1,196 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Defaul_FE\**" />
+    <Content Remove="Defaul_FE\**" />
+    <EmbeddedResource Remove="Defaul_FE\**" />
+    <None Remove="Defaul_FE\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Admin\js\demo.js" />
+    <None Include="wwwroot\Admin\js\hs.chartjs-matrix.js" />
+    <None Include="wwwroot\Admin\js\theme.min.js" />
+    <None Include="wwwroot\Admin\js\vendor.min.js" />
+    <None Include="wwwroot\Admin\svg\brands\atlassian.svg" />
+    <None Include="wwwroot\Admin\svg\brands\bank-of-america.svg" />
+    <None Include="wwwroot\Admin\svg\brands\bookingcom.svg" />
+    <None Include="wwwroot\Admin\svg\brands\capsule.svg" />
+    <None Include="wwwroot\Admin\svg\brands\chrome.svg" />
+    <None Include="wwwroot\Admin\svg\brands\digitalocean.svg" />
+    <None Include="wwwroot\Admin\svg\brands\excel.svg" />
+    <None Include="wwwroot\Admin\svg\brands\figma.svg" />
+    <None Include="wwwroot\Admin\svg\brands\fitbit-gray.svg" />
+    <None Include="wwwroot\Admin\svg\brands\flow-xo-gray.svg" />
+    <None Include="wwwroot\Admin\svg\brands\frontapp.svg" />
+    <None Include="wwwroot\Admin\svg\brands\gitlab-gray.svg" />
+    <None Include="wwwroot\Admin\svg\brands\gmail.svg" />
+    <None Include="wwwroot\Admin\svg\brands\google-docs.svg" />
+    <None Include="wwwroot\Admin\svg\brands\google-sheets.svg" />
+    <None Include="wwwroot\Admin\svg\brands\google-slides.svg" />
+    <None Include="wwwroot\Admin\svg\brands\google-webdev.svg" />
+    <None Include="wwwroot\Admin\svg\brands\google.svg" />
+    <None Include="wwwroot\Admin\svg\brands\guideline.svg" />
+    <None Include="wwwroot\Admin\svg\brands\htmlstream.svg" />
+    <None Include="wwwroot\Admin\svg\brands\jira.svg" />
+    <None Include="wwwroot\Admin\svg\brands\layar-gray.svg" />
+    <None Include="wwwroot\Admin\svg\brands\mailchimp.svg" />
+    <None Include="wwwroot\Admin\svg\brands\mastercard.svg" />
+    <None Include="wwwroot\Admin\svg\brands\paypal-icon.svg" />
+    <None Include="wwwroot\Admin\svg\brands\pdf.svg" />
+    <None Include="wwwroot\Admin\svg\brands\prosperops.svg" />
+    <None Include="wwwroot\Admin\svg\brands\slack.svg" />
+    <None Include="wwwroot\Admin\svg\brands\spec.svg" />
+    <None Include="wwwroot\Admin\svg\brands\spotify.svg" />
+    <None Include="wwwroot\Admin\svg\brands\visa.svg" />
+    <None Include="wwwroot\Admin\svg\brands\word.svg" />
+    <None Include="wwwroot\Admin\svg\components\abstract-bg-4.svg" />
+    <None Include="wwwroot\Admin\svg\components\placeholder-csv-format.svg" />
+    <None Include="wwwroot\Admin\svg\components\placeholder-img-format.svg" />
+    <None Include="wwwroot\Admin\svg\components\placeholder-lg.svg" />
+    <None Include="wwwroot\Admin\svg\components\popover-bottom.svg" />
+    <None Include="wwwroot\Admin\svg\components\popover-left.svg" />
+    <None Include="wwwroot\Admin\svg\components\popover-right.svg" />
+    <None Include="wwwroot\Admin\svg\components\popover-top.svg" />
+    <None Include="wwwroot\Admin\svg\components\star-half.svg" />
+    <None Include="wwwroot\Admin\svg\components\star-muted.svg" />
+    <None Include="wwwroot\Admin\svg\components\star.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\at-line.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\book.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\browse.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\card-1.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\card-2.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\card-3.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\card-4.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\card-5.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\chat.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\choice.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\click.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\copy.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\create.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\credit-card.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\graphs.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\hi-five.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\phone-line.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\presenting.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\print.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\review-5-star.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\review-rating-shield.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\sorry.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\think.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\unlock.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\world-line.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\yelling-reverse.svg" />
+    <None Include="wwwroot\Admin\svg\illustrations\yelling.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\content-combinations-container-overlay.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\content-combinations-content-centered.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\content-combinations-overlay.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\demo-layouts-default-classic.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\footer-default-container.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\footer-default-fluid.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\header-default-container.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\header-default-fluid.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\header-double-line-container.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\header-double-line-fluid.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\layouts-sidebar-dark.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\layouts-sidebar-default.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\layouts-sidebar-light.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-combinations-mini-plus-one-cols.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-combinations-two-cols-between.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-combinations-two-cols.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-combinations-two-plus-mini-cols.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-compact.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-default-classic.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-detached-container.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-detached-fluid.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-detached-overlay-container.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-detached-overlay-fluid.svg" />
+    <None Include="wwwroot\Admin\svg\layouts\sidebar-mini.svg" />
+    <None Include="wwwroot\Admin\svg\logos\logo-short-white.svg" />
+    <None Include="wwwroot\Admin\svg\logos\logo-short.svg" />
+    <None Include="wwwroot\Admin\svg\logos\logo-white.svg" />
+    <None Include="wwwroot\Admin\svg\logos\logo.svg" />
+    <None Include="wwwroot\Admin\vendor\chart.js.extensions\chartjs-extensions.js" />
+    <None Include="wwwroot\Admin\vendor\chart.js\dist\Chart.min.js" />
+    <None Include="wwwroot\Admin\vendor\chartjs-chart-matrix\dist\chartjs-chart-matrix.min.js" />
+    <None Include="wwwroot\Admin\vendor\chartjs-plugin-datalabels\dist\chartjs-plugin-datalabels.min.js" />
+    <None Include="wwwroot\Admin\vendor\flag-icon-css\flags\1x1\ca.svg" />
+    <None Include="wwwroot\Admin\vendor\flag-icon-css\flags\1x1\cn.svg" />
+    <None Include="wwwroot\Admin\vendor\flag-icon-css\flags\1x1\de.svg" />
+    <None Include="wwwroot\Admin\vendor\flag-icon-css\flags\1x1\dk.svg" />
+    <None Include="wwwroot\Admin\vendor\flag-icon-css\flags\1x1\fr.svg" />
+    <None Include="wwwroot\Admin\vendor\flag-icon-css\flags\1x1\gb.svg" />
+    <None Include="wwwroot\Admin\vendor\flag-icon-css\flags\1x1\in.svg" />
+    <None Include="wwwroot\Admin\vendor\flag-icon-css\flags\1x1\it.svg" />
+    <None Include="wwwroot\Admin\vendor\flag-icon-css\flags\1x1\us.svg" />
+    <None Include="wwwroot\Admin\vendor\hs-navbar-vertical-aside\hs-navbar-vertical-aside-mini-cache.js" />
+    <None Include="wwwroot\Admin\vendor\icon-set\fonts\The-Icon-of.bin" />
+    <None Include="wwwroot\Admin\vendor\icon-set\fonts\The-Icon-of.svg" />
+    <None Include="wwwroot\Content\css\style.css" />
+    <None Include="wwwroot\Content\css\style.min.css" />
+    <None Include="wwwroot\Content\external\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\Content\external\perfect-scrollbar\perfect-scrollbar.scss" />
+    <None Include="wwwroot\Content\favicon\favicon.ico" />
+    <None Include="wwwroot\Content\images\logo.png" />
+    <None Include="wwwroot\Content\images\single-topic-img01.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img02.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img03.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img04.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img05.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img06.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img07.jpg" />
+    <None Include="wwwroot\Content\images\single-topic-img08.jpg" />
+    <None Include="wwwroot\Content\js\bundle.js" />
+    <None Include="wwwroot\Content\js\bundle.min.js" />
+    <None Include="wwwroot\Content\scss\style.scss" />
+    <None Include="wwwroot\Content\scss\_badge.scss" />
+    <None Include="wwwroot\Content\scss\_btn-create-topic.scss" />
+    <None Include="wwwroot\Content\scss\_categories_list.scss" />
+    <None Include="wwwroot\Content\scss\_categories_single.scss" />
+    <None Include="wwwroot\Content\scss\_custom_magnific_popup.scss" />
+    <None Include="wwwroot\Content\scss\_default_tabs.scss" />
+    <None Include="wwwroot\Content\scss\_editor.scss" />
+    <None Include="wwwroot\Content\scss\_followers_list.scss" />
+    <None Include="wwwroot\Content\scss\_form.scss" />
+    <None Include="wwwroot\Content\scss\_gallery.scss" />
+    <None Include="wwwroot\Content\scss\_header.scss" />
+    <None Include="wwwroot\Content\scss\_header_objects.scss" />
+    <None Include="wwwroot\Content\scss\_layout-tab.scss" />
+    <None Include="wwwroot\Content\scss\_layout404.scss" />
+    <None Include="wwwroot\Content\scss\_login.scss" />
+    <None Include="wwwroot\Content\scss\_messages_layout.scss" />
+    <None Include="wwwroot\Content\scss\_mobile-menu.scss" />
+    <None Include="wwwroot\Content\scss\_modal.scss" />
+    <None Include="wwwroot\Content\scss\_pageContent.scss" />
+    <None Include="wwwroot\Content\scss\_popup_settings.scss" />
+    <None Include="wwwroot\Content\scss\_single-topic.scss" />
+    <None Include="wwwroot\Content\scss\_topic_list_item.scss" />
+    <None Include="wwwroot\Content\scss\_typography.scss" />
+    <None Include="wwwroot\Content\scss\_user_header.scss" />
+    <None Include="wwwroot\Content\scss\_variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="MimeKit" Version="3.0.0" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\update_images\" />
+  </ItemGroup>
+
+</Project>

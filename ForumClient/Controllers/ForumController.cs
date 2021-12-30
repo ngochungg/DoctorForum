@@ -29,10 +29,9 @@ namespace ForumClient.Controllers
             _context = context;
             this.webHostEnvironment = webHostEnvironment;
         }
-
         public async Task<IActionResult> Index()
         {
-            var post = await _context.Topic.ToListAsync();
+            var post = await _context.Topic.OrderByDescending(x=>x.Topic_Id).Take(10).ToListAsync();
             //Count User
             var UserCount = await _context.User.ToListAsync();
             var UCount = UserCount.Count().ToString();
@@ -46,7 +45,6 @@ namespace ForumClient.Controllers
             HttpContext.Session.SetString("UserStatus", UserStatus.ToString());
             return View(post);
         }
-
         #region User
         #region change_password
         public async Task<IActionResult> Change_Password_View(int id, string mess)

@@ -47,6 +47,7 @@ namespace ForumClient.Controllers
             return View();
         }
         [Route("Admin")]
+        
         [HttpPost]
         public async Task<IActionResult> LoginAdmin(LoginViewModel model)
         {
@@ -92,7 +93,6 @@ namespace ForumClient.Controllers
                 return View("Index");
             }
         }
-
 
         //page User
         public async Task<IActionResult> UserView()
@@ -237,7 +237,6 @@ namespace ForumClient.Controllers
             return RedirectToAction("Confirm_Doctor");
         }
 
-
         //page add user
         public IActionResult Add_admin_user()
         {
@@ -295,7 +294,6 @@ namespace ForumClient.Controllers
             return RedirectToAction("UserView");
         }
 
-
         public string UploadedFile(RegistrationViewModel model)
         {
             string uniqueFileName = null;
@@ -351,7 +349,6 @@ namespace ForumClient.Controllers
                 return RedirectToAction("Index");
             }
         }
-
         public async Task<IActionResult> OldPassword(Change_pass_view model, int id)
         {
             UserModel old_user = await _context.User.SingleOrDefaultAsync(c => c.Id == id);
@@ -391,8 +388,6 @@ namespace ForumClient.Controllers
             var category = await _context.Topic.ToListAsync();
             return View(category);
         }
-
-
         public async Task<ActionResult> TopicDelete(int id)
         {
             var category = await _context.Topic.FindAsync(id);
@@ -480,6 +475,7 @@ namespace ForumClient.Controllers
             var category = await _context.Categories.FindAsync(id);
             return View(category);
         }
+        
         //user Disable
         [Route("Disable_Cus")]
         public async Task<IActionResult> Disable_Cus()

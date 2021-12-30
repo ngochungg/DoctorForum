@@ -46,6 +46,7 @@ namespace ForumClient.Controllers
             HttpContext.Session.SetString("UserStatus", UserStatus.ToString());
             return View(post.ToPagedList(page, 5));
         }
+        
         #region User
         #region change_password
         public async Task<IActionResult> Change_Password_View(int id, string mess)
@@ -442,6 +443,7 @@ namespace ForumClient.Controllers
 
 
         #endregion
+        
         public void ValidationMessage(string key, string alert, string value)
         {
             try
@@ -457,24 +459,26 @@ namespace ForumClient.Controllers
 
         }
 
+        //Trending page
         public IActionResult Trending()
         {
             ViewBag.Trending = _context.Topic.OrderByDescending(x => x.Status).ToList();
             return View() ;
         }
         
+        //Categories page
         public async Task<ActionResult> Categories()
         {
             var category = await _context.Categories.ToListAsync();
             return View(category);
         }
-
         public async Task<IActionResult> ViewPostInCate(string name)
         {
             var post = await _context.Topic.Where(x => x.Categogies_name == name).ToListAsync();
             return View(post);
         }
 
+        //Create topic
         public IActionResult Create_Topic()
         {
             var cate = _context.Categories;
@@ -504,19 +508,17 @@ namespace ForumClient.Controllers
             }
             return RedirectToAction("Create_Topic");
         }
-        public async Task<ActionResult> UpdatePost(TopicModel request)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Topic.Update(request);
-                await _context.SaveChangesAsync();
-            }
-            return RedirectToAction("Create_Post");
-        }
         public async Task<ActionResult> DeletePost(int id)
         {
             var category = await _context.Topic.FindAsync(id);
             if (category == null) return RedirectToAction("Index");
+            _context.Topic.Remove(category);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Delete_MyPost(int id)
+        {
+            var category = await _context.Topic.FindAsync(id);
             _context.Topic.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -537,6 +539,8 @@ namespace ForumClient.Controllers
             }
             return sb.ToString();
         }
+        
+        //upload image
         public string UploadedFile(RegistrationViewModel model)
         {
             string uniqueFileName = null;
@@ -553,6 +557,8 @@ namespace ForumClient.Controllers
             }
             return uniqueFileName;
         }
+        
+        //update image
         public string UpdateFile(UpdateUserView model)
         {
             string uniqueFileName = null;
@@ -569,6 +575,8 @@ namespace ForumClient.Controllers
             }
             return uniqueFileName;
         }
+        
+        //comment
         public async Task<IActionResult> ViewComment(int Id)
         {
             ViewBag.Comments = _context.Comments.Where(x => x.topic_id.Equals(Id));
@@ -578,7 +586,6 @@ namespace ForumClient.Controllers
             await _context.SaveChangesAsync();
             return View();
         }
-
         public ActionResult CreateComment(CommentModel model)
         {
             if (ModelState.IsValid && HttpContext.Session.GetString("userId") != null)
@@ -595,7 +602,8 @@ namespace ForumClient.Controllers
             }
             return Redirect("/Forum/ViewComment/" + model.topic_id);
         }
-
+        
+        //reply
         public ActionResult ViewReply(int Id)
         {
             ViewBag.Comments=_context.Comments.Find(Id);
@@ -621,12 +629,14 @@ namespace ForumClient.Controllers
             return Redirect("/Forum/ViewReply/" + model.comment_id);
         }
 
+        //profile
         public IActionResult ViewInfomation(string Id)
         {
             var Userss = _context.User.SingleOrDefault(x => x.UserName.Equals(Id));
             return View(Userss);
         }
 
+        //search
         [HttpGet]
         public async Task<IActionResult> Search(string name)
         {
@@ -638,7 +648,7 @@ namespace ForumClient.Controllers
             return View(customers);
         }
 
-
+        //public and private
         public async Task<IActionResult> Public_User(int id)
         {
             var customers = await _context.User.SingleOrDefaultAsync(c=> c.Id == id);
@@ -654,12 +664,6 @@ namespace ForumClient.Controllers
             return RedirectToAction("User_View", customers);
         }
 
-        public async Task<IActionResult> Delete_MyPost(int id)
-        {
-            var category = await _context.Topic.FindAsync(id);
-             _context.Topic.Remove(category);
-             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+
     }
 }

@@ -30,7 +30,7 @@
                         </div>
                         <div class="tt-col-description">
                             <h6 class="tt-title">
-                                <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
+                                <a asp-action="ViewComment" asp-route-id="@post.Topic_Id"  style="text-decoration:none">
                                     @post.Title
                                 </a>
                             </h6>
@@ -53,8 +53,18 @@
                 </a>
 
             }
-
-            <h4>@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))</h4>
+        <style>
+            #pageding{
+                margin-top:30px;
+            }
+            #pageding ul li{
+                padding:30px;
+            }
+            #pageding ul li a {
+                text-decoration:none;
+            }
+        </style>
+            <h4 id="pageding">@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))</h4>
 
         </div>
     </div>

@@ -58,7 +58,7 @@ left ViewData["Title"] = "ViewReply";
                 }
             }
              <form asp-action="CreateReply">
-        <label class="form-label">Nhập nội dung</label>
+        <label class="form-label">Enter Reply</label>
         <input asp-for="Reply" class='form-control' />
         <input type='hidden' asp-for="comment_id" value='@ViewBag.Comments.comment_id' />
         <button class='btn btn-primary' type='submit'>Enter</button>

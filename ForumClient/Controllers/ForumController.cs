@@ -462,7 +462,7 @@ namespace ForumClient.Controllers
         //Trending page
         public IActionResult Trending()
         {
-            ViewBag.Trending = _context.Topic.OrderByDescending(x => x.Status).ToList();
+            ViewBag.Trending = _context.Topic.OrderByDescending(x => x.Status).Take(7).ToList();
             return View() ;
         }
         

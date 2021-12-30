@@ -15,6 +15,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using MimeKit;
 using MailKit.Net.Smtp;
+using X.PagedList;
 
 namespace ForumClient.Controllers
 {
@@ -29,9 +30,9 @@ namespace ForumClient.Controllers
             _context = context;
             this.webHostEnvironment = webHostEnvironment;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var post = await _context.Topic.OrderByDescending(x=>x.Topic_Id).Take(10).ToListAsync();
+            var post = await _context.Topic.OrderByDescending(x=>x.Topic_Id).ToListAsync();
             //Count User
             var UserCount = await _context.User.ToListAsync();
             var UCount = UserCount.Count().ToString();
@@ -43,7 +44,7 @@ namespace ForumClient.Controllers
                 UserStatus += Item.Status;
             }
             HttpContext.Session.SetString("UserStatus", UserStatus.ToString());
-            return View(post);
+            return View(post.ToPagedList(page, 5));
         }
         #region User
         #region change_password

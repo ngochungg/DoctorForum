@@ -1,9 +1,10 @@
-﻿@model IEnumerable<TopicModel> 
+﻿@model IPagedList<TopicModel>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Forum/_Layout.cshtml";
 }
-
 <main id="tt-pageContent" class="tt-offset-small">
     <div class="container">
         <div class="tt-topic-list">
@@ -16,40 +17,42 @@
             @foreach (var post in Model)
             {
                 <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
-                    <div class="tt-item tt-itemselect" style="word-wrap: break-word;" >
-                    <div class="tt-col-avatar">
-                        <svg class="tt-icon">
-                            @{
-                                var str = post.Username.Substring(0, 1).ToLower();
-                            }
-                            <use xlink:href="#icon-ava-@str"></use>
-                        </svg>
-                    </div>
-                    <div class="tt-col-description">
-                        <h6 class="tt-title">
-                            <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
-                                @post.Title
-                            </a>
-                        </h6>
-                        <div class="row align-items-center no-gutters">
-                            <div class="col-11">
-                                <ul class="tt-list-badge">
-                                    <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">@post.Categogies_name</span></a></li>
-                                    <li><a href="#"><span class="tt-badge">@post.Categogies_name</span></a></li>
-                                </ul>
-                            </div>
-                            <div class="col-1 ml-auto show-mobile">
-                                <div class="tt-value">1h</div>
+                    <div class="tt-item tt-itemselect" style="word-wrap: break-word;">
+                        <div class="tt-col-avatar">
+                            <svg class="tt-icon">
+                                @{
+                                    var str = post.Username.Substring(0, 1).ToLower();
+                                }
+                                <use xlink:href="#icon-ava-@str"></use>
+                            </svg>
+                        </div>
+                        <div class="tt-col-description">
+                            <h6 class="tt-title">
+                                <a asp-action="ViewComment" asp-route-id="@post.Topic_Id">
+                                    @post.Title
+                                </a>
+                            </h6>
+                            <div class="row align-items-center no-gutters">
+                                <div class="col-11">
+                                    <ul class="tt-list-badge">
+                                        <li class="show-mobile"><a href="#"><span class="tt-color01 tt-badge">@post.Categogies_name</span></a></li>
+                                        <li><a href="#"><span class="tt-badge">@post.Categogies_name</span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-1 ml-auto show-mobile">
+                                    <div class="tt-value">1h</div>
+                                </div>
                             </div>
                         </div>
+                        <div class="tt-col-category"><span class="tt-color01 tt-badge">@post.Categogies_name</span></div>
+                        <div class="tt-col-value hide-mobile">@post.Status</div>
+                        <div class="tt-col-value hide-mobile" style="margin-left: 50px;">@post.Created_at</div>
                     </div>
-                    <div class="tt-col-category"><span class="tt-color01 tt-badge">@post.Categogies_name</span></div>
-                    <div class="tt-col-value hide-mobile">@post.Status</div>
-                    <div class="tt-col-value hide-mobile" style="margin-left: 50px;">@post.Created_at</div>
-                </div>
                 </a>
-                
+
             }
+
+        <h4>@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))</h4>
 
             <div class="tt-row-btn">
                 <button type="button" class="btn-icon js-topiclist-showmore">

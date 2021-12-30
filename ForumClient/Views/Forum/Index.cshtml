@@ -58,14 +58,23 @@
                 margin-top:30px;
             }
             #pageding ul li{
-                padding:30px;
+                padding:20px;
+                font-size:20px;
             }
             #pageding ul li a {
                 text-decoration:none;
             }
+            ul.pagination {
+                margin-left: 400px;
+            }
+            ul.pagination li:hover{
+               background-color: cornflowerblue;
+               color:white;
+               border-radius:5%;
+               font-size:25px;
+            }
         </style>
-            <h4 id="pageding">@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))</h4>
-
+            <h4 id="pageding" style="">@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))</h4>
         </div>
     </div>
 </main>

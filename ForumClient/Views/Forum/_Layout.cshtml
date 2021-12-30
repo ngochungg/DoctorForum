@@ -41,7 +41,7 @@
                     <!-- /toggle mobile menu -->
                     <!-- logo -->
                     <div class="tt-logo">
-                        <a asp-action="Index"><img src="~/Content/images/logo.png" alt=""></a>
+                        <a asp-action="Index"><img src="~/Content/images/logo.jpg" alt=""></a>
                     </div>
                     <!-- /logo -->
                     <!-- desctop menu -->
@@ -112,12 +112,12 @@
                                     {
                                         <a asp-action="User_View" asp-route-id="@Uid"><img src="~/update_images/@Image" alt="Avatar" id="avatarr" style="margin-top:0px"></a>
                                     }
-                                    <a asp-action="User_View" asp-route-id="@Uid">
+                                    <a asp-action="User_View" asp-route-id="@Uid" style="text-decoration: none">
                                         <div style="margin-top: 13px;">
                                             @userId
                                         </div>
                                     </a>
-                                    <a asp-action="Logout" style="font-weight: bold; margin-top: 12px; color: black;">Logout</a>
+                                    <a asp-action="Logout" style="font-weight: bold; margin-top: 12px; color: black; text-decoration: none">Logout</a>
                                 </div>
                             }
                             else
@@ -131,13 +131,13 @@
                                     {
                                         <a asp-action="User_View" asp-route-id="@Uid"><img src="~/update_images/@Image" alt="Avatar" id="avatarr" style="margin-top:0px"></a>
                                     }
-                                    <a asp-action="User_View" asp-route-id="@Uid">
-                                        <div style="margin-top: 13px;">
+                                    <a asp-action="User_View" asp-route-id="@Uid" style="text-decoration: none">
+                                        <div style="margin-top: 13px; ">
                                             @userId <strong>Docter</strong>
                                         </div>
                                     </a>
 
-                                    <a asp-action="Logout" style="font-weight: bold; margin-top: 12px; color: black;">Logout</a>
+                                    <a asp-action="Logout" style="font-weight: bold; margin-top: 12px; color: black; text-decoration: none">Logout</a>
 
                                 </div>
                             }
@@ -586,7 +586,7 @@
 
 
 </body>
-<div class="container-fluid " style="margin-top:150px">
+<div class="container-fluid " style="    margin-top: 20px;" >
     <div class="row" style="background-color:darkgray; ">
         <div class="col-sm-2" style="margin-left:160px; margin-top: 30px; ">
             @{
@@ -606,15 +606,15 @@
         </div>
         <div class="col-sm-2" style=" margin-top: 30px; ">
 
-            <div style=" font-size: 20px; cursor: -webkit-zoom-in" class="foot-title">Users : @UCount</div><br />
-            <div style=" font-size: 20px;  cursor: -webkit-zoom-in" class="foot-title">Logins : @UserStatus </div>
+            <div style=" font-size: 20px; cursor: -webkit-zoom-in;" class="foot-title">Users : @UCount</div><br />
+            <div style=" font-size: 20px; cursor: -webkit-zoom-in;" class="foot-title">Logins : @UserStatus </div>
         </div>
         <div class="col-sm-4" style="">
             <div>
-                <img src="~/Content/images/logo.png" alt="" style="width:150px; margin-top:30px;margin-bottom:15px;float:right">
+                <img src="~/Content/images/logo.jpg" alt="" style="width:150px; margin-top:30px;margin-bottom:15px;float:right">
             </div>
         </div>
-        <div class="col-sm-12" style="text-align:center">
+        <div class="col-sm-12" style="text-align: center; color: lightgrey;">
             Create by H-B-N-L
         </div>
     </div>

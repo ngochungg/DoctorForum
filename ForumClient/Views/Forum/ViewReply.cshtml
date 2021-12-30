@@ -12,10 +12,14 @@ left ViewData["Title"] = "ViewReply";
                     <div class="tt-item-header">
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-d"></use></svg></i>
+                                @{
+                                    var str1 = ViewBag.Comments.username.Substring(0, 1).ToLower();
+                                }
+                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-@str1"></use></svg></i>
                             </div>
                             <div class="tt-avatar-title">
-                               <a href="#">@ViewBag.Comments.username</a>
+
+                               <a asp-action="ViewInfomation" asp-route-id="@ViewBag.Comments.username" target="_blank">@ViewBag.Comments.username</a>
                             </div>
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@ViewBag.Comments.create_at
@@ -65,11 +69,15 @@ left ViewData["Title"] = "ViewReply";
                  <div class="tt-single-topic">
                     <div class="tt-item-header pt-noborder">
                         <div class="tt-item-info info-top">
+                            @{
+                                var str123 = cmt.username.Substring(0, 1).ToLower();
+                            }
                             <div class="tt-avatar-icon">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-t"></use></svg></i>
+                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-@str123"></use></svg></i>
                             </div>
+
                             <div class="tt-avatar-title">
-                               <a href="#">@cmt.username</a>
+                                <a asp-action="ViewInfomation" asp-route-id="@cmt.username" target="_blank">@cmt.username</a>
                             </div>
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>@cmt.create_at
@@ -97,13 +105,5 @@ left ViewData["Title"] = "ViewReply";
                 </div>
             </div>
         }
-            <div class="tt-row-btn">
-                <button type="button" class="btn-icon js-topiclist-showmore">
-                    <svg class="tt-icon">
-                      <use xlink:href="#icon-load_lore_icon"></use>
-                    </svg>
-                </button>
-            </div>
         </div>
-    </div>
 </main>
